@@ -30,4 +30,9 @@ export class AppComponent implements AfterViewInit {
     this.convertToScript();
   }
 
+  loginViaTelegram(user:any){
+    alert('d');
+  }
+
+
 }
