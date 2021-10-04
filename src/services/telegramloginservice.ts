@@ -6,11 +6,11 @@ import { Injectable } from "@angular/core";
 export class TelegramLoginService {
 
     init(){
-        
+        window['']
     }
 
     private loginViaTelegram(loginData: any){
-           
+
     }
     
 }
