@@ -7,13 +7,14 @@ import { TelegramLoginService } from 'src/services/telegramloginservice';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  
   title = 'AIRTable'
   isLoad: boolean = false;
   isLoadError: boolean = false;
   user: any = undefined;
   username: string = 'none';
   botName = "ISHIRTestBot";
-  
+
   constructor(private service: TelegramLoginService){
     this.username = service.getData();
   }
