@@ -8,8 +8,7 @@ export class TelegramLoginService {
 
     key: string = 'username';
 
-    constructor(private cookieService: CookieService){
-        
+    constructor(private cookieService: CookieService){ 
     }
 
     getData(): string{
