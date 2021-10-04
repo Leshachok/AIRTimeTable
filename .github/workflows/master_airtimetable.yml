@@ -53,4 +53,4 @@ jobs:
           app-name: 'airtimetable'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C17F040C14994799942296F86763FA0B }}
-          package: .
+          package: ./dist/AIRTimeTable
