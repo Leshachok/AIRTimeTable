@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'AIRTimeTable';
+
+  onTelegramAuth(user:Map<String, String>){
+    alert(user.get('first_name'));
+  }
+
 }
