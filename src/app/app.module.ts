@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularTelegramLoginWidgetModule } from 'angular-telegram-login-widget';
+import { CookieService } from 'ngx-cookie-service';
 import { TelegramLoginService } from 'src/services/telegramloginservice';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,7 +17,8 @@ import { AppComponent } from './app.component';
     AngularTelegramLoginWidgetModule
   ],
   providers: [
-    TelegramLoginService
+    TelegramLoginService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

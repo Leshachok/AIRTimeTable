@@ -11,15 +11,13 @@ export class AppComponent {
   isLoad: boolean = false;
   isLoadError: boolean = false;
   user: any = undefined;
-  tgService: TelegramLoginService | undefined;
   username: string = 'none';
-
-  init(service: TelegramLoginService){
-    this.tgService = service;
+  botName = "ISHIRTestBot";
+  
+  constructor(private service: TelegramLoginService){
     this.username = service.getData();
   }
 
-  botName = "ISHIRTestBot";
 
   onLoad() {
     this.isLoad = true;
@@ -31,7 +29,7 @@ export class AppComponent {
 
   onLogin(user: any) {
     this.user = user;
-    this.username = user['username'] as string
-    this.tgService?.saveData(user);
+    this.service.saveData(user);
+    this.username = this.service.getData()
   }
 }
