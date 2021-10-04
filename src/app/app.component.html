@@ -1,3 +1,19 @@
+<h1>Angular Telegram login widget</h1>
+<angular-telegram-login-widget (load)="onLoad()" (loadError)="onLoadError()" (login)="onLogin($event)"
+	[botName]="botName"></angular-telegram-login-widget>
 
+
+<div>
+	<b>Telegram widget script loaded</b>: {{isLoad?'Yes':'No'}}
+</div>
+
+<div>
+	<b>Is there errors wile loading script</b>: {{isLoadError?'Yes':'No'}}
+</div>
+
+<h3>Login data</h3>
+<pre>
+  {{userOutput ? userOutput: 'You`re not loged in'}}
+</pre>
 
 
