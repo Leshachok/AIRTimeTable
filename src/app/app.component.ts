@@ -9,7 +9,7 @@ export class AppComponent {
   title = 'AIRTable'
   isLoad: boolean = false;
   isLoadError: boolean = false;
-  userOutput = "";
+  user: any = undefined;
 
   botName = "ISHIRTestBot";
 
@@ -22,6 +22,6 @@ export class AppComponent {
   }
 
   onLogin(user: any) {
-    this.userOutput = JSON.stringify(user, null, 4);
+    this.user = user;
   }
 }
