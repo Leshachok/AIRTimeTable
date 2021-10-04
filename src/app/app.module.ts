@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularTelegramLoginWidgetModule } from 'angular-telegram-login-widget';
+import { TelegramLoginService } from 'src/services/telegramloginservice';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +15,9 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     AngularTelegramLoginWidgetModule
   ],
-  providers: [],
+  providers: [
+    TelegramLoginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

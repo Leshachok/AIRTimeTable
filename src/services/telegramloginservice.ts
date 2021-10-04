@@ -5,12 +5,18 @@ import { Injectable } from "@angular/core";
 })
 export class TelegramLoginService {
 
+    key: string = 'username';
+
     init(){
         
     }
 
-    private loginViaTelegram(loginData: any){
-        alert('этого не должнр было случится')
+    getData(): string{
+        return localStorage.getItem(this.key) as string;
+    }
+
+    saveData(userData: any){
+        localStorage.setItem(this.key, userData[this.key]);
     }
     
 }

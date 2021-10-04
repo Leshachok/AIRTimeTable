@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { TelegramLoginService } from 'src/services/telegramloginservice';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,13 @@ export class AppComponent {
   isLoad: boolean = false;
   isLoadError: boolean = false;
   user: any = undefined;
+  tgService: TelegramLoginService | undefined;
+  username: string = 'none';
+
+  init(service: TelegramLoginService){
+    this.tgService = service;
+    this.username = service.getData();
+  }
 
   botName = "ISHIRTestBot";
 
@@ -23,5 +31,7 @@ export class AppComponent {
 
   onLogin(user: any) {
     this.user = user;
+    this.username = user['username'] as string
+    this.tgService?.saveData(user);
   }
 }
