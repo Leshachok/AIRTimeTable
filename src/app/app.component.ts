@@ -31,7 +31,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   loginViaTelegram(user:any){
-    alert('d');
+    alert('это хотелось бы чтобы случилось')
   }
 
 
