@@ -4,7 +4,12 @@
 body {
   font-size: 14px;
 }
+.days{
+    width: 100%; 
+    display: table;
+}
 .card {
+  display: table-cell;
   width: 186px;
   height: 181px;
   background: rgba(255,255,255,1);
