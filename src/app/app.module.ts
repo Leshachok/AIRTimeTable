@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TimetableComponent } from './timetable/timetable.component';
+import { TimeTableService } from 'src/services/timetableservice';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { TimetableComponent } from './timetable/timetable.component';
   ],
   providers: [
     TelegramLoginService,
-    CookieService
+    CookieService,
+    TimeTableService
   ],
   bootstrap: [AppComponent]
 })

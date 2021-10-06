@@ -1,39 +1,31 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { TimeTableService } from 'src/services/timetableservice';
 
 @Component({
   selector: 'app-timetable',
   templateUrl: './timetable.component.html',
   styleUrls: ['./timetable.component.scss']
 })
-export class TimetableComponent implements OnInit {
+export class TimetableComponent implements OnInit, OnChanges {
 
-  json: string = ''
+  //тут номер группы хранится
+  @Input() group: string = ""
 
-  constructor(private httpClient: HttpClient) { }
+  //тут както пары хранятся
+  pairs: any[] = []
+
+  constructor(private timeTableService: TimeTableService) { }
 
   ngOnInit(){
-    //this.getData()
+    
   }
 
-  async getData(): Promise<void> {
-    const params = new HttpParams()
-    .set('division', 'УІ191')
-    .set('day', 'monday');
-
-    let url: string = `https://routine.pnit.od.ua/routine/getLessons`;
-    const response = this.httpClient.post(url, {params}, {headers: {'Access-Control-Allow-Origin': 'true'}})
-
-    response.subscribe(
-      (val) => {
-        this.json = val as string
-      },
-      (response) => {
-          alert(response.message)
-          console.error('There was an error!', response)
-      }
-    )
-  
+  ngOnChanges(changes: SimpleChanges){
+    if(changes.group){
+      // timetable.getPairs
+    }
   }
+
 
 }

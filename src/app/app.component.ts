@@ -9,14 +9,16 @@ import { TelegramLoginService } from 'src/services/telegramloginservice';
 export class AppComponent {
   
   title = 'AIRTable'
-  isLoad: boolean = false;
-  isLoadError: boolean = false;
-  user: any = undefined;
-  username: string = 'none';
   botName = "ISHIRTestBot";
 
+  isLoad: boolean = false;
+  isLoadError: boolean = false;
+
+  user: any = undefined;
+  course: number = 1;
+  group: string = "AI200"
+
   constructor(private service: TelegramLoginService){
-    this.username = service.getData();
   }
 
 
@@ -31,6 +33,5 @@ export class AppComponent {
   onLogin(user: any) {
     this.user = user;
     this.service.saveData(user);
-    this.username = this.service.getData()
   }
 }

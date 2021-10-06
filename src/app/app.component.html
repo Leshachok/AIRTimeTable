@@ -1,12 +1,8 @@
-<h1>Angular Telegram login widget</h1>
+здесь header с двумя менюшками
+
 <angular-telegram-login-widget (load)="onLoad()" (loadError)="onLoadError()" (login)="onLogin($event)"
 	[botName]="botName"></angular-telegram-login-widget>
 
 
-
-<h3>Login data: 
-    {{username ? username + ' logged in' : 'You`re not loged in'}}
-</h3>
-
-<app-timetable></app-timetable>
+<app-timetable [group]="group"></app-timetable>
 
