@@ -7,7 +7,7 @@
         <title>Document</title>
     </head>
     <body>
-    <div class="timetable">  
+    <div *ngIf="pairs.length; else unset"  class="timetable">  
         <div class="days" *ngFor="let day of days" id = "monday" >
         <div  class="day_title">
             <span class="day_title">{{day}} </span>  
@@ -25,6 +25,9 @@
             
         </div>
     </div>   
+    <ng-template #unset>
+        <h2>Выберите группу</h2>
+    </ng-template>
         
     </body>
 </html>
