@@ -39,5 +39,6 @@ export class TimetableComponent implements OnInit, OnChanges {
     }
   }
 
-
+  edit_image:string ="assets/img/edit.png";
+  delete_image:string ="assets/img/delete.png"
 }
