@@ -4,19 +4,18 @@
     height: 50px;
     background: #404040;
     display: flex;
-    align-items: center 
+    align-items: center ;
+    justify-content: space-between;
     
 }
 form{
     display: flex;
-    align-items: center 
+    align-items:flex-start;
+    
 }
 select{
     /* Auto Layout */
-
-display: flex;
 flex-direction: column;
-align-items: flex-start;
 padding: 4px 16px;
 
 position: static;
@@ -49,7 +48,5 @@ top: 0px;
 order: 1;
 }
 #telegram_login{
-    position: absolute;
-    right: 45px;
-    top: 4px;
+    margin-right: 45px;
 }
