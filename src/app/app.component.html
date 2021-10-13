@@ -8,10 +8,12 @@
 		<option *ngFor="let i of groups">{{i}}</option>
 	  </select>
 	</form>
+	<angular-telegram-login-widget id="telegram_login" (load)="onLoad()" (loadError)="onLoadError()" (login)="onLogin($event)"
+  [botName]="botName"></angular-telegram-login-widget>
+	
   </div>
 
-<angular-telegram-login-widget (load)="onLoad()" (loadError)="onLoadError()" (login)="onLogin($event)"
-	[botName]="botName"></angular-telegram-login-widget>
+  
 
 
 <app-timetable [group]="group"></app-timetable>
