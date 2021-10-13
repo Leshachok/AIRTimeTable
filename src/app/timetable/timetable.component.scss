@@ -7,14 +7,14 @@ body {
 .days{
     width: 100%; 
     display: flex;
-flex-direction: column;
-align-items: flex-start;
-padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
 }
 .card {
   display: table-cell;
-  width: 186px;
-  height: 181px;
+  width: 380px;
+  height: 254px;
   background: rgba(255,255,255,1);
   padding: 16px 16px;
   margin: 16px;
@@ -30,8 +30,8 @@ padding: 16px;
   overflow: hidden;
 }
 .info {
-  width: 154px;
-  height: 102px;
+  width: 320px;
+  height: 70px;
   background: rgba(255,255,255,1);
   margin: 8px;
   opacity: 1;
@@ -40,7 +40,7 @@ padding: 16px;
   left: 16px;
   overflow: hidden;
 }
-.v5_377 {
+.room {
   width: 85px;
   color: rgba(48,56,75,1);
   position: absolute;
@@ -52,8 +52,8 @@ padding: 16px;
   opacity: 1;
   text-align: left;
 }
-.v5_378 {
-  width: 154px;
+.subject {
+  width: 320px;
   color: rgba(78,88,115,1);
   position: absolute;
   top: 52px;
@@ -64,7 +64,7 @@ padding: 16px;
   opacity: 1;
   text-align: left;
 }
-.v5_379 {
+.type_container {
   width: 124px;
   height: 31px;
   background: rgba(63,111,233,1);
@@ -80,7 +80,7 @@ padding: 16px;
   border-bottom-right-radius: 8px;
   overflow: hidden;
 }
-.v5_380 {
+.type {
   width: 108px;
   color: rgba(255,255,255,1);
   position: absolute;
@@ -93,9 +93,6 @@ padding: 16px;
   text-align: left;
 }
 
-// .group{
-  
-// }
 .timetable{
   display: flex;
 flex-direction: row;

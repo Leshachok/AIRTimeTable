@@ -9,10 +9,10 @@ import { PairResponse } from "src/app/request/request";
 export class TimeTableService {
 
     private map: Map<number, string[]> = new Map([
-        [1, ["first", "second"]],
-        [2, ["third", "fourth"]],
-        [3, ["fifth", "sixth"]],
-        [4, ["seventh", "eighth"]],
+        [1, ["УК-211", "УП-211"]],
+        [2, ["УК-201", "УП-201", "УП-202"]],
+        [3, ["УІ-191", "УК-191"]],
+        [4, ["УІ-181", "УІ-184"]],
     ])
 
     constructor(private httpClient: HttpClient){ 
@@ -29,8 +29,8 @@ export class TimeTableService {
             .set('division', group)
             .set('day', 'monday');
     
-        const url: string = `https://routine.pnit.od.ua/routine/getLessons`;
-        return this.httpClient.post<PairResponse>(url, {params}, {headers: {'Access-Control-Allow-Origin': 'true'}})
+        const url: string = `https://stats.pnit.od.ua/routine/getLessons`;
+        return this.httpClient.post<PairResponse>(url, {params})
     
     }
 

@@ -7,43 +7,22 @@
         <title>Document</title>
     </head>
     <body>
-        <div class="group">Выбраная группа {{this.group}}</div>
-        <ol *ngFor="let pair of pairs">
-            <li>{{pair}}</li>
-        </ol>
     <div class="timetable">  
-        <div class="days" id = "monday">
+        <div class="days" *ngFor="let day of days" id = "monday" >
         <div  class="day_title">
-            <span class="day_title">Понеділок </span>  
+            <span class="day_title">{{day}} </span>  
         </div>
             
-            <div class="card">
+            <div class="card" *ngFor="let pair of pairs">
                 <div class="info">
-                    <span class="v5_377">609ф</span>
-                    <span class="v5_378">Веб-технології та веб-дизайн</span>
+                    <span class="room">{{pair.room}}</span>
+                    <span class="subject">{{pair.subject}}</span>
                 </div>
-                <div class="v5_379">
-                    <span class="v5_380">Лабораторна</span>
+                <div class="type_container">
+                    <span class="type">Лабораторна</span>
                 </div>
             </div>
-            <div class="card">
-                <div class="info">
-                    <span class="v5_377">609ф</span>
-                    <span class="v5_378">Веб-технології та веб-дизайн</span>
-                </div>
-                <div class="v5_379">
-                    <span class="v5_380">Лабораторна</span>
-                </div>
-            </div>
-            <div class="card">
-                <div class="info">
-                    <span class="v5_377">609ф</span>
-                    <span class="v5_378">Веб-технології та веб-дизайн</span>
-                </div>
-                <div class="v5_379">
-                    <span class="v5_380">Лабораторна</span>
-                </div>
-            </div>
+            
         </div>
     </div>   
         

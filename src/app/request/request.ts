@@ -6,8 +6,9 @@ export class PairResponse {
 }
 
 export class Pair{
-    private subject: string = ""
-    private room: string = ""
-    private time: number = 0
-    private lecturers: string[] = []
+     
+    constructor(public subject: string, public room: string, public time: number, public lecturers: string[] ){
+
+    }
+    
 }

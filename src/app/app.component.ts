@@ -17,8 +17,8 @@ export class AppComponent {
 
   user: any = undefined;
   group: string = "";
-  course: number = 1;
   groups: string[] = [];
+  course: number = 1;
   courses: number[] = [1, 2, 3, 4];
 
 
@@ -46,7 +46,7 @@ export class AppComponent {
 
   setCourse(element: any) {
     let html: HTMLSelectElement = element as HTMLSelectElement;
-    let value = html.value;
+    let value = html.value.charAt(0);
     this.course = +value;
     this.groups=this.getGroups(this.course)
     this.group = this.groups[0]
