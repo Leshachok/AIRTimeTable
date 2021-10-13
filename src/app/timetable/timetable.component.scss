@@ -6,7 +6,10 @@ body {
 }
 .days{
     width: 100%; 
-    display: table;
+    display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 16px;
 }
 .card {
   display: table-cell;
@@ -90,6 +93,43 @@ body {
   text-align: left;
 }
 
-.group{
+// .group{
   
+// }
+.timetable{
+  display: flex;
+flex-direction: row;
+align-items: flex-start;
 }
+.day_title{
+  position: relative;
+width: 159px;
+height: 25px;
+left: 0px;
+top: 0px;
+margin: 0px;
+font-family: Manrope;
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 25px;
+/* identical to box height */
+
+display: table-cell;
+align-items: flex-end;
+position: relative;
+    top: 16px;
+    left: 16px;
+
+color: #30384B;
+top: 16px;
+    left: 16px;
+
+/* Inside Auto Layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+margin: 24px 0px;
+}
+

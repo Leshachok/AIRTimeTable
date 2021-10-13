@@ -1,0 +1,50 @@
+.toolbar{
+    
+    width: 100%;
+    height: 50px;
+    background: #404040;
+    display: flex;
+    align-items: center 
+    
+}
+form{
+    display: flex;
+    align-items: center 
+}
+select{
+    /* Auto Layout */
+
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 4px 16px;
+
+position: static;
+
+
+background: #FFFFFF;
+border-radius: 32px;
+
+/* Inside Auto Layout */
+
+flex: none;
+
+flex-grow: 0;
+margin: 0px 32px;
+}
+#course{
+width: 105px;
+height: 32px;
+left: 0px;
+top: 0px;
+
+order: 0;
+}
+#group{
+width: 161px;
+height: 32px;
+left: 137px;
+top: 0px;
+
+order: 1;
+}
