@@ -8,6 +8,9 @@
     </head>
     <body>
         <div class="group">Выбраная группа {{this.group}}</div>
+        <ol *ngFor="let pair of pairs">
+            <li>{{pair}}</li>
+        </ol>
         
         <div class="days">
             <div class="card">

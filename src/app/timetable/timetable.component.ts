@@ -14,9 +14,9 @@ export class TimetableComponent implements OnInit, OnChanges {
   @Input() group: string = ""
 
   //тут както пары хранятся
-  pairs: string[] = ['first', 'second', 'third']
+  pairs: string[] = []
 
-  constructor() { }
+  constructor(private service: TimeTableService) { }
 
   ngOnInit() { }
 
@@ -24,7 +24,17 @@ export class TimetableComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges){
     if(!changes.group.isFirstChange()){
       console.log(changes.group.currentValue);
-      this.pairs = ['fourth', 'fifth', 'sixth']
+      this.service.getPairs(this.group).subscribe(
+        (respones) => {
+          let json = respones 
+          // тут в pairs записываются пары
+          this.pairs = ["dsdsdsd", "sdsdsd", "sdsdsd"]
+        },
+        (error) => {
+            console.error('There was an error!', error)
+            this.pairs = ["first", "second", "third"]
+        }
+      )
     }
   }
 

@@ -1,37 +1,37 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Subscription } from "rxjs";
+import { Observable } from "rxjs";
+import { PairResponse } from "src/app/request/request";
 
 @Injectable({
     providedIn: 'root'
 })
 export class TimeTableService {
 
-    constructor(private httpClient: HttpClient){ 
+    private map: Map<number, string[]> = new Map([
+        [1, ["first", "second"]],
+        [2, ["third", "fourth"]],
+        [3, ["fifth", "sixth"]],
+        [4, ["seventh", "eighth"]],
+    ])
 
+    constructor(private httpClient: HttpClient){ 
+        
     }
 
-    async getPairs(group: string){
-        let pairs: any[] = []
+    getGroupsByCourse(course: number): string[]{
+        let groups = this.map.get(course) 
+        return groups ? groups : []
+    }
+
+    getPairs(group: string): Observable<PairResponse>{
         const params = new HttpParams()
             .set('division', group)
             .set('day', 'monday');
     
         const url: string = `https://routine.pnit.od.ua/routine/getLessons`;
-        const response = await this.httpClient.post(url, {params}, {headers: {'Access-Control-Allow-Origin': 'true'}})
+        return this.httpClient.post<PairResponse>(url, {params}, {headers: {'Access-Control-Allow-Origin': 'true'}})
     
-        response.subscribe(
-          (val) => {
-            let json = val as string
-            // json decode
-            // тут в pairs записываются пары
-            return pairs
-          },
-          (response) => {
-              console.error('There was an error!', response)
-              return pairs
-          }
-        )
     }
 
     editPair(){
@@ -47,3 +47,4 @@ export class TimeTableService {
     }
     
 }
+
