@@ -8,12 +8,12 @@
     </head>
     <body>
     <div *ngIf="pairs.length; else unset"  class="timetable">  
-        <div class="days" *ngFor="let day of days" id = "monday" >
+        <div class="days" *ngFor="let day of pairs" id = "monday" >
         <div  class="day_title">
-            <span class="day_title">{{day}} </span>  
+            <span class="day_title">{{day.weekday}} </span>  
         </div>
             
-            <div class="card" *ngFor="let pair of pairs">
+            <div class="card" *ngFor="let pair of day.pairs">
                 <div class="info">
                     <span class="room">{{pair.room}}</span>
                     <span class="subject">{{pair.subject}}</span>

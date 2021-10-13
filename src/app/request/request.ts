@@ -1,14 +1,19 @@
 export class PairResponse {
-    private code: number = 0
-    private message: string = ""
-    private data: Pair[] = []
+    public code: number = 0
+    public message: string = ""
+    public data: Day[] = []
     
 }
 
-export class Pair{
-     
-    constructor(public subject: string, public room: string, public time: number, public lecturers: string[] ){
+export class Day{
+    public weekday: string = ""
+    public pairs: Pair[] = []
+}
 
-    }
+export class Pair{
+    public subject: string = ""
+    public room: string = ""
+    public time: number = 0
+    public lecturers: string[] = []
     
 }

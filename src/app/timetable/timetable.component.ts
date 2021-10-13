@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TimeTableService } from 'src/services/timetableservice';
-import { Pair } from '../request/request';
+import { Day, Pair, PairResponse } from '../request/request';
 
 @Component({
   selector: 'app-timetable',
@@ -13,7 +13,7 @@ export class TimetableComponent implements OnInit, OnChanges {
   @Input() group: string = ""
 
   //тут както пары хранятся
-  pairs: Pair[] = []
+  pairs: Day[] = []
   days: string[] = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
 
   constructor(private service: TimeTableService) { }
@@ -25,14 +25,11 @@ export class TimetableComponent implements OnInit, OnChanges {
     if(!changes.group.isFirstChange()){
       console.log(changes.group.currentValue);
       this.service.getPairs(this.group).subscribe(
-        (respones) => {
-          let json = respones 
+        (response) => {
+          console.log(response.data);
+          
           // тут в pairs записываются пары
-          this.pairs = [
-              new Pair("Технології розроблення ПП", "204ф", 234234, []),
-              new Pair("Бази даних", "409ф", 234234, []),
-              new Pair("Програмування", "411ф", 234234, []),
-          ]
+          this.pairs = response.data
         },
         (error) => {
             console.error('There was an error!', error)
