@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { pairs } from 'rxjs';
 import { TimeTableService } from 'src/services/timetableservice';
 
 @Component({
@@ -13,17 +14,17 @@ export class TimetableComponent implements OnInit, OnChanges {
   @Input() group: string = ""
 
   //тут както пары хранятся
-  pairs: any[] = []
+  pairs: string[] = ['first', 'second', 'third']
 
-  constructor(private timeTableService: TimeTableService) { }
+  constructor() { }
 
-  ngOnInit(){
-    
-  }
+  ngOnInit() { }
+
 
   ngOnChanges(changes: SimpleChanges){
-    if(changes.group){
-      // timetable.getPairs
+    if(!changes.group.isFirstChange()){
+      console.log(changes.group.currentValue);
+      this.pairs = ['fourth', 'fifth', 'sixth']
     }
   }
 

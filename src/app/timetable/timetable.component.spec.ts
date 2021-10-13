@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TimetableComponent } from './timetable.component';
 
-describe('TimetableComponent', () => {
+fdescribe('TimetableComponent', () => {
   let component: TimetableComponent;
   let fixture: ComponentFixture<TimetableComponent>;
 
@@ -22,4 +22,11 @@ describe('TimetableComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should display group', ()=>{
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('.group')?.textContent).toEqual('Выбраная группа ' + component.group);
+  })
+
 });

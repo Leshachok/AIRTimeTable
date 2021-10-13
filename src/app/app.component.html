@@ -1,7 +1,19 @@
-здесь header с двумя менюшками
+<div class="toolbar" role="banner">
+	<form>
+	  <select id="course" name="course" (change)="setCourse($event.target)">
+		<option *ngFor="let i of listOfCourses">{{i}}</option>
+	  </select>
+  
+	  <select id="group" name="group" (change)="setGroup($event.target)">
+		<option *ngFor="let i of listOfGroups">{{i}}</option>
+	  </select>
+	</form>
+  </div>
 
 <angular-telegram-login-widget (load)="onLoad()" (loadError)="onLoadError()" (login)="onLogin($event)"
 	[botName]="botName"></angular-telegram-login-widget>
+
+<button (click)="onButtonClick()" >sdjspjdsijd</button>
 
 
 <app-timetable [group]="group"></app-timetable>
