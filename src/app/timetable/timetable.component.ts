@@ -1,12 +1,13 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
-import { Day, Pair, PairResponse } from '../request/request';
+import { Day } from '../request/request';
+import {DialogModule} from 'primeng/dialog';
 
 @Component({
   selector: 'app-timetable',
   templateUrl: './timetable.component.html',
-  styleUrls: ['./timetable.component.scss']
+  styleUrls: ['./timetable.component.scss'],
 })
 export class TimetableComponent implements OnInit, OnChanges {
 
@@ -17,13 +18,21 @@ export class TimetableComponent implements OnInit, OnChanges {
   //тут както пары хранятся
   pairs: Day[] = []
   days: string[] = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
+  display = false
  
 
   constructor(private service: TimeTableService, private TgService: TelegramLoginService) { 
     this.tgID = TgService.getID()
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
+
+  dialog(){
+    this.display = true
+    console.log('dsd');
+    
+  }
 
 
   ngOnChanges(changes: SimpleChanges){

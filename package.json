@@ -21,6 +21,8 @@
     "angular-telegram-login-widget": "^0.2.2",
     "ngx-cookie-service": "^12.0.3",
     "normalize.css": "^8.0.1",
+    "primeicons": "^4.1.0",
+    "primeng": "^12.2.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
