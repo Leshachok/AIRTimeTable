@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
 import { Day, Pair, PairResponse } from '../request/request';
-
+import {DialogModule} from 'primeng/dialog';
 @Component({
   selector: 'app-timetable',
   templateUrl: './timetable.component.html',
@@ -51,6 +51,12 @@ export class TimetableComponent implements OnInit, OnChanges {
 
   onDeletePair(){
     alert('Вы точно хотите удалить пару?')
+  }
+
+  display: boolean = false;
+
+  showDialog() {
+      this.display = true;
   }
 
   edit_image:string ="assets/img/edit.png";

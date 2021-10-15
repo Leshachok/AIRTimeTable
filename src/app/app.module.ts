@@ -9,6 +9,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TimetableComponent } from './timetable/timetable.component';
 import { TimeTableService } from 'src/services/timetableservice';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogModule } from 'primeng/dialog';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +22,9 @@ import { TimeTableService } from 'src/services/timetableservice';
     BrowserModule,
     AppRoutingModule,
     AngularTelegramLoginWidgetModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    DialogModule
   ],
   providers: [
     TelegramLoginService,

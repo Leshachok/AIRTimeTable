@@ -18,7 +18,7 @@
                     <span class="room">{{pair.room}}</span>
                     <span class="subject">{{pair.subject}}</span>
                 </div>
-                <input type="image" (click)="onEditPair()"  [src]="edit_image" *ngIf="tgID > 0 && group == 'УІ191'" class="button_image" id="edit"> 
+                <input type="image" (click)="showDialog() "  [src]="edit_image" *ngIf="tgID > 0 && group == 'УІ191'" class="button_image" id="edit"> 
                 <input type="image" (click)="onDeletePair()" [src]="delete_image" *ngIf="tgID > 0 && group == 'УІ191'"class="button_image" id="delete"> 
                 <div class="type_container">
                     <span class="type">Лабораторна</span>
@@ -30,6 +30,9 @@
                 </div>
             </a>
         </div>
+        <p-dialog header="Title" [(visible)]="display" [style] ="{}">
+            Content
+        </p-dialog>
     </div>   
     <ng-template #unset>
             <h2>Выберите группу</h2>
