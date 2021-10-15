@@ -5,7 +5,7 @@ import { TimeTableService } from 'src/services/timetableservice';
 @Component({
   selector: 'app-root',
   templateUrl: "./app.component.html",
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   

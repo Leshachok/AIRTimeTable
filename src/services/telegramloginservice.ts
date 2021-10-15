@@ -10,6 +10,7 @@ export class TelegramLoginService {
     keyID: string = 'id'
     private tgID: number = 0
     private username: string = ""
+    private first_name: string = ""
 
     constructor(private cookieService: CookieService){ 
 
@@ -21,6 +22,10 @@ export class TelegramLoginService {
         return this.tgID
     }
 
+    getFirstName(): string{
+        return this.first_name
+    }
+
     getUsername(): string{
         this.username = this.cookieService.get(this.keyName)
         return this.username
@@ -29,10 +34,11 @@ export class TelegramLoginService {
     saveData(userData: any){
         this.tgID = userData[this.keyID]
         this.username = userData[this.keyName]
+        this.first_name = userData['first_name'] ? userData['first_name'] : userData['second_name']
         this.cookieService.set(this.keyName, this.username);
         this.cookieService.set(this.keyID, this.tgID.toString());
         console.log(this.tgID + ' login');
-        
+
     }
 
     
