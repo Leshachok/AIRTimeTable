@@ -13,7 +13,8 @@ import { TimeTableService } from 'src/services/timetableservice';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule} from 'primeng/inputtext';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -29,13 +30,15 @@ import { ConfirmationService } from 'primeng/api';
     DialogModule,
     InputTextModule,
     FormsModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ToastModule
   ],
   providers: [
     TelegramLoginService,
     CookieService,
     TimeTableService,
-    ConfirmationService
+    ConfirmationService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })

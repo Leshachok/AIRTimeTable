@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
 import { Day } from '../request/request';
@@ -22,7 +22,8 @@ export class TimetableComponent implements OnInit, OnChanges {
   deleteId: number = 0
   onDeleted = false
 
-  constructor(private service: TimeTableService, private TgService: TelegramLoginService, private confService: ConfirmationService) { 
+  constructor(private service: TimeTableService, private TgService: TelegramLoginService,
+       private confService: ConfirmationService, private messageService: MessageService) { 
     this.tgID = TgService.getID()
   }
 
@@ -55,6 +56,7 @@ export class TimetableComponent implements OnInit, OnChanges {
       this.tgID = this.TgService.getID()
   }
 
+
   onEditPair(){
     alert('Вы точно хотите изменить пару?')
   }
@@ -66,7 +68,7 @@ export class TimetableComponent implements OnInit, OnChanges {
       message: 'Ви дійсно хочете видалити пару?',
         accept: () => {
             //Actual logic to perform a confirmation
-            
+            this.messageService.add({severity:'success', summary: 'Видалено', detail: 'Пара успішно видалена'});
         },
         reject: () => {
 
