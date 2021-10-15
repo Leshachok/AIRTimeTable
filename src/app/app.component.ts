@@ -40,6 +40,7 @@ export class AppComponent {
     this.user = user;
     this.service.saveData(user);
     this.telegramID = user['id']
+    this.ttservice.addGroupEditor()
   }
 
   getGroups(course: number): string[] {

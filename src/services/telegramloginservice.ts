@@ -32,6 +32,8 @@ export class TelegramLoginService {
         this.cookieService.set(this.keyName, this.username);
         this.cookieService.set(this.keyID, this.tgID.toString());
         console.log(this.tgID + ' login');
+        
     }
+
     
 }
