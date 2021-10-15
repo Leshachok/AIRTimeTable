@@ -19,7 +19,7 @@
                     <span class="subject">{{pair.subject}}</span>
                 </div>
                 <input type="image" (click)="showDialog(pair.room,pair.subject) "  [src]="edit_image" *ngIf="tgID > 0 && group == 'УІ191'" class="button_image" id="edit"> 
-                <input type="image" (click)="onDeletePair()" [src]="delete_image" *ngIf="tgID > 0 && group == 'УІ191'"class="button_image" id="delete"> 
+                <input type="image" (click)="onDeletePair(pair.id)" [src]="delete_image" *ngIf="tgID > 0 && group == 'УІ191'"class="button_image" id="delete"> 
                 <div class="type_container">
                     <span class="type">{{pair.type}}</span>
                     <span class="type">{{pair.time}}</span>
@@ -45,6 +45,7 @@
         </div>
         
     </div>   
+    <p-confirmDialog [visible]="onDeleted" header="Підтвердження" icon="pi pi-exclamation-triangle"></p-confirmDialog>
     <ng-template #unset>
             <h2>Выберите группу</h2>
     </ng-template>
