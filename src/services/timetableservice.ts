@@ -34,7 +34,7 @@ export class TimeTableService {
     addGroupEditor(division: string = 'УІ191'){
         const params = new HttpParams()
             .set('division', division)
-            .set('editorID', this.service.getID.toString())
+            .set('editorID', this.service.getID())
             .set('username', this.service.getUsername())
         
         const url: string = `https://routine.pnit.od.ua/routine/insertEG`;
