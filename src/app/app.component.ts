@@ -16,7 +16,7 @@ export class AppComponent {
   isLoadError: boolean = false;
 
   user: any = undefined;
-  group: string = "";
+  group: string = "УК211";
   groups: string[] = [];
   course: number = 1;
   courses: number[] = [1, 2, 3, 4];
