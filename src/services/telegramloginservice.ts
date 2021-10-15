@@ -6,17 +6,30 @@ import { CookieService } from "ngx-cookie-service";
 })
 export class TelegramLoginService {
 
-    key: string = 'username';
+    keyName: string = 'username'
+    keyID: string = 'id'
+    private tgID: number = 0
+    private username: string = ""
 
     constructor(private cookieService: CookieService){ 
+        
     }
 
-    getData(): string{
-        return this.cookieService.get(this.key)
+    getID():number{
+        this.tgID = +this.cookieService.get(this.keyID)
+        return this.tgID
+    }
+
+    getUsername(): string{
+        this.username = this.cookieService.get(this.keyName)
+        return this.username
     }
 
     saveData(userData: any){
-        this.cookieService.set(this.key, userData[this.key]);
+        this.tgID = userData[this.keyID]
+        this.username = userData[this.keyName]
+        this.cookieService.set(this.keyName, this.username);
+        this.cookieService.set(this.keyID, this.tgID.toString());
     }
     
 }

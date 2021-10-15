@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
 import { Day, Pair, PairResponse } from '../request/request';
 
@@ -15,8 +16,11 @@ export class TimetableComponent implements OnInit, OnChanges {
   //тут както пары хранятся
   pairs: Day[] = []
   days: string[] = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
+  tgID: number = 0
 
-  constructor(private service: TimeTableService) { }
+  constructor(private service: TimeTableService, private TgService: TelegramLoginService) { 
+    this.tgID = TgService.getID()
+  }
 
   ngOnInit() { }
 
