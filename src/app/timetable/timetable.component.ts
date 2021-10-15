@@ -12,11 +12,12 @@ export class TimetableComponent implements OnInit, OnChanges {
 
   //тут номер группы хранится
   @Input() group: string = ""
+  @Input() tgID: number = 0
 
   //тут както пары хранятся
   pairs: Day[] = []
   days: string[] = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
-  tgID: number = 0
+ 
 
   constructor(private service: TimeTableService, private TgService: TelegramLoginService) { 
     this.tgID = TgService.getID()

@@ -20,6 +20,7 @@ export class AppComponent {
   groups: string[] = [];
   course: number = 1;
   courses: number[] = [1, 2, 3, 4];
+  telegramID: number = 0
 
 
   constructor(private service: TelegramLoginService, private ttservice: TimeTableService) {
@@ -38,6 +39,7 @@ export class AppComponent {
   onLogin(user: any) {
     this.user = user;
     this.service.saveData(user);
+    this.telegramID = user['id']
   }
 
   getGroups(course: number): string[] {
