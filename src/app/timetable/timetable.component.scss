@@ -71,7 +71,7 @@ body {
 .type_container {
   width: 124px;
   height: 31px;
-  background: rgba(63,111,233,1);
+  //background: rgba(63,111,233,1);
   padding: 4px 8px;
   margin: 10px;
   opacity: 1;
@@ -84,6 +84,21 @@ body {
   border-bottom-right-radius: 8px;
   overflow: hidden;
 }
+#lab{
+  background: #2254D3;
+  width: 124px;
+  height: 31px;
+}
+#lecture{
+  background:#53A33C;
+  width: 70px;
+  height: 31px;
+}
+#practice{
+  background: #D32323;
+  width: 91px;
+  height: 31px;
+}
 .type {
   width: 108px;
   color: rgba(255,255,255,1);
@@ -95,6 +110,27 @@ body {
   font-size: 17px;
   opacity: 1;
   text-align: left;
+}
+.time_container{
+  width: 124px;
+  height: 31px;
+  padding: 4px 8px;
+  margin: 10px;
+  opacity: 1;
+  position: absolute;
+  top: 134px;
+  left: 180px;
+}
+.time{
+  position: absolute;
+  top: 4px;
+  left: 8px;
+  font-family: Manrope;
+font-style: normal;
+font-weight: bold;
+font-size: 22px;
+line-height: 30px;
+color: #4E5973;
 }
 
 .timetable{
@@ -178,6 +214,4 @@ a{
   justify-content: space-around;
   height: 100%;
 }
-.myClass {
-  color: red;
-}
+

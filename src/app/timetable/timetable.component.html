@@ -18,21 +18,27 @@
                     <span class="room">{{pair.room}}</span>
                     <span class="subject">{{pair.subject}}</span>
                 </div>
-                <input type="image" (click)="showDialog(pair.room,pair.subject) "  [src]="edit_image" *ngIf="tgID > 0 && group == 'УІ191'" class="button_image" id="edit"> 
+                <input type="image" (click)="showDialog(pair.room,pair.subject,pair.time) "  [src]="edit_image" *ngIf="tgID > 0 && group == 'УІ191'" class="button_image" id="edit"> 
                 <input type="image" (click)="onDeletePair()" [src]="delete_image" *ngIf="tgID > 0 && group == 'УІ191'"class="button_image" id="delete"> 
-                <div class="type_container">
+                <div class="type_container" id={{pair.type}}>
                     <span class="type">{{pair.type}}</span>
-                    <span class="type">{{pair.time}}</span>
                 </div>
-                <p-dialog *ngIf="pair.room === room && pair.subject === subject" header="Редагування пари" [(visible)]="display" [contentStyle]="{'width': '50vw' , 'height' : '50vw'}" [resizable] = "false">
+                <div class="time_container">
+                    <span class="time">{{pair.time}}</span>
+                </div>
+                <p-dialog *ngIf="pair.room === room && pair.subject === subject && pair.time === time" header="Редагування пари" [(visible)]="display" [contentStyle]="{'width': '25vw' , 'height' : '25vw'}" [resizable] = "false">
                     <div class="input_values">   
                         <span class="p-float-label">
-                            <input id="float-input" type="text" [(ngModel)]="room" pInputText> 
-                            <label for="float-input">Room</label>
+                            <input id="float-input" type="text" [(ngModel)]="room" placeholder="Large" pInputText> 
+                            <label for="float-input">Аудиторія</label>
                         </span>
                         <span class="p-float-label">
-                            <input id="float-input" type="text" [(ngModel)]="subject" pInputText> 
-                            <label for="float-input">Subject</label>
+                            <input id="float-input" type="text" [(ngModel)]="subject" placeholder="Large" pInputText> 
+                            <label for="float-input">Дисципліна</label>
+                        </span>
+                        <span class="p-float-label">
+                            <input id="float-input" type="text" [(ngModel)]="time" placeholder="Large" pInputText> 
+                            <label for="float-input">Час</label>
                         </span>
                     </div> 
                 </p-dialog>
