@@ -25,8 +25,10 @@ export class AppComponent {
 
   constructor(private service: TelegramLoginService, private ttservice: TimeTableService) {
     this.groups = ttservice.getGroupsByCourse(this.course)
-   }
+  }
 
+  ngOnInit() {
+  }
 
   onLoad() {
     this.isLoad = true;

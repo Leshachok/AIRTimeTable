@@ -10,10 +10,9 @@
 	</form>
 	<angular-telegram-login-widget id="telegram_login" (load)="onLoad()" (loadError)="onLoadError()" (login)="onLogin($event)"
   [botName]="botName"></angular-telegram-login-widget>
+
 	
   </div>
-
-  
 
 
 <app-timetable [tgID]="telegramID" [group]="group"></app-timetable>
