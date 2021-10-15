@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ConfirmationService } from 'primeng/api';
 import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
 import { Day } from '../request/request';
@@ -18,9 +19,10 @@ export class TimetableComponent implements OnInit, OnChanges {
   pairs: Day[] = []
   days: string[] = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
   display = false
- 
+  deleteId: number = 0
+  onDeleted = false
 
-  constructor(private service: TimeTableService, private TgService: TelegramLoginService) { 
+  constructor(private service: TimeTableService, private TgService: TelegramLoginService, private confService: ConfirmationService) { 
     this.tgID = TgService.getID()
   }
 
@@ -57,8 +59,22 @@ export class TimetableComponent implements OnInit, OnChanges {
     alert('Вы точно хотите изменить пару?')
   }
 
-  onDeletePair(){
-    alert('Вы точно хотите удалить пару?')
+  onDeletePair(id: number){
+    this.deleteId = id
+    this.onDeleted = true
+    this.confService.confirm({
+      message: 'Ви дійсно хочете видалити пару?',
+        accept: () => {
+            //Actual logic to perform a confirmation
+            
+        },
+        reject: () => {
+
+        },
+        acceptLabel: "Так",
+        rejectLabel: "Ні"
+
+    });
   }
 
   edit_image:string ="assets/img/edit.png";
