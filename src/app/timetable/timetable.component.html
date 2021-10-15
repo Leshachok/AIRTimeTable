@@ -19,7 +19,7 @@
                     <span class="subject">{{pair.subject}}</span>
                 </div>
                 <input type="image" (click)="showDialog(pair.room,pair.subject,pair.time) "  [src]="edit_image" *ngIf="tgID > 0 && group == 'УІ191'" class="button_image" id="edit"> 
-                <input type="image" (click)="onDeletePair()" [src]="delete_image" *ngIf="tgID > 0 && group == 'УІ191'"class="button_image" id="delete"> 
+                <input type="image" (click)="onDeletePair(pair.id)" [src]="delete_image" *ngIf="tgID > 0 && group == 'УІ191'"class="button_image" id="delete"> 
                 <div class="type_container" id={{pair.type}}>
                     <span class="type">{{pair.type}}</span>
                 </div>
