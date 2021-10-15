@@ -4,6 +4,9 @@
 body {
   font-size: 14px;
 }
+
+  
+
 .days{
     width: 100%; 
     display: flex;
@@ -98,6 +101,7 @@ body {
   display: flex;
 flex-direction: row;
 align-items: flex-start;
+background: #EAEAEA;
 }
 .day_title{
   position: relative;
@@ -152,3 +156,19 @@ margin: 24px 0px;
 #delete:hover{
   box-shadow: 0px 4px 8px #F95A00;
 }
+#add_card{
+  background: #EAEAEA;
+  border: 1px dashed #30384B;
+  font-family: Manrope;
+font-style: normal;
+font-weight: normal;
+font-size: 17px;
+display: flex;
+align-items: center;
+justify-content: space-around;
+}
+a{
+  color: none;
+  text-decoration: none;
+}
+
