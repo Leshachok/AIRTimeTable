@@ -45,6 +45,14 @@ export class TimetableComponent implements OnInit, OnChanges {
     }
   }
 
+  onEditPair(){
+    alert('Вы точно хотите изменить пару?')
+  }
+
+  onDeletePair(){
+    alert('Вы точно хотите удалить пару?')
+  }
+
   edit_image:string ="assets/img/edit.png";
   delete_image:string ="assets/img/delete.png"
 }
