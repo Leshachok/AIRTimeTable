@@ -15,5 +15,6 @@ export class Pair{
     public room: string = ""
     public time: number = 0
     public lecturers: string[] = []
-    
+    public id: number = 0
+    public type: string = ""
 }

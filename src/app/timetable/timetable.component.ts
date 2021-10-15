@@ -41,6 +41,7 @@ export class TimetableComponent implements OnInit, OnChanges {
           
           // тут в pairs записываются пары
           this.pairs = response.data
+          console.log(this.pairs[0].pairs[0].id)
         },
         (error) => {
             console.error('There was an error!', error)
