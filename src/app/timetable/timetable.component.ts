@@ -40,9 +40,9 @@ export class TimetableComponent implements OnInit, OnChanges {
             console.error('There was an error!', error)
             this.pairs = []
         }
-      )
+      ) 
+      this.tgID = this.TgService.getID()
     }
-    console.log(this.tgID + ' ngonch')
   }
 
   edit_image:string ="assets/img/edit.png";
