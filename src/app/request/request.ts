@@ -13,7 +13,8 @@ export class Day{
 export class Pair{
     public subject: string = ""
     public room: string = ""
-    public time: number = 0
+    public time: string = ""
     public lecturers: string[] = []
-    
+    public id: number = 0
+    public type: string = ""
 }

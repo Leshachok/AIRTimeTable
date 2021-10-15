@@ -21,7 +21,8 @@
                 <input type="image" (click)="showDialog(pair.room,pair.subject) "  [src]="edit_image" *ngIf="tgID > 0 && group == 'УІ191'" class="button_image" id="edit"> 
                 <input type="image" (click)="onDeletePair()" [src]="delete_image" *ngIf="tgID > 0 && group == 'УІ191'"class="button_image" id="delete"> 
                 <div class="type_container">
-                    <span class="type">Лабораторна</span>
+                    <span class="type">{{pair.type}}</span>
+                    <span class="type">{{pair.time}}</span>
                 </div>
                 <p-dialog *ngIf="pair.room === room && pair.subject === subject" header="Редагування пари" [(visible)]="display" [contentStyle]="{'width': '50vw' , 'height' : '50vw'}" [resizable] = "false">
                     <div class="input_values">   

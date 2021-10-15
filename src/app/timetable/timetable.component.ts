@@ -37,11 +37,8 @@ export class TimetableComponent implements OnInit, OnChanges {
 
 
   ngOnChanges(changes: SimpleChanges){
-    if(!changes) return;
-    console.log(changes.group.currentValue);
       this.service.getPairs(this.group).subscribe(
         (response) => {
-          console.log(response.data);
           
           // тут в pairs записываются пары
           this.pairs = response.data
