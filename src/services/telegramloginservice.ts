@@ -17,6 +17,7 @@ export class TelegramLoginService {
 
     getID():number{
         this.tgID = +this.cookieService.get(this.keyID)
+        console.log(this.tgID + ' init')
         return this.tgID
     }
 
