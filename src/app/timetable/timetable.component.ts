@@ -37,8 +37,8 @@ export class TimetableComponent implements OnInit, OnChanges {
 
 
   ngOnChanges(changes: SimpleChanges){
-    if(!changes.group.isFirstChange()){
-      console.log(changes.group.currentValue);
+    if(!changes) return;
+    console.log(changes.group.currentValue);
       this.service.getPairs(this.group).subscribe(
         (response) => {
           console.log(response.data);
@@ -52,7 +52,6 @@ export class TimetableComponent implements OnInit, OnChanges {
         }
       ) 
       this.tgID = this.TgService.getID()
-    }
   }
 
   onEditPair(){

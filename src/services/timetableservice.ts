@@ -36,11 +36,10 @@ export class TimeTableService {
             .set('division', division)
             .set('editorID', this.service.getID())
             .set('username', this.service.getUsername())
-        
         const url: string = `https://routine.pnit.od.ua/routine/insertEG`;
         this.httpClient.post(url, params).subscribe(
             (response) => {
-            console.log(response.toString());
+                console.log(response.toString());
             
 
             },
