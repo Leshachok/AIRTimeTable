@@ -27,8 +27,12 @@ export class TimetableComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
 
-  showDialog(){
+  room:string = '';
+  subject:string = '';
+  showDialog(room:string,subject:string){
     this.display = true
+    this.room = room;
+    this.subject = subject;
   }
 
 

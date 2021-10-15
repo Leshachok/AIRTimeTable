@@ -171,4 +171,13 @@ a{
   color: none;
   text-decoration: none;
 }
-
+.input_values{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+}
+.myClass {
+  color: red;
+}

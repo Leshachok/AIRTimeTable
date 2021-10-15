@@ -18,11 +18,23 @@
                     <span class="room">{{pair.room}}</span>
                     <span class="subject">{{pair.subject}}</span>
                 </div>
-                <input type="image" (click)="showDialog() "  [src]="edit_image" *ngIf="tgID > 0 && group == 'УІ191'" class="button_image" id="edit"> 
+                <input type="image" (click)="showDialog(pair.room,pair.subject) "  [src]="edit_image" *ngIf="tgID > 0 && group == 'УІ191'" class="button_image" id="edit"> 
                 <input type="image" (click)="onDeletePair()" [src]="delete_image" *ngIf="tgID > 0 && group == 'УІ191'"class="button_image" id="delete"> 
                 <div class="type_container">
                     <span class="type">Лабораторна</span>
                 </div>
+                <p-dialog *ngIf="pair.room === room && pair.subject === subject" header="Редагування пари" [(visible)]="display" [contentStyle]="{'width': '50vw' , 'height' : '50vw'}" [resizable] = "false">
+                    <div class="input_values">   
+                        <span class="p-float-label">
+                            <input id="float-input" type="text" [(ngModel)]="room" pInputText> 
+                            <label for="float-input">Room</label>
+                        </span>
+                        <span class="p-float-label">
+                            <input id="float-input" type="text" [(ngModel)]="subject" pInputText> 
+                            <label for="float-input">Subject</label>
+                        </span>
+                    </div> 
+                </p-dialog>
             </div>
             <a href="" id>
                 <div class="card" id="add_card">
@@ -30,9 +42,7 @@
                 </div>
             </a>
         </div>
-        <p-dialog header="Title" [(visible)]="display" [style] ="{}">
-            Content
-        </p-dialog>
+        
     </div>   
     <ng-template #unset>
             <h2>Выберите группу</h2>

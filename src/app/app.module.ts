@@ -5,12 +5,13 @@ import { CookieService } from 'ngx-cookie-service';
 import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TimetableComponent } from './timetable/timetable.component';
 import { TimeTableService } from 'src/services/timetableservice';
 import { DialogModule } from 'primeng/dialog';
+import {InputTextModule} from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { DialogModule } from 'primeng/dialog';
     AngularTelegramLoginWidgetModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    DialogModule
+    DialogModule,
+    InputTextModule,
+    FormsModule
   ],
   providers: [
     TelegramLoginService,
