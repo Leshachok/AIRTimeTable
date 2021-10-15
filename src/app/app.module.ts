@@ -22,8 +22,8 @@ import { DialogModule } from 'primeng/dialog';
     AppRoutingModule,
     AngularTelegramLoginWidgetModule,
     HttpClientModule,
-    DialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DialogModule
   ],
   providers: [
     TelegramLoginService,

@@ -2,7 +2,6 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
 import { Day } from '../request/request';
-import { DialogModule} from 'primeng/dialog';
 import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
