@@ -18,8 +18,8 @@
                     <span class="room">{{pair.room}}</span>
                     <span class="subject">{{pair.subject}}</span>
                 </div>
-                <input type="image" (onClick)="onEditPair()" [src]="edit_image" *ngIf="tgID > 0 && group == 'УІ191'" class="button_image" id="edit"> 
-                <input type="image" (onClick)="onDeletePair()" [src]="delete_image" *ngIf="tgID > 0 && group == 'УІ191'"class="button_image" id="delete"> 
+                <input type="image" (click)="onEditPair()"  [src]="edit_image" *ngIf="tgID > 0 && group == 'УІ191'" class="button_image" id="edit"> 
+                <input type="image" (click)="onDeletePair()" [src]="delete_image" *ngIf="tgID > 0 && group == 'УІ191'"class="button_image" id="delete"> 
                 <div class="type_container">
                     <span class="type">Лабораторна</span>
                 </div>
