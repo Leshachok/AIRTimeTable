@@ -37,11 +37,9 @@ export class TimetableComponent implements OnInit, OnChanges {
     console.log(changes.group.currentValue);
       this.service.getPairs(this.group).subscribe(
         (response) => {
-          console.log(response.data);
           
           // тут в pairs записываются пары
           this.pairs = response.data
-          console.log(this.pairs[0].pairs[0].id)
         },
         (error) => {
             console.error('There was an error!', error)
