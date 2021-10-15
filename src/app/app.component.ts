@@ -5,7 +5,7 @@ import { TimeTableService } from 'src/services/timetableservice';
 @Component({
   selector: 'app-root',
   templateUrl: "./app.component.html",
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   
@@ -25,8 +25,10 @@ export class AppComponent {
 
   constructor(private service: TelegramLoginService, private ttservice: TimeTableService) {
     this.groups = ttservice.getGroupsByCourse(this.course)
-   }
+  }
 
+  ngOnInit() {
+  }
 
   onLoad() {
     this.isLoad = true;
@@ -40,6 +42,7 @@ export class AppComponent {
     this.user = user;
     this.service.saveData(user);
     this.telegramID = user['id']
+    this.ttservice.addGroupEditor()
   }
 
   getGroups(course: number): string[] {
