@@ -2,7 +2,6 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
 import { Day } from '../request/request';
-import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-timetable',
@@ -21,13 +20,15 @@ export class TimetableComponent implements OnInit, OnChanges {
   display = false
  
 
-  constructor(private service: TimeTableService, private TgService: TelegramLoginService, private primengConfig: PrimeNGConfig) { 
+  constructor(private service: TimeTableService, private TgService: TelegramLoginService) { 
     this.tgID = TgService.getID()
   }
 
   ngOnInit() {
+  }
+
+  showDialog(){
     this.display = true
-    this.primengConfig.ripple = true;
   }
 
 
