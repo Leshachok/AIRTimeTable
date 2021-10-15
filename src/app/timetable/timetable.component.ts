@@ -41,6 +41,7 @@ export class TimetableComponent implements OnInit, OnChanges {
         }
       )
     }
+    console.log(this.tgID + ' ngonch')
   }
 
   edit_image:string ="assets/img/edit.png";
