@@ -33,11 +33,14 @@ export class TimetableComponent implements OnInit, OnChanges {
   room:string = '';
   subject:string = '';
   time:string ='';
-  showDialog(room:string,subject:string,time:string){
+  showDialogEdit(room:string,subject:string,time:string){
     this.display = true
     this.room = room;
     this.subject = subject;
     this.time = time;
+  }
+  showDialogCreate(){
+    this.display = true
   }
 
 
@@ -58,7 +61,12 @@ export class TimetableComponent implements OnInit, OnChanges {
 
 
   onEditPair(){
-    alert('Вы точно хотите изменить пару?')
+    this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Пара успішно змінена'});
+    this.display = false;
+  }
+  onCreatePair(){
+    this.messageService.add({severity:'success', summary: 'Створено', detail: 'Пара успішно створена'});
+    this.display = false; 
   }
 
   onDeletePair(id: number){
@@ -78,7 +86,6 @@ export class TimetableComponent implements OnInit, OnChanges {
 
     });
   }
-
   edit_image:string ="assets/img/edit.png";
   delete_image:string ="assets/img/delete.png"
   

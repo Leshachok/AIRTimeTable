@@ -12,7 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 16px;
+    //padding: 16px;
 }
 .card {
   display: table-cell;
@@ -160,15 +160,8 @@ position: relative;
     left: 16px;
 
 color: #30384B;
-top: 16px;
-    left: 16px;
-
-/* Inside Auto Layout */
-
-flex: none;
-order: 0;
-flex-grow: 0;
-margin: 24px 0px;
+// top: 16px;
+//     left: 16px;
 }
 .button_image{
   position: absolute;
@@ -210,8 +203,14 @@ a{
 .input_values{
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-around;
   height: 100%;
+}
+.p-float-label{
+  width: 100%;
+}
+.float-input{
+  width: 100%;
 }
 

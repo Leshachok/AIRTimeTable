@@ -8,49 +8,84 @@
     </head>
     <body>
     <div *ngIf="pairs.length; else unset"  class="timetable">  
-        <div class="days" *ngFor="let day of pairs" id = "monday" >
-        <div  class="day_title">
-            <span class="day_title">{{day.weekday}} </span>  
-        </div>
+        <div class="days" *ngFor="let day of pairs" >
+       <!-- <div  class="day_title">-->
+           <span class="day_title" *ngIf="day.weekday === 'monday'">Понеділок</span>
+           <span class="day_title" *ngIf="day.weekday === 'tuesday'">Вівторок</span> 
+           <span class="day_title" *ngIf="day.weekday === 'wednesday'">Середа</span> 
+           <span class="day_title" *ngIf="day.weekday === 'thursday'">Четвер</span> 
+           <span class="day_title" *ngIf="day.weekday === 'friday'">П'ятниця</span>  
+        <!--</div>-->
             
             <div class="card" *ngFor="let pair of day.pairs">
                 <div class="info">
                     <span class="room">{{pair.room}}</span>
                     <span class="subject">{{pair.subject}}</span>
                 </div>
-                <input type="image" (click)="showDialog(pair.room,pair.subject,pair.time) "  [src]="edit_image" *ngIf="tgID > 0 && group == 'УІ191'" class="button_image" id="edit"> 
+                <input type="image" (click)="showDialogEdit(pair.room,pair.subject,pair.time) "  [src]="edit_image" *ngIf="tgID > 0 && group == 'УІ191'" class="button_image" id="edit"> 
                 <input type="image" (click)="onDeletePair(pair.id)" [src]="delete_image" *ngIf="tgID > 0 && group == 'УІ191'"class="button_image" id="delete"> 
                 <div class="type_container" id={{pair.type}}>
-                    <span class="type">{{pair.type}}</span>
+                    <span class="type" *ngIf="pair.type === 'lab'">Лабораторна</span>
+                    <span class="type" *ngIf="pair.type === 'lecture'">Лекція</span>
+                    <span class="type" *ngIf="pair.type === 'practice'">Практика</span>
                 </div>
                 <div class="time_container">
                     <span class="time">{{pair.time}}</span>
                 </div>
-                <p-dialog *ngIf="pair.room === room && pair.subject === subject && pair.time === time" header="Редагування пари" [(visible)]="display" [contentStyle]="{'width': '25vw' , 'height' : '25vw'}" [resizable] = "false">
+                <p-dialog *ngIf="pair.room === room && pair.subject === subject && pair.time === time" [(visible)]="display" [contentStyle]="{'width': '25vw' , 'height' : '25vw'}" [resizable] = "false">
+                    <ng-template pTemplate="header">
+                        <h2>Редагування пари</h2>
+                    </ng-template>
                     <div class="input_values">   
                         <span class="p-float-label">
-                            <input id="float-input" type="text" [(ngModel)]="room" placeholder="Large" pInputText> 
-                            <label for="float-input">Аудиторія</label>
+                            <input class="float-input" id="float-input_room" type="text" [(ngModel)]="room" pInputText> 
+                            <label for="float-input_room">Аудиторія</label>
                         </span>
                         <span class="p-float-label">
-                            <input id="float-input" type="text" [(ngModel)]="subject" placeholder="Large" pInputText> 
-                            <label for="float-input">Дисципліна</label>
+                            <input class="float-input" id="float-input_subject" type="text" [(ngModel)]="subject" pInputText> 
+                            <label for="float-input_subject">Дисципліна</label>
                         </span>
                         <span class="p-float-label">
-                            <input id="float-input" type="text" [(ngModel)]="time" placeholder="Large" pInputText> 
-                            <label for="float-input">Час</label>
+                            <input class="float-input" id="float-input_time" type="text" [(ngModel)]="time" pInputText> 
+                            <label for="float-input_time">Час</label>
                         </span>
-                    </div> 
+                    </div>
+                    <ng-template pTemplate="footer">
+                        <p-button label="Зберегти зміни" icon="pi pi-check" iconPos="left" (click) = "onEditPair()"></p-button>
+                    </ng-template> 
                 </p-dialog>
             </div>
-            <a href="" id>
+            <a (click)="showDialogCreate()" *ngIf="tgID > 0 && group == 'УІ191'">
                 <div class="card" id="add_card">
                     + Додати пару
                 </div>
+                
             </a>
         </div>
         
-    </div>   
+    </div>
+    <p-dialog [(visible)]="display" [contentStyle]="{'width': '25vw' , 'height' : '25vw'}" [resizable] = "false">
+        <ng-template pTemplate="header">
+            <h2>Додання пари</h2>
+        </ng-template>
+        <div class="input_values">   
+            <span class="p-float-label">
+                <input class="float-input" id="float-input_room" type="text" pInputText> 
+                <label for="float-input_room">Аудиторія</label>
+            </span>
+            <span class="p-float-label">
+                <input class="float-input" id="float-input_subject" type="text" pInputText> 
+                <label for="float-input_subject">Дисципліна</label>
+            </span>
+            <span class="p-float-label">
+                <input class="float-input" id="float-input_time" type="text" pInputText> 
+                <label for="float-input_time">Час</label>
+            </span>
+        </div>
+        <ng-template pTemplate="footer">
+            <p-button label="Додати пару" icon="pi pi-check" iconPos="left" (click) = "onCreatePair()"></p-button>
+        </ng-template> 
+    </p-dialog>   
     <p-confirmDialog [visible]="onDeleted" header="Підтвердження" icon="pi pi-exclamation-triangle"></p-confirmDialog>
     <p-toast position="top-right"></p-toast>
     <ng-template #unset>
