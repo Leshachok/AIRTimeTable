@@ -31,7 +31,7 @@ export class TimeTableService {
         return this.httpClient.post<PairResponse>(url, params)
     }
 
-    addGroupEditor(division: string = 'УІ191'){
+    addGroupEditor(division: string = 'set group here'){
         const params = new HttpParams()
             .set('division', division)
             .set('editorID', this.service.getID())
@@ -54,7 +54,18 @@ export class TimeTableService {
 
     }
 
-    deletePair(){
+    deletePair(id: number){
+        const params = new HttpParams()
+        .set('pairID', id)
+        .set('editorID', 2)
+        const url: string = `https://routine.pnit.od.ua/routine/deletePair`;
+        this.httpClient.post(url, params).subscribe(
+            (response) => {
+                console.log(response.toString());
+            },
+            (error) => {
+                console.error('There was an error!', error)
+            })
 
     }
 
