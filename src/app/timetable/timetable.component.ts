@@ -70,12 +70,14 @@ export class TimetableComponent implements OnInit, OnChanges {
   }
 
   onDeletePair(id: number){
+    console.log('dsd');
     this.deleteId = id
     this.onDeleted = true
     this.confService.confirm({
       message: 'Ви дійсно хочете видалити пару?',
         accept: () => {
             //Actual logic to perform a confirmation
+            this.service.deletePair(id);
             this.messageService.add({severity:'success', summary: 'Видалено', detail: 'Пара успішно видалена'});
         },
         reject: () => {
