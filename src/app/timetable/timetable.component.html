@@ -32,7 +32,7 @@
                 <div class="time_container">
                     <span class="time">{{pair.time}}</span>
                 </div>
-                <p-dialog *ngIf="pair.room === room && pair.subject === subject && pair.time === time" [(visible)]="display" [contentStyle]="{'width': '25vw' , 'height' : '25vw'}" [resizable] = "false">
+                <p-dialog *ngIf="pair.room === room && pair.subject === subject && pair.time === time" [(visible)]="displayEdit" [contentStyle]="{'width': '25vw' , 'height' : '25vw'}" [resizable] = "false">
                     <ng-template pTemplate="header">
                         <h2>Редагування пари</h2>
                     </ng-template>
@@ -64,7 +64,7 @@
         </div>
         
     </div>
-    <p-dialog [(visible)]="display" [contentStyle]="{'width': '25vw' , 'height' : '25vw'}" [resizable] = "false">
+    <p-dialog [(visible)]="displayAdd" [contentStyle]="{'width': '25vw' , 'height' : '25vw'}" [resizable] = "false">
         <ng-template pTemplate="header">
             <h2>Додання пари</h2>
         </ng-template>

@@ -32,7 +32,10 @@ export class AppComponent {
 
   onLoad() {
     this.isLoad = true;
-    if(this.service.getID() != 0) this.ttservice.getEditGroupByTgID()
+    if(this.service.getID() != 0) {
+      this.ttservice.getEditGroupByTgID()
+      this.editGroup = this.ttservice.getEditGroup()
+    }
   }
 
   onLoadError() {

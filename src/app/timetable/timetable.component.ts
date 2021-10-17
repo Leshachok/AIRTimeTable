@@ -18,9 +18,11 @@ export class TimetableComponent implements OnInit, OnChanges {
   //тут както пары хранятся
   pairs: Day[] = []
   days: string[] = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
-  display = false
+  displayEdit = false
+  displayDelete = false
+  displayAdd = false
   deleteId: number = 0
-  editAllowGroup: string = ''
+  @Input() editAllowGroup: string = ''
   onDeleted = false
   
   room:string = '';
@@ -40,14 +42,14 @@ export class TimetableComponent implements OnInit, OnChanges {
 
 
   showDialogEdit(room:string, subject:string, time:string){
-    this.display = true
+    this.displayEdit = true
     this.room = room;
     this.subject = subject;
     this.time = time;
   }
 
   showDialogCreate(){
-    this.display = true
+    this.displayAdd = true
   }
 
 
@@ -69,11 +71,11 @@ export class TimetableComponent implements OnInit, OnChanges {
 
   onEditPair(){
     this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Пара успішно змінена'});
-    this.display = false;
+    this.displayEdit = false;
   }
   onCreatePair(){
     this.messageService.add({severity:'success', summary: 'Створено', detail: 'Пара успішно створена'});
-    this.display = false; 
+    this.displayAdd = false; 
   }
 
   onDeletePair(id: number){
