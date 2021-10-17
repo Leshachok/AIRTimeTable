@@ -28,7 +28,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    
+
   }
 
   onLoad() {
@@ -37,7 +37,6 @@ export class AppComponent {
       this.ttservice.getEditGroupByTgID().subscribe(
         (response)=>{
             this.editGroup = response.data.group
-            console.log(this.editGroup + ' from serv')
         },
         (error)=>{
             console.log('Нельзя')
@@ -56,8 +55,14 @@ export class AppComponent {
     this.telegramID = user['id']
     //это убрать когда всех зарегаем
     this.ttservice.addGroupEditor()
-    this.ttservice.getEditGroupByTgID()
-    this.editGroup = this.ttservice.getEditGroup()
+    this.ttservice.getEditGroupByTgID().subscribe(
+      (response)=>{
+          this.editGroup = response.data.group
+      },
+      (error)=>{
+          console.log('Нельзя')
+      }
+    )
   }
 
   getGroups(course: number): string[] {

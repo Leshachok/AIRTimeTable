@@ -53,19 +53,19 @@ export class TimetableComponent implements OnInit, OnChanges {
   ngOnChanges(changes: SimpleChanges){
       if(changes.editAllowGroup){
         console.log(changes.editAllowGroup.currentValue + ' ngonch')
-      }
-      this.service.getPairs(this.group).subscribe(
-        (response) => {
+      }else if (changes.group){
+        this.service.getPairs(this.group).subscribe(
+          (response) => {
           
-          // тут в pairs записываются пары
-          this.pairs = response.data
-        },
-        (error) => {
+            // тут в pairs записываются пары
+            this.pairs = response.data
+          },
+          (error) => {
             console.error('There was an error!', error)
             this.pairs = []
-        }
-      ) 
-      
+          }
+        ) 
+      }     
   }
 
 
