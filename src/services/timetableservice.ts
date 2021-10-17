@@ -70,13 +70,14 @@ export class TimeTableService {
 
     }
 
-    deletePair(id: number): Observable<any>{
+    deletePair(id: number): Observable<Response>{
+        console.log('deleting ' +  this.service.getID() + ' ' + this.editGroup + ' ' + id)
         const params = new HttpParams()
             .set('pairID', id)
             .set('editorID', this.service.getID())
             .set('group', this.editGroup)
         const url: string = `https://routine.pnit.od.ua/routine/deletePair`;
-        return this.httpClient.post<any>(url, params)
+        return this.httpClient.post<Response>(url, params)
 
     }
 

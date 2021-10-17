@@ -89,7 +89,7 @@ export class TimetableComponent implements OnInit, OnChanges {
             this.service.deletePair(id).subscribe(
               (response) => {
                   this.messageService.add({severity:'success', summary: 'Видалено', detail: 'Пара успішно видалена'});
-                  console.log(response.toString());
+                  console.log(response.message);
               },
               (error) => {
                   this.messageService.add({severity:'error', summary: 'Помилка', detail: 'Пара не видалена'});
