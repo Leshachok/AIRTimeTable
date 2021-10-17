@@ -33,12 +33,14 @@ export class TimetableComponent implements OnInit, OnChanges {
   room:string = '';
   subject:string = '';
   time:string ='';
-  showDialogEdit(room:string,subject:string,time:string){
+
+  showDialogEdit(room:string, subject:string, time:string){
     this.display = true
     this.room = room;
     this.subject = subject;
     this.time = time;
   }
+
   showDialogCreate(){
     this.display = true
   }

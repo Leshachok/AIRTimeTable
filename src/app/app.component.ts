@@ -31,10 +31,12 @@ export class AppComponent {
   }
 
   onLoad() {
+    console.log('load')
     this.isLoad = true;
   }
 
   onLoadError() {
+    console.log('error')
     this.isLoadError = true;
   }
 

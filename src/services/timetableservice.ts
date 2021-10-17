@@ -15,9 +15,17 @@ export class TimeTableService {
         [3, ["УІ191", "УК191"]],
         [4, ["УІ181", "УІ184"]],
     ])
+    private editGroup: string = ''
 
     constructor(private httpClient: HttpClient, private service: TelegramLoginService) { }
-    
+
+    getEditGroup(): string{
+        return this.editGroup
+    }
+
+    setEditGroup(group: string){
+        this.editGroup = group
+    }
 
     getGroupsByCourse(course: number): string[]{
         let groups = this.map.get(course) 
