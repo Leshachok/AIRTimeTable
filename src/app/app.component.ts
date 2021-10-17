@@ -28,13 +28,21 @@ export class AppComponent {
   }
 
   ngOnInit() {
+    
   }
 
   onLoad() {
     this.isLoad = true;
     if(this.service.getID() != 0) {
-      this.ttservice.getEditGroupByTgID()
-      this.editGroup = this.ttservice.getEditGroup()
+      this.ttservice.getEditGroupByTgID().subscribe(
+        (response)=>{
+            this.editGroup = response.data.group
+            console.log(this.editGroup + ' from serv')
+        },
+        (error)=>{
+            console.log('Нельзя')
+        }
+      )
     }
   }
 

@@ -24,19 +24,11 @@ export class TimeTableService {
         return this.editGroup
     }
 
-    getEditGroupByTgID(){
+    getEditGroupByTgID(): Observable<EditGroupResponse>{
         const params = new HttpParams()
             .set('editorID', this.service.getID())
         const url: string = `https://routine.pnit.od.ua/routine/getEditGroup`;
-        this.httpClient.post<EditGroupResponse>(url, params).subscribe(
-            (response)=>{
-                this.editGroup = response.data.group
-                console.log(this.editGroup + ' from serv')
-            },
-            (error)=>{
-                console.log('Нельзя')
-            }
-        )
+        return this.httpClient.post<EditGroupResponse>(url, params)
     }
 
     setEditGroup(group: string){
