@@ -22,7 +22,7 @@
                     <span class="room">{{pair.room}}</span>
                     <span class="subject">{{pair.subject}}</span>
                 </div>
-                <input type="image" (click)="showDialogEdit(pair.room,pair.subject,pair.time) "  [src]="edit_image" *ngIf="group == editAllowGroup" class="button_image" id="edit"> 
+                <input type="image" (click)="showDialogEdit(pair.room,pair.subject,pair.time) "  [src]="edit_image" *ngIf="group" class="button_image" id="edit"> 
                 <input type="image" (click)="onDeletePair(pair.id)" [src]="delete_image" *ngIf="group == editAllowGroup"class="button_image" id="delete"> 
                 <div class="type_container" id={{pair.type}}>
                     <span class="type" *ngIf="pair.type === 'lab'">Лабораторна</span>
@@ -32,7 +32,7 @@
                 <div class="time_container">
                     <span class="time">{{pair.time}}</span>
                 </div>
-                <p-dialog *ngIf="pair.room === room && pair.subject === subject && pair.time === time" [(visible)]="displayEdit" [contentStyle]="{'width': '25vw' , 'height' : '25vw'}" [resizable] = "false">
+                <p-dialog *ngIf="pair.room" [(visible)]="displayEdit" [contentStyle]="{'width': '25vw' , 'height' : '25vw'}" [resizable] = "false">
                     <ng-template pTemplate="header">
                         <h2>Редагування пари</h2>
                     </ng-template>

@@ -1,7 +1,10 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
 import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
+import { AppComponent } from '../app.component';
+import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { Day } from '../request/request';
 
 @Component({
@@ -17,7 +20,7 @@ export class TimetableComponent implements OnInit, OnChanges {
 
   //тут както пары хранятся
   pairs: Day[] = []
-  days: string[] = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
+  days: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
   displayEdit = false
   displayDelete = false
   displayAdd = false
@@ -33,23 +36,34 @@ export class TimetableComponent implements OnInit, OnChanges {
   delete_image:string ="assets/img/delete.png"
 
   constructor(private service: TimeTableService, private TgService: TelegramLoginService,
-       private confService: ConfirmationService, private messageService: MessageService) { 
+       private confService: ConfirmationService, private messageService: MessageService, private dialogService: DialogService) { 
     this.tgID = TgService.getID()
   }
 
   ngOnInit() {
+    this.days.map((value)=> new Date(value))
   }
 
 
   showDialogEdit(room:string, subject:string, time:string){
-    this.displayEdit = true
-    this.room = room;
-    this.subject = subject;
-    this.time = time;
+    this.room = room
+    const ref = this.dialogService.open(EditDialogComponent, {
+      data: {
+        room: '404f'
+      },
+      header: 'Choose a Car',
+      width: '70%',
+      
+    });
+    // this.displayEdit = true
+    // this.room = room;
+    // this.subject = subject;
+    // this.time = time;
+
   }
 
   showDialogCreate(){
-    this.displayAdd = true
+    console.log('opned')
   }
 
 
