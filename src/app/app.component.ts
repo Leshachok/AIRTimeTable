@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
 
@@ -23,7 +24,7 @@ export class AppComponent {
   telegramID: number = 0
   editGroup: string = ""
 
-  constructor(private service: TelegramLoginService, private ttservice: TimeTableService) {
+  constructor(private service: TelegramLoginService, private ttservice: TimeTableService, private messageService: MessageService) {
     this.groups = ttservice.getGroupsByCourse(this.course)
   }
 
@@ -37,6 +38,7 @@ export class AppComponent {
       this.ttservice.getEditGroupByTgID().subscribe(
         (response)=>{
             this.editGroup = response.data.group
+            this.messageService.add({severity:'success', summary: 'Отримано доступ', detail: 'Ви маєте змогу редагувати розклад групи ' + this.editGroup});
         },
         (error)=>{
             console.log('Нельзя')
@@ -58,9 +60,11 @@ export class AppComponent {
     this.ttservice.getEditGroupByTgID().subscribe(
       (response)=>{
           this.editGroup = response.data.group
+          this.messageService.add({severity:'success', summary: 'Отримано доступ', detail: 'Тепер ви маєте змогу редагувати розклад групи ' + this.editGroup});
       },
       (error)=>{
           console.log('Нельзя')
+          this.messageService.add({severity:'warn', summary: 'Відмова в доступі', detail: 'Тепер ви маєте змогу редагувати розклад групи ' + this.editGroup});
       }
     )
   }

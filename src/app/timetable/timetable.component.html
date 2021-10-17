@@ -85,9 +85,11 @@
         <ng-template pTemplate="footer">
             <p-button label="Додати пару" icon="pi pi-check" iconPos="left" (click) = "onCreatePair()"></p-button>
         </ng-template> 
-    </p-dialog>   
+    </p-dialog>
+       
     <p-confirmDialog [visible]="onDeleted" header="Підтвердження" icon="pi pi-exclamation-triangle"></p-confirmDialog>
     <p-toast position="top-right"></p-toast>
+
     <ng-template #unset>
             <h2>Выберите группу</h2>
     </ng-template>
