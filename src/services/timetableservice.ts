@@ -25,7 +25,7 @@ export class TimeTableService {
 
     getEditGroupByTgID(){
         const params = new HttpParams()
-            .set('editorID', 550175275)
+            .set('editorID', this.service.getID())
         const url: string = `https://routine.pnit.od.ua/routine/getEditGroup`;
         this.httpClient.post<EditGroupResponse>(url, params).subscribe(
             (response)=>{
