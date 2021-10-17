@@ -35,9 +35,6 @@ export class TimetableComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.tgID = this.TgService.getID()
-    this.editAllowGroup = this.service.getEditGroup()
-    console.log(this.editAllowGroup + ' allowed')
   }
 
 
