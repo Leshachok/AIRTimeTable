@@ -13,6 +13,7 @@ export class TimetableComponent implements OnInit, OnChanges {
 
   //тут номер группы хранится
   @Input() group: string = ""
+  @Input() editAllowGroup: string = ''
   @Input() tgID: number = 0
 
   //тут както пары хранятся
@@ -21,7 +22,6 @@ export class TimetableComponent implements OnInit, OnChanges {
   display = false
   deleteId: number = 0
   onDeleted = false
-  editAllowGroup: string = ''
 
   constructor(private service: TimeTableService, private TgService: TelegramLoginService,
        private confService: ConfirmationService, private messageService: MessageService) { 

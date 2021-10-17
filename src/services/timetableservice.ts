@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable, Input } from "@angular/core";
 import { Observable } from "rxjs";
 import { EditGroupResponse, PairResponse } from "src/app/request/request";
 import { TelegramLoginService } from "./telegramloginservice";
@@ -15,7 +15,7 @@ export class TimeTableService {
         [3, ["УІ191", "УК191"]],
         [4, ["УІ181", "УІ184"]],
     ])
-    private editGroup: string = ''
+    @Input() public editGroup: string = ''
 
     constructor(private httpClient: HttpClient, private service: TelegramLoginService) { }
 

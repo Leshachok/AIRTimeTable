@@ -21,6 +21,7 @@ export class AppComponent {
   course: number = 1;
   courses: number[] = [1, 2, 3, 4];
   telegramID: number = 0
+  editGroup: string = ""
 
   constructor(private service: TelegramLoginService, private ttservice: TimeTableService) {
     this.groups = ttservice.getGroupsByCourse(this.course)
@@ -42,8 +43,10 @@ export class AppComponent {
     this.user = user;
     this.service.saveData(user);
     this.telegramID = user['id']
+    //это убрать когда всех зарегаем
     this.ttservice.addGroupEditor()
     this.ttservice.getEditGroupByTgID()
+    this.editGroup = this.ttservice.getEditGroup()
   }
 
   getGroups(course: number): string[] {
