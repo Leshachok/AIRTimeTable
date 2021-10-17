@@ -15,7 +15,7 @@ export class TimeTableService {
         [3, ["УІ191", "УК191"]],
         [4, ["УІ181", "УІ184"]],
     ])
-    @Input() public editGroup: string = ''
+    public editGroup: string = ''
 
     constructor(private httpClient: HttpClient, private service: TelegramLoginService) { }
 

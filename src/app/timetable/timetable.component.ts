@@ -13,7 +13,6 @@ export class TimetableComponent implements OnInit, OnChanges {
 
   //тут номер группы хранится
   @Input() group: string = ""
-  @Input() editAllowGroup: string = ''
   @Input() tgID: number = 0
 
   //тут както пары хранятся
@@ -21,7 +20,12 @@ export class TimetableComponent implements OnInit, OnChanges {
   days: string[] = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
   display = false
   deleteId: number = 0
+  editAllowGroup: string = ''
   onDeleted = false
+  
+  room:string = '';
+  subject:string = '';
+  time:string ='';
 
   constructor(private service: TimeTableService, private TgService: TelegramLoginService,
        private confService: ConfirmationService, private messageService: MessageService) { 
@@ -29,11 +33,11 @@ export class TimetableComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this.tgID = this.TgService.getID()
+    this.editAllowGroup = this.service.getEditGroup()
+    console.log(this.editAllowGroup + ' allowed')
   }
 
-  room:string = '';
-  subject:string = '';
-  time:string ='';
 
   showDialogEdit(room:string, subject:string, time:string){
     this.display = true
@@ -59,9 +63,7 @@ export class TimetableComponent implements OnInit, OnChanges {
             this.pairs = []
         }
       ) 
-      this.tgID = this.TgService.getID()
-      this.editAllowGroup = this.service.getEditGroup()
-      console.log(this.editAllowGroup + ' allowed')
+      
   }
 
 
