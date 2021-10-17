@@ -29,6 +29,9 @@ export class TimetableComponent implements OnInit, OnChanges {
   subject:string = '';
   time:string ='';
 
+  edit_image:string ="assets/img/edit.png";
+  delete_image:string ="assets/img/delete.png"
+
   constructor(private service: TimeTableService, private TgService: TelegramLoginService,
        private confService: ConfirmationService, private messageService: MessageService) { 
     this.tgID = TgService.getID()
@@ -54,17 +57,7 @@ export class TimetableComponent implements OnInit, OnChanges {
       if(changes.editAllowGroup){
         console.log(changes.editAllowGroup.currentValue + ' ngonch')
       }else if (changes.group){
-        this.service.getPairs(this.group).subscribe(
-          (response) => {
-          
-            // тут в pairs записываются пары
-            this.pairs = response.data
-          },
-          (error) => {
-            console.error('There was an error!', error)
-            this.pairs = []
-          }
-        ) 
+         this.getPairs()
       }     
   }
 
@@ -89,11 +82,10 @@ export class TimetableComponent implements OnInit, OnChanges {
             this.service.deletePair(id).subscribe(
               (response) => {
                   this.messageService.add({severity:'success', summary: 'Видалено', detail: 'Пара успішно видалена'});
-                  console.log(response.message);
+                  this.getPairs()
               },
               (error) => {
                   this.messageService.add({severity:'error', summary: 'Помилка', detail: 'Пара не видалена'});
-                  console.error('There was an error!', error)
               });
         },
         reject: () => {
@@ -104,7 +96,19 @@ export class TimetableComponent implements OnInit, OnChanges {
 
     });
   }
-  edit_image:string ="assets/img/edit.png";
-  delete_image:string ="assets/img/delete.png"
+
+  getPairs(){
+    this.service.getPairs(this.group).subscribe(
+      (response) => {
+      
+        // тут в pairs записываются пары
+        this.pairs = response.data
+      },
+      (error) => {
+        console.error('There was an error!', error)
+        this.pairs = []
+      }
+    )
+  }
   
 }

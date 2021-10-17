@@ -71,7 +71,6 @@ export class TimeTableService {
     }
 
     deletePair(id: number): Observable<Response>{
-        console.log('deleting ' +  this.service.getID() + ' ' + this.editGroup + ' ' + id)
         const params = new HttpParams()
             .set('pairID', id)
             .set('editorID', this.service.getID())
