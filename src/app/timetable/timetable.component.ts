@@ -12,7 +12,7 @@ import { Day } from '../request/request';
 export class TimetableComponent implements OnInit, OnChanges {
 
   //тут номер группы хранится
-  @Input() group: string = ""
+  @Input() group: string = "УК211"
   @Input() tgID: number = 0
 
   //тут както пары хранятся

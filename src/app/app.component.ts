@@ -38,7 +38,7 @@ export class AppComponent {
       this.ttservice.getEditGroupByTgID().subscribe(
         (response)=>{
             this.editGroup = response.data.group
-            this.messageService.add({severity:'success', summary: 'Отримано доступ', detail: 'Ви маєте змогу редагувати розклад групи ' + this.editGroup});
+            this.messageService.add({severity:'success', summary: 'Є доступ', detail: 'Ви маєте змогу редагувати розклад групи ' + this.editGroup});
         },
         (error)=>{
             console.log('Нельзя')
