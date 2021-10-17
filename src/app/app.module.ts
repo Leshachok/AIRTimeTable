@@ -15,11 +15,14 @@ import { InputTextModule} from 'primeng/inputtext';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TimetableComponent
+    TimetableComponent,
+    EditDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -31,14 +34,16 @@ import { ToastModule } from 'primeng/toast';
     InputTextModule,
     FormsModule,
     ConfirmDialogModule,
-    ToastModule
+    ToastModule,
+    DynamicDialogModule
   ],
   providers: [
     TelegramLoginService,
     CookieService,
     TimeTableService,
     ConfirmationService,
-    MessageService
+    MessageService,
+    DialogService
   ],
   bootstrap: [AppComponent]
 })
