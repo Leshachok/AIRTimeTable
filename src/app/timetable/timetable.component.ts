@@ -86,8 +86,15 @@ export class TimetableComponent implements OnInit, OnChanges {
       message: 'Ви дійсно хочете видалити пару?',
         accept: () => {
             //Actual logic to perform a confirmation
-            this.service.deletePair(id);
-            this.messageService.add({severity:'success', summary: 'Видалено', detail: 'Пара успішно видалена'});
+            this.service.deletePair(id).subscribe(
+              (response) => {
+                  this.messageService.add({severity:'success', summary: 'Видалено', detail: 'Пара успішно видалена'});
+                  console.log(response.toString());
+              },
+              (error) => {
+                  this.messageService.add({severity:'error', summary: 'Помилка', detail: 'Пара не видалена'});
+                  console.error('There was an error!', error)
+              });
         },
         reject: () => {
 
