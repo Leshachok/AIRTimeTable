@@ -20,6 +20,7 @@ export class TimeTableService {
     constructor(private httpClient: HttpClient, private service: TelegramLoginService) { }
 
     getEditGroup():string{
+        console.log('get from service ' + this.editGroup)
         return this.editGroup
     }
 
@@ -30,7 +31,7 @@ export class TimeTableService {
         this.httpClient.post<EditGroupResponse>(url, params).subscribe(
             (response)=>{
                 this.editGroup = response.data.group
-                console.log(this.editGroup)
+                console.log(this.editGroup + ' from serv')
             },
             (error)=>{
                 console.log('Нельзя')
