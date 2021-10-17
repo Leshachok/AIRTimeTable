@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { PairResponse } from "src/app/request/request";
+import { EditGroupResponse, PairResponse } from "src/app/request/request";
 import { TelegramLoginService } from "./telegramloginservice";
 
 @Injectable({
@@ -19,8 +19,23 @@ export class TimeTableService {
 
     constructor(private httpClient: HttpClient, private service: TelegramLoginService) { }
 
-    getEditGroup(): string{
+    getEditGroup():string{
         return this.editGroup
+    }
+
+    getEditGroupByTgID(){
+        const params = new HttpParams()
+            .set('editorID', 550175275)
+        const url: string = `https://routine.pnit.od.ua/routine/getEditGroup`;
+        this.httpClient.post<EditGroupResponse>(url, params).subscribe(
+            (response)=>{
+                this.editGroup = response.data.group
+                console.log(this.editGroup)
+            },
+            (error)=>{
+                console.log('Нельзя')
+            }
+        )
     }
 
     setEditGroup(group: string){

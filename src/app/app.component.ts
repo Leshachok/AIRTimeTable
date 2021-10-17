@@ -31,12 +31,11 @@ export class AppComponent {
   }
 
   onLoad() {
-    console.log('load')
     this.isLoad = true;
+    this.ttservice.getEditGroupByTgID()
   }
 
   onLoadError() {
-    console.log('error')
     this.isLoadError = true;
   }
 

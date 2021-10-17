@@ -18,3 +18,13 @@ export class Pair{
     public id: number = 0
     public type: string = ""
 }
+
+export class EditGroupResponse{
+    public code: number = 0
+    public message: string = ""
+    public data: Group = new Group()
+}
+
+export class Group{
+    public group: string = ''
+}

@@ -21,6 +21,7 @@ export class TimetableComponent implements OnInit, OnChanges {
   display = false
   deleteId: number = 0
   onDeleted = false
+  editAllowGroup: string = ''
 
   constructor(private service: TimeTableService, private TgService: TelegramLoginService,
        private confService: ConfirmationService, private messageService: MessageService) { 
@@ -59,6 +60,8 @@ export class TimetableComponent implements OnInit, OnChanges {
         }
       ) 
       this.tgID = this.TgService.getID()
+      this.editAllowGroup = this.service.getEditGroup()
+      console.log(this.editAllowGroup + ' allowed')
   }
 
 
