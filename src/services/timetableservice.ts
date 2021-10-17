@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable, Input } from "@angular/core";
 import { Observable } from "rxjs";
-import { EditGroupResponse, PairResponse } from "src/app/request/request";
+import { EditGroupResponse, PairResponse, Response } from "src/app/request/request";
 import { TelegramLoginService } from "./telegramloginservice";
 
 @Injectable({
@@ -72,11 +72,11 @@ export class TimeTableService {
 
     deletePair(id: number): Observable<any>{
         const params = new HttpParams()
-        .set('pairID', id)
-        .set('editorID', this.service.getID())
-        .set('group', this.editGroup)
+            .set('pairID', id)
+            .set('editorID', this.service.getID())
+            .set('group', this.editGroup)
         const url: string = `https://routine.pnit.od.ua/routine/deletePair`;
-        return this.httpClient.post(url, params)
+        return this.httpClient.post<any>(url, params)
 
     }
 

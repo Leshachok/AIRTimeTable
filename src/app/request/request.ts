@@ -28,3 +28,9 @@ export class EditGroupResponse{
 export class Group{
     public group: string = ''
 }
+
+export class Response{
+    public code: number = 0
+    public message: string = ""
+    public data = []
+}
