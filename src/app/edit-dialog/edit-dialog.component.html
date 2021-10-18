@@ -8,7 +8,7 @@
         <label for="float-input_subject">Дисципліна</label>
     </span>
     <span class="p-float-label">
-        <input class="float-input" id="float-input_time" type="text" [(ngModel)]="type" pInputText> 
+        <p-dropdown [options]="types" [(ngModel)]="type"></p-dropdown>
         <label for="float-input_time">Тип</label>
     </span>
 </div>

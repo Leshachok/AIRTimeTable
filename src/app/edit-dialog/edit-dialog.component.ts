@@ -9,10 +9,12 @@ import { Pair } from '../request/request';
 })
 
 export class EditDialogComponent implements OnInit {
+
   public pair: Pair = new Pair('', '', '', [], 0, '')
   public room: string = ''
   public type: string = ''
   public subject: string = ''
+  public types: string[] = ['lab', 'lecture', 'practice']
   constructor(private config: DynamicDialogConfig, private ref: DynamicDialogRef) { }
 
   ngOnInit(): void {

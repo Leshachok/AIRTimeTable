@@ -18,6 +18,8 @@ import { ToastModule } from 'primeng/toast';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { MenubarModule } from 'primeng/menubar';
+import { DropdownModule } from 'primeng/dropdown';
+import { ScrollingModule } from '@angular/cdk/scrolling'
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { MenubarModule } from 'primeng/menubar';
     ConfirmDialogModule,
     ToastModule,
     DynamicDialogModule,
-    MenubarModule
+    MenubarModule,
+    DropdownModule,
+    ScrollingModule
   ],
   providers: [
     TelegramLoginService,

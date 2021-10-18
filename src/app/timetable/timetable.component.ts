@@ -26,7 +26,8 @@ export class TimetableComponent implements OnInit, OnChanges {
   deleteId: number = 0
   @Input() editAllowGroup: string = ''
   onDeleted = false
-  
+  add_pair_dialog_visible = false
+
   room:string = '';
   subject:string = '';
   time:string ='';
@@ -52,7 +53,7 @@ export class TimetableComponent implements OnInit, OnChanges {
       },
       header: 'Редагування пари',
       width: '70%',
-      height: '55%'
+      height: '45%'
       
     });
 
@@ -64,7 +65,7 @@ export class TimetableComponent implements OnInit, OnChanges {
   }
 
   showDialogCreate(){
-    console.log('opned')
+    this.add_pair_dialog_visible = true
   }
 
 
