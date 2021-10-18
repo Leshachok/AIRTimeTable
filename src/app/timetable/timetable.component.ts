@@ -59,7 +59,7 @@ export class TimetableComponent implements OnInit, OnChanges {
 
     ref.onClose.subscribe(
       (pair)=>{
-          console.log(pair.room)
+          console.log(pair)
       }
     )
   }
