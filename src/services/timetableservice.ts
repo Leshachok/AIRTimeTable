@@ -10,10 +10,10 @@ import { TelegramLoginService } from "./telegramloginservice";
 export class TimeTableService {
 
     private map: Map<number, string[]> = new Map([
-        [1, ["УК211", "УП211"]],
-        [2, ["УК201", "УП201", "УП202"]],
-        [3, ["УІ191", "УК191"]],
-        [4, ["УІ181", "УІ184"]],
+        [1, ["УК211", "УП211", "УЕ211"]],
+        [2, ["УЕ201", "УК201", "УП201", "УП202"]],
+        [3, ["УІ191", "УК191", "УЕ191"]],
+        [4, ["УІ184", "УК181", "УЕ181",]],
     ])
     public editGroup: string = ''
 

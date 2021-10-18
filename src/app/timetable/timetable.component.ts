@@ -5,7 +5,7 @@ import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
 import { AppComponent } from '../app.component';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
-import { Day } from '../request/request';
+import { Day, Pair } from '../request/request';
 
 @Component({
   selector: 'app-timetable',
@@ -45,21 +45,22 @@ export class TimetableComponent implements OnInit, OnChanges {
   }
 
 
-  showDialogEdit(room:string, subject:string, time:string){
-    this.room = room
+  showDialogEdit(pair: Pair){
     const ref = this.dialogService.open(EditDialogComponent, {
       data: {
-        room: '404f'
+        pair: pair
       },
-      header: 'Choose a Car',
+      header: 'Редагування пари',
       width: '70%',
+      height: '55%'
       
     });
-    // this.displayEdit = true
-    // this.room = room;
-    // this.subject = subject;
-    // this.time = time;
 
+    ref.onClose.subscribe(
+      (pair)=>{
+          console.log(pair.room)
+      }
+    )
   }
 
   showDialogCreate(){

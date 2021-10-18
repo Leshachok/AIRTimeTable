@@ -1,2 +1,17 @@
-<p>edit-dialog works!</p>
-<input class="float-input" id="float-input_room" type="text" [(ngModel)]="room" pInputText>
+<div class="input_values" >   
+    <span class="p-float-label">
+        <input class="float-input" id="float-input_room" type="text" [(ngModel)]="room" pInputText> 
+        <label for="float-input_room">Аудиторія</label>
+    </span>
+    <span class="p-float-label">
+        <input class="float-input" id="float-input_subject" type="text" [(ngModel)]="subject" pInputText> 
+        <label for="float-input_subject">Дисципліна</label>
+    </span>
+    <span class="p-float-label">
+        <input class="float-input" id="float-input_time" type="text" [(ngModel)]="type" pInputText> 
+        <label for="float-input_time">Тип</label>
+    </span>
+</div>
+<p-button label="Зберегти зміни" icon="pi pi-check" iconPos="left" (click) = "close()"></p-button>
+<ng-template pTemplate="footer">
+</ng-template>

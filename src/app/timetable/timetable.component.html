@@ -22,7 +22,7 @@
                     <span class="room">{{pair.room}}</span>
                     <span class="subject">{{pair.subject}}</span>
                 </div>
-                <input type="image" (click)="showDialogEdit(pair.room,pair.subject,pair.time) "  [src]="edit_image" *ngIf="group" class="button_image" id="edit"> 
+                <input type="image" (click)="showDialogEdit(pair) "  [src]="edit_image" *ngIf="group" class="button_image" id="edit"> 
                 <input type="image" (click)="onDeletePair(pair.id)" [src]="delete_image" *ngIf="group == editAllowGroup"class="button_image" id="delete"> 
                 <div class="type_container" id={{pair.type}}>
                     <span class="type" *ngIf="pair.type === 'lab'">Лабораторна</span>
@@ -32,28 +32,6 @@
                 <div class="time_container">
                     <span class="time">{{pair.time}}</span>
                 </div>
-                <p-dialog *ngIf="pair.room" [(visible)]="displayEdit" [contentStyle]="{'width': '25vw' , 'height' : '25vw'}" [resizable] = "false">
-                    <ng-template pTemplate="header">
-                        <h2>Редагування пари</h2>
-                    </ng-template>
-                    <div class="input_values">   
-                        <span class="p-float-label">
-                            <input class="float-input" id="float-input_room" type="text" [(ngModel)]="room" pInputText> 
-                            <label for="float-input_room">Аудиторія</label>
-                        </span>
-                        <span class="p-float-label">
-                            <input class="float-input" id="float-input_subject" type="text" [(ngModel)]="subject" pInputText> 
-                            <label for="float-input_subject">Дисципліна</label>
-                        </span>
-                        <span class="p-float-label">
-                            <input class="float-input" id="float-input_time" type="text" [(ngModel)]="time" pInputText> 
-                            <label for="float-input_time">Час</label>
-                        </span>
-                    </div>
-                    <ng-template pTemplate="footer">
-                        <p-button label="Зберегти зміни" icon="pi pi-check" iconPos="left" (click) = "onEditPair()"></p-button>
-                    </ng-template> 
-                </p-dialog>
             </div>
             <a (click)="showDialogCreate()" *ngIf="tgID > 0 && group == 'УІ191'">
                 <div class="card" id="add_card">

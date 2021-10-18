@@ -17,6 +17,12 @@ export class Pair{
     public lecturers: string[] = []
     public id: number = 0
     public type: string = ""
+
+    constructor(subject: string, room: string, time: string, lecturers: string[], id: number, type: string){
+        this.subject = subject, this.room = room, this.time = time, this.id = id, this.type = type, this.lecturers = lecturers
+    }
+
+    
 }
 
 export class EditGroupResponse{
