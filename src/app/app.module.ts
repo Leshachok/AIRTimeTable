@@ -17,6 +17,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { MenubarModule } from 'primeng/menubar';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
     FormsModule,
     ConfirmDialogModule,
     ToastModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    MenubarModule
   ],
   providers: [
     TelegramLoginService,

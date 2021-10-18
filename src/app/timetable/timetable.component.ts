@@ -1,9 +1,8 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
-import { AppComponent } from '../app.component';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { Day, Pair } from '../request/request';
 
@@ -41,6 +40,7 @@ export class TimetableComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this.getPairs()
     this.days.map((value)=> new Date(value))
   }
 

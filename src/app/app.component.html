@@ -1,18 +1,11 @@
-<div class="toolbar" role="banner">
-	<form>
-	  <select id="course" name="course" (change)="setCourse($event.target)">
-		<option *ngFor="let i of courses">{{i + ' курс'}}</option>
-	  </select>
-  
-	  <select id="group" name="group" (change)="setGroup($event.target)">
-		<option *ngFor="let i of groups">{{i}}</option>
-	  </select>
-	</form>
+<div>
+	<p-menubar [model]="items" >
+	<ng-template pTemplate="start">
+		<img src="assets/img/air.jpg" height="40" class="p-mr-2">
+	</ng-template>
 	<angular-telegram-login-widget id="telegram_login" (load)="onLoad()" (loadError)="onLoadError()" (login)="onLogin($event)"
-  [botName]="botName"></angular-telegram-login-widget>
-
-	
+  		[botName]="botName"></angular-telegram-login-widget>
+	</p-menubar>
 </div>
-
 
 <app-timetable [editAllowGroup]="editGroup" [tgID]="telegramID" [group]="group"></app-timetable>

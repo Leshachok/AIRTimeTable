@@ -7,6 +7,7 @@ import { Pair } from '../request/request';
   templateUrl: './edit-dialog.component.html',
   styleUrls: ['./edit-dialog.component.scss']
 })
+
 export class EditDialogComponent implements OnInit {
   public pair: Pair = new Pair('', '', '', [], 0, '')
   public room: string = ''

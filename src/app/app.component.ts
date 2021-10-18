@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
 
@@ -18,18 +18,45 @@ export class AppComponent {
 
   user: any = undefined;
   group: string = "УК211";
-  groups: string[] = [];
-  course: number = 1;
-  courses: number[] = [1, 2, 3, 4];
   telegramID: number = 0
   editGroup: string = ""
 
-  constructor(private service: TelegramLoginService, private ttservice: TimeTableService, private messageService: MessageService) {
-    this.groups = ttservice.getGroupsByCourse(this.course)
-  }
+	items: MenuItem[] = [];
+	firstGroupItems: MenuItem[] = [];
+	secondGroupItems: MenuItem[] = [];
+	thirdGroupItems: MenuItem[] = [];
+	fourthGroupItems: MenuItem[] = [];
+
+  constructor(private service: TelegramLoginService, private ttservice: TimeTableService, private messageService: MessageService) { }
 
   ngOnInit() {
-
+    this.ttservice.map.get(1)!!.map((group) => this.firstGroupItems.push({label: group, command: event => this.setGroup(group)}));
+    this.ttservice.map.get(2)!!.map((group)  => this.secondGroupItems.push({label: group, command: event => this.setGroup(group)}))
+    this.ttservice.map.get(3)!!.map((group)  => this.thirdGroupItems.push({label: group, command: event => this.setGroup(group)}))
+    this.ttservice.map.get(4)!!.map((group)  => this.fourthGroupItems.push({label: group, command: event => this.setGroup(group)}))
+    this.items = [
+      {
+        label: this.group,
+        items: [
+            {
+              label: "1 курс",
+              items: this.firstGroupItems
+            },
+            {
+              label: '2 курс',
+              items: this.secondGroupItems
+            }, 
+            {
+            label: "3 курс",
+              items: this.thirdGroupItems
+            }, 
+            {
+            label: "4 курс",
+              items: this.fourthGroupItems
+            }
+        ]
+      }, 
+    ]
   }
 
   onLoad() {
@@ -66,7 +93,7 @@ export class AppComponent {
       },
       (error)=>{
           console.log('Нельзя')
-          this.messageService.add({severity:'warn', summary: 'Відмова в доступі', detail: 'Тепер ви маєте змогу редагувати розклад групи ' + this.editGroup});
+          this.messageService.add({severity:'warn', summary: 'Відмова в доступі', detail: 'У вас нема доступу редагування груп' + this.editGroup});
       }
     )
   }
@@ -75,18 +102,10 @@ export class AppComponent {
     return this.ttservice.getGroupsByCourse(course); 
   }
 
-  setCourse(element: any) {
-    let html: HTMLSelectElement = element as HTMLSelectElement;
-    let value = html.value.charAt(0);
-    this.course = +value;
-    this.groups=this.getGroups(this.course)
-    this.group = this.groups[0]
-  }
 
-  setGroup(element: any) {
-    let html: HTMLSelectElement = element as HTMLSelectElement;
-    let value = html.value;
-    this.group = value;
+  setGroup(group: string) {
+    this.group = group
+    this.items[0].label = group
   }
 
 }
