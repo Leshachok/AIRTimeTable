@@ -28,7 +28,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets/img/air.jpg"
+              "src/assets"
             ],
             "styles": [
               "src/styles.scss",
