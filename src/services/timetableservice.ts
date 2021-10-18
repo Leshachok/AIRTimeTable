@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable} from "@angular/core";
 import { Observable } from "rxjs";
-import { EditGroupResponse, PairResponse, Response } from "src/app/request/request";
+import { EditGroupResponse, Pair, PairResponse, Response } from "src/app/request/request";
 import { TelegramLoginService } from "./telegramloginservice";
 
 @Injectable({
@@ -62,12 +62,20 @@ export class TimeTableService {
             },
             (error) => {
                console.error('There was an error!', error)
-            })
+        })
 
     }
 
-    editPair(){
-
+    editPair(division: string, pair: Pair): Observable<any>{
+        const params = new HttpParams()
+            .set('division', division)
+            .set('editorID', this.service.getID())
+            .set('room', pair.room)
+            .set('type', pair.type)
+            .set('pairID', pair.id)
+            .set('subject', pair.subject)
+        const url: string = `https://routine.pnit.od.ua/routine/editPair`;
+        return this.httpClient.post(url, params)
     }
 
     deletePair(id: number): Observable<Response>{
