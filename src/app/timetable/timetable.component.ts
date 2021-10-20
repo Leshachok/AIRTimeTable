@@ -52,8 +52,8 @@ export class TimetableComponent implements OnInit, OnChanges {
         pair: pair
       },
       header: 'Редагування пари',
-      width: '70%',
-      height: '45%'
+      width: '25vw',
+      height: '25vw'
       
     });
 
