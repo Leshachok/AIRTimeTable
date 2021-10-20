@@ -78,25 +78,24 @@ export class TimetableComponent implements OnInit, OnChanges {
 
   showDialogCreate(){
     const ref = this.dialogService.open(AddDialogComponent, {
-      header: 'Редагування пари',
+      header: 'Додання нової пари',
       width: '25vw',
-      height: '25vw'
+      height: '25vw',
     });
     ref.onClose.subscribe(
       (pair)=>{
-          this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Пара успішно додана!'});
           if(pair){
-
-            // this.service.addPair().subscribe(
-            //   (response) =>{
-            //       console.log(response)
-            //       this.getPairs()
+            this.service.addPair(JSON.stringify(pair)).subscribe(
+              (response) =>{
+                  console.log(response)
+                  this.messageService.add({severity:'success', summary: 'Додано', detail: 'Пара успішно додана!'});
+                  this.getPairs()
             
-            //   },
-            //   (error) => {
+              },
+              (error) => {
 
-            //   }
-            // )
+              }
+            )
           }
       }
     )

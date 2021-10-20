@@ -1,1 +1,24 @@
-<p>add-dialog works!</p>
+<div class="input_values">   
+    <span class="p-float-label">
+        <input class="float-input" id="float-input_room" type="text" pInputText> 
+        <label for="float-input_room">Аудиторія</label>
+    </span>
+    <span class="p-float-label">
+        <input class="float-input" id="float-input_subject" type="text" pInputText> 
+        <label for="float-input_subject">Дисципліна</label>
+    </span>
+    <span class="p-float-label">
+        <input class="float-input" id="float-input_time" type="text" pInputText> 
+        <label for="float-input_time">Час</label>
+    </span>
+    <span class="p-float-label">
+        <p-dropdown id ="float-input_days" [options]="days" [(ngModel)]="day"></p-dropdown>
+        <label for="float-input_days">День</label>
+    </span>
+    <span class="p-float-label">
+        <p-dropdown id="float-input_type" [options]="types" [(ngModel)]="type"></p-dropdown>
+        <label for="float-input_type">Тип пари</label>
+    </span>
+    <p-button label="Додати пару" icon="pi pi-check" iconPos="left" (click) = "close()"></p-button>
+</div>
+    

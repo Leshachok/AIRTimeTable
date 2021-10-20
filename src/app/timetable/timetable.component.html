@@ -41,30 +41,7 @@
             </button>
         </div>
         
-    </div>
-    <p-dialog [(visible)]="add_pair_dialog_visible" [contentStyle]="{'width': '25vw' , 'height' : '25vw'}" [resizable] = "false">
-        <ng-template pTemplate="header">
-            <h2>Додання пари</h2>
-        </ng-template>
-        <div class="input_values">   
-            <span class="p-float-label">
-                <input class="float-input" id="float-input_room" type="text" pInputText> 
-                <label for="float-input_room">Аудиторія</label>
-            </span>
-            <span class="p-float-label">
-                <input class="float-input" id="float-input_subject" type="text" pInputText> 
-                <label for="float-input_subject">Дисципліна</label>
-            </span>
-            <span class="p-float-label">
-                <input class="float-input" id="float-input_time" type="text" pInputText> 
-                <label for="float-input_time">Час</label>
-            </span>
-        </div>
-        <ng-template pTemplate="footer">
-            <p-button label="Додати пару" icon="pi pi-check" iconPos="left" (click) = "onCreatePair()"></p-button>
-        </ng-template> 
-    </p-dialog>
-       
+    </div>   
     <p-confirmDialog [visible]="onDeleted" header="Підтвердження" icon="pi pi-exclamation-triangle"></p-confirmDialog>
     <p-toast position="top-right"></p-toast>
 

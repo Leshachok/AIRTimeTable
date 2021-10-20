@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TimeTableService } from 'src/services/timetableservice';
-
+import { Pair } from '../request/request';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 @Component({
   selector: 'app-add-dialog',
   templateUrl: './add-dialog.component.html',
@@ -8,21 +9,44 @@ import { TimeTableService } from 'src/services/timetableservice';
 })
 export class AddDialogComponent implements OnInit {
 
+  public pair: Pair = new Pair('', '', '', [], 0, '')
   private group: string = '' 
   public room: string = ''
-  public type: string = ''
+  public types: string[] = []
+  private typesMap: Map<string, string> = new Map([
+    ["Лабораторна", 'lab'],
+    ["Лекція", 'lecture'],
+    ["Практика", 'practice'],
+  ]) 
+  public days: string[] = []
+  private daysMap: Map<string, number> = new Map([
+    ["Понеділок", 1],
+    ["Вівторок", 2],
+    ["Среда", 3],
+    ["Четвер", 4],
+    ["П'ятниця", 5],
+  ])
   public subject: string = ''
   public day: number = 0
-  public pair: boolean = true
+  public is_pair: boolean = true
   public pair_num: number = 0
   private lecturers: string[] = []
-  public types: string[] = ['lab', 'lecture', 'practice']
+  public type: string = ''
 
-  constructor(private service: TimeTableService) {
+  constructor(private service: TimeTableService,private ref: DynamicDialogRef) {
     this.group = service.getEditGroup()
+    this.days = [...this.daysMap.keys()]
+    this.types = [...this.typesMap.keys()]
   }
 
   ngOnInit(): void {
   }
 
+  close(){
+    this.pair.room = this.room
+    this.pair.subject = this.subject
+    this.pair.type = this.type
+    
+    this.ref.close(this.pair)
+  }
 }
