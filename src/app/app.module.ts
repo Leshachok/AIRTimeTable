@@ -19,13 +19,15 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { MenubarModule } from 'primeng/menubar';
 import { DropdownModule } from 'primeng/dropdown';
-import { ScrollingModule } from '@angular/cdk/scrolling'
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { AddDialogComponent } from './add-dialog/add-dialog.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     TimetableComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    AddDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
+import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { Day, NewPair, Pair } from '../request/request';
 
@@ -76,7 +77,29 @@ export class TimetableComponent implements OnInit, OnChanges {
   }
 
   showDialogCreate(){
-    this.add_pair_dialog_visible = true
+    const ref = this.dialogService.open(AddDialogComponent, {
+      header: 'Редагування пари',
+      width: '25vw',
+      height: '25vw'
+    });
+    ref.onClose.subscribe(
+      (pair)=>{
+          this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Пара успішно додана!'});
+          if(pair){
+
+            // this.service.addPair().subscribe(
+            //   (response) =>{
+            //       console.log(response)
+            //       this.getPairs()
+            
+            //   },
+            //   (error) => {
+
+            //   }
+            // )
+          }
+      }
+    )
   }
 
 
