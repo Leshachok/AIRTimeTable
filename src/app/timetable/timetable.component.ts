@@ -4,7 +4,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
-import { Day, Pair } from '../request/request';
+import { Day, NewPair, Pair } from '../request/request';
 
 @Component({
   selector: 'app-timetable',
@@ -92,6 +92,18 @@ export class TimetableComponent implements OnInit, OnChanges {
   onCreatePair(){
     this.messageService.add({severity:'success', summary: 'Створено', detail: 'Пара успішно створена'});
     this.displayAdd = false; 
+    let pair: NewPair = new NewPair([], ['УІ191'], 'тестова пара', '311f', [1,2,3,4,5,6,7,8], 1, 1, 'lab')
+    let list: NewPair[] = [pair]
+    console.log(JSON.stringify({list}))
+    this.service.addPair(JSON.stringify({list})).subscribe(
+      (response)=>{
+          console.log(response)
+          this.getPairs()
+      },
+      (error)=>{
+          console.log(error)
+      }
+  )
   }
 
   onDeletePair(id: number){

@@ -88,8 +88,11 @@ export class TimeTableService {
 
     }
 
-    addPair(){
-
+    addPair(json: string){
+        const params = new HttpParams()
+            .set('json', json)
+        const url: string = `https://routine.pnit.od.ua/routine/insertLessons`;
+        return this.httpClient.post<any>(url, params)
     }
     
 }

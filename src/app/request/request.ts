@@ -1,3 +1,4 @@
+
 export class PairResponse {
     public code: number = 0
     public message: string = ""
@@ -39,4 +40,18 @@ export class Response{
     public code: number = 0
     public message: string = ""
     public data = []
+}
+
+export class NewPair{
+    
+    constructor(
+        public lecturers: string[],
+        public divisions: string[], 
+        public subject: string, 
+        public room:string,
+        public weeks: number[],
+        public day: number,
+        public lesson_num: number,
+        public type: string
+        ) { }
 }
