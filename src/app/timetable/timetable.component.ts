@@ -63,7 +63,6 @@ export class TimetableComponent implements OnInit, OnChanges {
           if(pair){
             this.service.editPair(this.editAllowGroup, pair).subscribe(
               (response) =>{
-                  console.log(response)
                   this.getPairs()
                   this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Пара успішно змінена!'});
               },
@@ -103,14 +102,12 @@ export class TimetableComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges){
       if(changes.editAllowGroup){
-        console.log(changes.editAllowGroup.currentValue + ' ngonch')
       }else if (changes.group){
          this.getPairs()
       }     
   }
 
   onDeletePair(id: number){
-    console.log('dsd');
     this.deleteId = id
     this.onDeleted = true
     this.confService.confirm({

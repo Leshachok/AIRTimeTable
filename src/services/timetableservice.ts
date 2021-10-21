@@ -20,7 +20,6 @@ export class TimeTableService {
     constructor(private httpClient: HttpClient, private service: TelegramLoginService) { }
 
     getEditGroup():string{
-        console.log('get from service ' + this.editGroup)
         return this.editGroup
     }
 
@@ -55,9 +54,7 @@ export class TimeTableService {
             .set('name', this.service.getFirstName())
         const url: string = `https://routine.pnit.od.ua/routine/insertEG`;
         this.httpClient.post(url, params).subscribe(
-            (response) => {
-                console.log(response.toString());
-            
+            (response) => {            
 
             },
             (error) => {

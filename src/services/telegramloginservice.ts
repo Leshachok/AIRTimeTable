@@ -18,7 +18,6 @@ export class TelegramLoginService {
 
     getID():number{
         this.tgID = +this.cookieService.get(this.keyID)
-        console.log(this.tgID + ' init')
         return this.tgID
     }
 
@@ -37,7 +36,6 @@ export class TelegramLoginService {
         this.first_name = userData['first_name'] ? userData['first_name'] : userData['second_name']
         this.cookieService.set(this.keyName, this.username);
         this.cookieService.set(this.keyID, this.tgID.toString());
-        console.log(this.tgID + ' login');
     }
 
     
