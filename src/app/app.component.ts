@@ -84,7 +84,7 @@ export class AppComponent {
     this.service.saveData(user);
     this.telegramID = user['id']
     //это убрать когда всех зарегаем
-    this.ttservice.addGroupEditor()
+    //this.ttservice.addGroupEditor()
     this.ttservice.getEditGroupByTgID().subscribe(
       (response)=>{
           this.editGroup = response.data.group
