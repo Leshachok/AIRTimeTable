@@ -1,19 +1,23 @@
 <div class="input_values">   
     <span class="p-float-label">
-        <input class="float-input" id="float-input_room" type="text" pInputText> 
+        <input class="float-input" id="float-input_room" type="text" [(ngModel)]="room" pInputText> 
         <label for="float-input_room">Аудиторія</label>
     </span>
     <span class="p-float-label">
-        <input class="float-input" id="float-input_subject" type="text" pInputText> 
+        <input class="float-input" id="float-input_subject" type="text" [(ngModel)]="subject" pInputText> 
         <label for="float-input_subject">Дисципліна</label>
     </span>
     <span class="p-float-label">
-        <input class="float-input" id="float-input_time" type="text" pInputText> 
-        <label for="float-input_time">Час</label>
+        <p-dropdown id="float-input_type" [options]="weeks_type" [(ngModel)]="week"></p-dropdown>
+        <label for="float-input_type">Тиждень</label>
     </span>
     <span class="p-float-label">
         <p-dropdown id ="float-input_days" [options]="days" [(ngModel)]="day"></p-dropdown>
         <label for="float-input_days">День</label>
+    </span>
+    <span class="p-float-label">
+        <p-dropdown id ="float-input_days" [options]="pair_nums" [(ngModel)]="pair_num"></p-dropdown>
+        <label for="float-input_days">Номер пари</label>
     </span>
     <span class="p-float-label">
         <p-dropdown id="float-input_type" [options]="types" [(ngModel)]="type"></p-dropdown>

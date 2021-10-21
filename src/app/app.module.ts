@@ -21,6 +21,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { DropdownModule } from 'primeng/dropdown';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AddDialogComponent } from './add-dialog/add-dialog.component'
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { AddDialogComponent } from './add-dialog/add-dialog.component'
     DynamicDialogModule,
     MenubarModule,
     DropdownModule,
-    ScrollingModule
+    ScrollingModule,
+    InputSwitchModule
   ],
   providers: [
     TelegramLoginService,

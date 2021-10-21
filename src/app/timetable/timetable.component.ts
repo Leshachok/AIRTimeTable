@@ -80,14 +80,13 @@ export class TimetableComponent implements OnInit, OnChanges {
     const ref = this.dialogService.open(AddDialogComponent, {
       header: 'Додання нової пари',
       width: '25vw',
-      height: '25vw',
+      height: '30vw',
     });
     ref.onClose.subscribe(
-      (pair)=>{
-          if(pair){
-            this.service.addPair(JSON.stringify(pair)).subscribe(
+      (pairs)=>{
+          if(pairs){
+            this.service.addPair(JSON.stringify(pairs)).subscribe(
               (response) =>{
-                  console.log(response)
                   this.messageService.add({severity:'success', summary: 'Додано', detail: 'Пара успішно додана!'});
                   this.getPairs()
             
@@ -108,24 +107,6 @@ export class TimetableComponent implements OnInit, OnChanges {
       }else if (changes.group){
          this.getPairs()
       }     
-  }
-
-
-  onCreatePair(){
-    this.messageService.add({severity:'success', summary: 'Створено', detail: 'Пара успішно створена'});
-    this.displayAdd = false; 
-    let pair: NewPair = new NewPair([], ['УІ191'], 'тестова пара', '311f', [1,2,3,4,5,6,7,8], 1, 1, 'lab')
-    let list: NewPair[] = [pair]
-    console.log(JSON.stringify({list}))
-    this.service.addPair(JSON.stringify({list})).subscribe(
-      (response)=>{
-          console.log(response)
-          this.getPairs()
-      },
-      (error)=>{
-          console.log(error)
-      }
-  )
   }
 
   onDeletePair(id: number){
