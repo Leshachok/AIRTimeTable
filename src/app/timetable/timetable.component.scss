@@ -185,12 +185,26 @@ color: #30384B;
 #delete:hover{
   box-shadow: 0px 4px 8px #F95A00;
 }
-#link{
+#zoom{
   left: 240px;
  border: 2px solid #8397ca;
 }
-#link:hover{
+#zoom:hover{
   box-shadow: 0px 4px 8px #8397ca;
+}
+#teams{
+  left: 240px;
+ border: 2px solid #464EB8;
+}
+#teams:hover{
+  box-shadow: 0px 4px 8px #464EB8;
+}
+#gmeet{
+  left: 240px;
+ border: 2px solid green;
+}
+#gmeet:hover{
+  box-shadow: 0px 4px 8px green;
 }
 
 #add_card{
