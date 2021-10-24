@@ -11,9 +11,9 @@ import { Pair } from '../request/request';
 export class EditDialogComponent implements OnInit {
 
   public pair: Pair = new Pair('', '', '', [], 0, '', '')
-  public room: string = '100'
+  public room: string = ''
   public type: string = ''
-  public subject: string = 'Назва'
+  public subject: string = ''
   public types: string[] = []
   public link: string =''
   private typesMap: Map<string, string> = new Map([
@@ -27,7 +27,7 @@ export class EditDialogComponent implements OnInit {
   ngOnInit(): void {
     this.pair = this.config.data.pair
     this.room = this.pair.room? this.pair.room: '100'
-    this.type = this.pair.type? this.pair.type: 'lab'
+    this.type = this.pair.type? this.pair.type: 'Лекція'
     this.subject = this.pair.subject? this.pair.subject: 'Назва предмету'
     this.types = [...this.typesMap.keys()]
     this.link = this.pair.link
@@ -36,7 +36,7 @@ export class EditDialogComponent implements OnInit {
   close(){
     this.pair.room = this.room
     this.pair.subject = this.subject
-    this.pair.type = this.type
+    this.pair.type = this.typesMap.get(this.type)!!
     this.pair.link = this.link
     
     this.ref.close(this.pair)
