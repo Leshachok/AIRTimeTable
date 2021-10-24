@@ -8,12 +8,12 @@
         <label for="float-input_subject">Дисципліна</label>
     </span>
     <span class="p-float-label">
-        <input class="float-input" id="float-input_link" type="text" [(ngModel)]="link" pInputText> 
-        <label for="float-input_subject">Посилання на онлайн пару(якщо э)</label>
-    </span>
-    <span class="p-float-label">
         <p-dropdown [options]="types" [(ngModel)]="type"></p-dropdown>
         <label for="float-input_time">Тип</label>
+    </span>
+    <span class="p-float-label">
+        <input class="float-input" id="float-input_link" type="text" [(ngModel)]="link" pInputText> 
+        <label for="float-input_subject">Посилання на онлайн пару (якщо є)</label>
     </span>
 </div>
 <p-button label="Зберегти зміни" icon="pi pi-check" iconPos="left" (click) = "close()"></p-button>

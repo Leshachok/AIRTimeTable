@@ -71,6 +71,7 @@ export class TimeTableService {
             .set('type', pair.type)
             .set('pairID', pair.id)
             .set('subject', pair.subject)
+            .set('link', pair.link)
         const url: string = `https://routine.pnit.od.ua/routine/editPair`;
         return this.httpClient.post(url, params)
     }
