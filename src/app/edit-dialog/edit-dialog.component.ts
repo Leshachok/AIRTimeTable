@@ -10,7 +10,7 @@ import { Pair } from '../request/request';
 
 export class EditDialogComponent implements OnInit {
 
-  public pair: Pair = new Pair('', '', '', [], 0, '')
+  public pair: Pair = new Pair('', '', '', [], 0, '', '')
   public room: string = ''
   public type: string = ''
   public subject: string = ''

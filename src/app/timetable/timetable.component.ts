@@ -5,7 +5,7 @@ import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
-import { Day, NewPair, Pair } from '../request/request';
+import { Day,  Pair } from '../request/request';
 
 @Component({
   selector: 'app-timetable',
@@ -135,7 +135,6 @@ export class TimetableComponent implements OnInit, OnChanges {
   getPairs(){
     this.service.getPairs(this.group).subscribe(
       (response) => {
-      
         // тут в pairs записываются пары
         this.pairs = response.data
       },

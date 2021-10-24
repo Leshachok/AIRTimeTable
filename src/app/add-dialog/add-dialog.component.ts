@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TimeTableService } from 'src/services/timetableservice';
-import { NewPair, Pair } from '../request/request';
+import { NewPair } from '../request/request';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
 
@@ -11,7 +11,7 @@ import { MessageService } from 'primeng/api';
 })
 export class AddDialogComponent implements OnInit {
 
-  public pair: NewPair = new NewPair([], [], '', '', [], 0, 0, '')
+  public pair: NewPair = new NewPair([], [], '', '', [], 0, 0, '', '')
   private group: string = '' 
   public room: string = ''
   public subject: string = ''
@@ -62,7 +62,7 @@ export class AddDialogComponent implements OnInit {
       this.messageService.add({severity:'warn', summary: 'Увага', detail: 'Заповніть всі поля!'});
       return
     }
-    this.pair = new NewPair(this.lecturers, [this.group], this.subject, this.room, this.weeksMap.get(this.week)!!, this.daysMap.get(this.day)!!, this.pair_num, this.typesMap.get(this.type)!!)
+    this.pair = new NewPair(this.lecturers, [this.group], this.subject, this.room, this.weeksMap.get(this.week)!!, this.daysMap.get(this.day)!!, this.pair_num, this.typesMap.get(this.type)!!, '')
     console.log(this.pair)
     
     this.ref.close([this.pair])

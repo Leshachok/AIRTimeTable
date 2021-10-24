@@ -18,9 +18,10 @@ export class Pair{
     public lecturers: string[] = []
     public id: number = 0
     public type: string = ""
+    public link: string = ""
 
-    constructor(subject: string, room: string, time: string, lecturers: string[], id: number, type: string){
-        this.subject = subject, this.room = room, this.time = time, this.id = id, this.type = type, this.lecturers = lecturers
+    constructor(subject: string, room: string, time: string, lecturers: string[], id: number, type: string, link: string){
+        this.subject = subject, this.room = room, this.time = time, this.id = id, this.type = type, this.lecturers = lecturers, this.link = link
     }
 
     
@@ -52,6 +53,7 @@ export class NewPair{
         public weeks: number[],
         public day: number,
         public lesson_num: number,
-        public type: string
+        public type: string,
+        public link: string
         ) { }
 }
