@@ -145,9 +145,5 @@ export class TimetableComponent implements OnInit, OnChanges {
       }
     )
   }
-
-  isLink():boolean{
-    return true
-  }
   
 }

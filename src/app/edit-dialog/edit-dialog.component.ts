@@ -21,7 +21,7 @@ export class EditDialogComponent implements OnInit {
     ["Лекція", 'lecture'],
     ["Практика", 'practice'],
   ]) 
-  
+
   constructor(private config: DynamicDialogConfig, private ref: DynamicDialogRef) { }
 
   ngOnInit(): void {
@@ -29,6 +29,7 @@ export class EditDialogComponent implements OnInit {
     this.room = this.pair.room
     this.types = [...this.typesMap.keys()]
     this.subject = this.pair.subject
+    this.link = this.pair.link
   }
 
   close(){
