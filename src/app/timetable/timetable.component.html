@@ -22,6 +22,7 @@
                     <span class="room">{{pair.room}}</span>
                     <span class="subject">{{pair.subject}}</span>
                 </div>
+                <input type="image" *ngIf="isLink()" [src]="link_image" class="button_image" id="link"> 
                 <input type="image" (click)="showDialogEdit(pair) "  [src]="edit_image" *ngIf="group == editAllowGroup" class="button_image" id="edit"> 
                 <input type="image" (click)="onDeletePair(pair.id)" [src]="delete_image" *ngIf="group == editAllowGroup"class="button_image" id="delete"> 
                 <div class="type_container" id={{pair.type}}>

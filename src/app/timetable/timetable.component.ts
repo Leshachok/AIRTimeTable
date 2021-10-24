@@ -34,7 +34,8 @@ export class TimetableComponent implements OnInit, OnChanges {
   time:string ='';
 
   edit_image:string ="assets/img/edit.png";
-  delete_image:string ="assets/img/delete.png"
+  delete_image:string ="assets/img/delete.png";
+  link_image:string = "assets/img/link.png";
 
   constructor(private service: TimeTableService, private TgService: TelegramLoginService,
        private confService: ConfirmationService, private messageService: MessageService, private dialogService: DialogService) { 
@@ -54,7 +55,7 @@ export class TimetableComponent implements OnInit, OnChanges {
       },
       header: 'Редагування пари',
       width: '25vw',
-      height: '25vw'
+      height: '35vw'
       
     });
 
@@ -79,7 +80,7 @@ export class TimetableComponent implements OnInit, OnChanges {
     const ref = this.dialogService.open(AddDialogComponent, {
       header: 'Додання нової пари',
       width: '25vw',
-      height: '30vw',
+      height: '35vw',
     });
     ref.onClose.subscribe(
       (pairs)=>{
@@ -143,6 +144,10 @@ export class TimetableComponent implements OnInit, OnChanges {
         this.pairs = []
       }
     )
+  }
+
+  isLink():boolean{
+    return true
   }
   
 }

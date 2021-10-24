@@ -14,14 +14,20 @@ export class EditDialogComponent implements OnInit {
   public room: string = ''
   public type: string = ''
   public subject: string = ''
-  public types: string[] = ['lab', 'lecture', 'practice']
-  public link: string = ''
+  public types: string[] = []
+  public link: string =''
+  private typesMap: Map<string, string> = new Map([
+    ["Лабораторна", 'lab'],
+    ["Лекція", 'lecture'],
+    ["Практика", 'practice'],
+  ]) 
+  
   constructor(private config: DynamicDialogConfig, private ref: DynamicDialogRef) { }
 
   ngOnInit(): void {
     this.pair = this.config.data.pair
     this.room = this.pair.room
-    this.type = this.pair.type
+    this.types = [...this.typesMap.keys()]
     this.subject = this.pair.subject
   }
 

@@ -172,19 +172,27 @@ color: #30384B;
 }
 
 #edit{
- left: 210px;
+ left:180px ;
  border: 2px solid #FFCB13;
 }
 #edit:hover{
   box-shadow: 0px 4px 8px #FFCB13;
 }
 #delete{
-  left: 240px;
+  left:210px ;
  border: 2px solid #F95A00;
 }
 #delete:hover{
   box-shadow: 0px 4px 8px #F95A00;
 }
+#link{
+  left: 240px;
+ border: 2px solid #8397ca;
+}
+#link:hover{
+  box-shadow: 0px 4px 8px #8397ca;
+}
+
 #add_card{
   background: #EAEAEA;
   border: 1px dashed #30384B;
