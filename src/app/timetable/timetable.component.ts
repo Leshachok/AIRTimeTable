@@ -67,10 +67,8 @@ export class TimetableComponent implements OnInit, OnChanges {
     ref.onClose.subscribe(
       (pair)=>{
           if(pair){
-            console.log(pair)
             this.service.editPair(this.editAllowGroup, pair).subscribe(
               (response) =>{
-                  console.log(response)
                   this.getPairs()
                   this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Пара успішно змінена!'});
               },
