@@ -35,7 +35,12 @@ export class TimetableComponent implements OnInit, OnChanges {
 
   edit_image:string ="assets/img/edit.png";
   delete_image:string ="assets/img/delete.png";
-  link_image:string = "assets/img/link.png";
+
+  mapDomenIcon: Map<string, string> = new Map([
+    ["meet.google.com", "assets/img/gmeet.png"],
+    ["zoom.us", "assets/img/zoom.png"],
+    ["teams.microsoft.com", "assets/img/teams.png"],
+  ])
 
   constructor(private service: TimeTableService, private TgService: TelegramLoginService,
        private confService: ConfirmationService, private messageService: MessageService, private dialogService: DialogService) { 
@@ -136,14 +141,37 @@ export class TimetableComponent implements OnInit, OnChanges {
   getPairs(){
     this.service.getPairs(this.group).subscribe(
       (response) => {
+
         // тут в pairs записываются пары
         this.pairs = response.data
+        this.pairs.forEach( (day) => {
+          day.pairs.forEach( (pair) => {
+
+            if(pair.link.length){
+              pair.link_icon = "assets/img/custom.jpg";
+              [...this.mapDomenIcon.keys()].forEach((key) => {
+                if(pair.link.includes(key)){
+                  pair.link_icon = this.mapDomenIcon.get(key)!!
+                }
+              })
+            }
+
+            
+
+          })
+        })
+
       },
       (error) => {
         console.error('There was an error!', error)
         this.pairs = []
       }
+    
     )
+  }
+
+  openLink(url: string){
+    window.open(url)
   }
   
 }

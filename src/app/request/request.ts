@@ -19,6 +19,7 @@ export class Pair{
     public id: number = 0
     public type: string = ""
     public link: string = ""
+    public link_icon = ""
 
     constructor(subject: string, room: string, time: string, lecturers: string[], id: number, type: string, link: string){
         this.subject = subject, this.room = room, this.time = time, this.id = id, this.type = type, this.lecturers = lecturers, this.link = link
