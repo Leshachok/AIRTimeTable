@@ -25,6 +25,7 @@ export class AddDialogComponent implements OnInit {
   private lecturers: string[] = []
   public type: string = 'Лабораторна'
   public types: string[] = []
+  public link: string = ''
   private typesMap: Map<string, string> = new Map([
     ["Лабораторна", 'lab'],
     ["Лекція", 'lecture'],

@@ -8,6 +8,10 @@
         <label for="float-input_subject">Дисципліна</label>
     </span>
     <span class="p-float-label">
+        <input class="float-input" id="float-input_link" type="text" [(ngModel)]="link" pInputText> 
+        <label for="float-input_subject">Посилання на онлайн пару(якщо э)</label>
+    </span>
+    <span class="p-float-label">
         <p-dropdown id="float-input_type" [options]="weeks_type" [(ngModel)]="week"></p-dropdown>
         <label for="float-input_type">Тиждень</label>
     </span>
