@@ -157,6 +157,9 @@ body {
   .timetable-day:first-child {
     margin-left: 0.6rem;
   }
+  .timetable-day:last-child {
+    margin-bottom: 1.5rem;
+  }
 }
 
 @media (max-width: 608px) {
