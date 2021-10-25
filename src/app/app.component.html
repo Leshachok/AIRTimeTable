@@ -3,10 +3,13 @@
 	<ng-template pTemplate="start">
 		<img src="assets/img/air.png" height="50" class="p-mr-2">
 	</ng-template>
-	<div class="p-menubar-end">
+	<ng-template pTemplate="end">
 		<angular-telegram-login-widget id="telegram_login" (load)="onLoad()" (loadError)="onLoadError()" (login)="onLogin($event)"
-  			[botName]="botName"></angular-telegram-login-widget>
-	</div>
+					[botName]="botName"></angular-telegram-login-widget>
+	</ng-template>
+	<!-- <div class="p-menubar-end">
+		
+	</div> -->
 	</p-menubar>
 </div>
 
