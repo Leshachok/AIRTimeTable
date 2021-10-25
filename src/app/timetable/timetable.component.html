@@ -4,55 +4,51 @@
     <head>
         <link href="https://fonts.googleapis.com/css?family=Manrope&display=swap" rel="stylesheet" />
         <link href="./timetable.component.scss" rel="stylesheet" />
-        <title>Document</title>
+        <title>Timetable Component</title>
     </head>
     <body>
-    <div *ngIf="pairs.length; else unset"  class="timetable">  
-        <div class="days" *ngFor="let day of pairs" >
-       <!-- <div  class="day_title">-->
-           <span class="day_title" *ngIf="day.weekday === 'monday'">Понеділок</span>
-           <span class="day_title" *ngIf="day.weekday === 'tuesday'">Вівторок</span> 
-           <span class="day_title" *ngIf="day.weekday === 'wednesday'">Середа</span> 
-           <span class="day_title" *ngIf="day.weekday === 'thursday'">Четвер</span> 
-           <span class="day_title" *ngIf="day.weekday === 'friday'">П'ятниця</span>  
-        <!--</div>-->
-            
-            <div class="card" *ngFor="let pair of day.pairs">
-                <div class="info">
-                    <span class="room">{{pair.room}}</span>
-                    <span class="subject">{{pair.subject}}</span>
-                </div>
-                <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/zoom.png' " class="button_image" id="zoom">
-                <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/gmeet.png' " class="button_image" id="gmeet">
-                <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/teams.png' " class="button_image" id="teams">
-                <input type="image" (click)="showDialogEdit(pair) "  [src]="edit_image" *ngIf="group == editAllowGroup" class="button_image" id="edit"> 
-                <input type="image" (click)="onDeletePair(pair.id)" [src]="delete_image" *ngIf="group == editAllowGroup"class="button_image" id="delete"> 
-                <div class="type_container" id={{pair.type}}>
-                    <span class="type" *ngIf="pair.type === 'lab'">Лабораторна</span>
-                    <span class="type" *ngIf="pair.type === 'lecture'">Лекція</span>
-                    <span class="type" *ngIf="pair.type === 'practice'">Практика</span>
-                </div>
-                <div class="time_container">
-                    <span class="time">{{pair.time}}</span>
+        <div *ngIf="pairs.length; else unset" class="timetable">
+            <div class="timetable-days-wrapper">
+                <div class="timetable-day" *ngFor="let day of pairs" >
+               <!-- <div  class="day_title">-->
+                   <div class="timetable-day__weekday" *ngIf="day.weekday === 'monday'">Понеділок</div>
+                   <div class="timetable-day__weekday" *ngIf="day.weekday === 'tuesday'">Вівторок</div> 
+                   <div class="timetable-day__weekday" *ngIf="day.weekday === 'wednesday'">Середа</div> 
+                   <div class="timetable-day__weekday" *ngIf="day.weekday === 'thursday'">Четвер</div> 
+                   <div class="timetable-day__weekday" *ngIf="day.weekday === 'friday'">П'ятниця</div>  
+                <!--</div>-->
+
+                    <div class="timetable-card" *ngFor="let pair of day.pairs">
+                        <div class="timetable-card-info">
+                            <div class="timetable-card-info__room">{{pair.room}}</div>
+                            <div class="timetable-card-info__subject">{{pair.subject}}</div>
+                        </div>
+                        <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/zoom.png' " class="timetable-card-info__image-link" id="zoom">
+                        <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/gmeet.png' " class="timetable-card-info__image-link" id="gmeet">
+                        <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/teams.png' " class="timetable-card-info__image-link" id="teams">
+                        <input type="image" (click)="showDialogEdit(pair) "  [src]="edit_image" *ngIf="group == editAllowGroup" class="timetable-card-info__image-link" id="edit">
+                        <input type="image" (click)="onDeletePair(pair.id)" [src]="delete_image" *ngIf="group == editAllowGroup"class="timetable-card-info__image-link" id="delete">
+                        <div class="timetable-card-footer-information">
+                            <div class="timetable-card-type" id={{pair.type}}>
+                                <div class="timetable-card-type__name" *ngIf="pair.type === 'lab'">Лабораторна</div>
+                                <div class="timetable-card-type__name" *ngIf="pair.type === 'lecture'">Лекція</div>
+                                <div class="timetable-card-type__name" *ngIf="pair.type === 'practice'">Практика</div>
+                            </div>
+                            <div class="timetable-card__time">{{pair.time}}</div>
+                        </div>     
+                    </div>
+                    <button (click)="showDialogCreate()" *ngIf="group == editAllowGroup" class="add-timetable-card" id="add_card">+ Додати пару</button>
                 </div>
             </div>
-            <button (click)="showDialogCreate()" *ngIf="group == editAllowGroup" class="card" id="add_card">
-                
-                    + Додати пару
-                
-                
-            </button>
         </div>
         
-    </div>   
-    <p-confirmDialog [visible]="onDeleted" header="Підтвердження" icon="pi pi-exclamation-triangle"></p-confirmDialog>
-    <p-toast position="top-right"></p-toast>
+        <p-confirmDialog [visible]="onDeleted" header="Підтвердження" icon="pi pi-exclamation-triangle" class="confirmation-dialog"></p-confirmDialog>
+        <p-toast class="confirmation-success" position="top-right"></p-toast>
 
-    <ng-template #unset>
-            <h1>ой.. что-то с сервером</h1>
-    </ng-template>
+        <ng-template #unset>
+                <h1>Ой.. щось із сервером</h1>
+        </ng-template>
         
-    
     </body>
 
 </html>
