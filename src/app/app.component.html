@@ -4,10 +4,8 @@
 		<img src="assets/img/air.png" height="50" class="p-mr-2">
 	</ng-template>
 	<ng-template pTemplate="end">
-		<div class="p-menubar-end">
 		<angular-telegram-login-widget id="telegram_login" (load)="onLoad()" (loadError)="onLoadError()" (login)="onLogin($event)"
 					[botName]="botName"></angular-telegram-login-widget>
-		</div>
 	</ng-template>
 	
 	</p-menubar>
