@@ -1,7 +1,9 @@
 <header class="header">
 	<p-menubar class="menu" [model]="items" [autoDisplay]="false" [style] = "{ 'border-radius' : '0px'}">
 	<ng-template class="menu__logo" pTemplate="start">
-		<img src="assets/img/air.png" height="50" class="menu__image p-mr-2">
+		<div id="logo_block">
+			<img src="assets/img/air.png" height="50" class="menu__image p-mr-2">
+		</div>
 	</ng-template>
 	<ng-template class="telegram-login" pTemplate="end">
 		<angular-telegram-login-widget class="telegram-login__widget" id="telegram_login" (load)="onLoad()" (loadError)="onLoadError()" (login)="onLogin($event)"

@@ -22,6 +22,7 @@
                         <div class="timetable-card-info">
                             <div class="timetable-card-info__room">{{pair.room}}</div>
                             <div class="timetable-card-info__subject">{{pair.subject}}</div>
+                            <div class="timetable-card-info__teacher">{{pair.lecturers}}</div>
                         </div>
                         <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/zoom.png' " class="timetable-card-info__image-link" id="zoom">
                         <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/gmeet.png' " class="timetable-card-info__image-link" id="gmeet">
