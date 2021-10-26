@@ -12,9 +12,7 @@ export class TelegramLoginService {
     private username: string = ""
     private first_name: string = ""
 
-    constructor(private cookieService: CookieService){ 
-
-    }
+    constructor(private cookieService: CookieService) { }
 
     getID():number{
         this.tgID = +this.cookieService.get(this.keyID)
