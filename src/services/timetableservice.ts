@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable} from "@angular/core";
+import { CookieService } from "ngx-cookie-service";
 import { Observable } from "rxjs";
 import { EditGroupResponse, Pair, PairResponse, Response } from "src/app/request/request";
 import { TelegramLoginService } from "./telegramloginservice";
@@ -15,9 +16,20 @@ export class TimeTableService {
         [3, ["УІ191", "УК191", "УЕ191"]],
         [4, ["УІ184", "УК181", "УЕ181"]],
     ])
-    public editGroup: string = ''
+    public editGroup = ''
+    private lastSelectedGroup = ''
+    private keyGroup = 'lastSelect'
 
-    constructor(private httpClient: HttpClient, private service: TelegramLoginService) { }
+    constructor(private httpClient: HttpClient, private service: TelegramLoginService, private cookieService: CookieService) { }
+
+    getLastSelectedGroup(): string{
+        this.lastSelectedGroup = this.cookieService.get(this.keyGroup)
+        return this.lastSelectedGroup? this.lastSelectedGroup: 'УК211'
+    }
+
+    setLastSelectedGroup(group: string){
+        this.cookieService.set(this.keyGroup, group)
+    }
 
     getEditGroup():string{
         return this.editGroup

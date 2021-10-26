@@ -17,7 +17,7 @@ export class AppComponent {
   isLoadError: boolean = false;
 
   user: any = undefined;
-  group: string = "УК211";
+  group: string = "";
   telegramID: number = 0
   editGroup: string = ""
 
@@ -30,6 +30,7 @@ export class AppComponent {
   constructor(private service: TelegramLoginService, private ttservice: TimeTableService, private messageService: MessageService) { }
 
   ngOnInit() {
+    this.group = this.ttservice.getLastSelectedGroup()
     this.ttservice.map.get(1)!!.map((group) => this.firstGroupItems.push({label: group, command: event => this.setGroup(group)}));
     this.ttservice.map.get(2)!!.map((group)  => this.secondGroupItems.push({label: group, command: event => this.setGroup(group)}))
     this.ttservice.map.get(3)!!.map((group)  => this.thirdGroupItems.push({label: group, command: event => this.setGroup(group)}))
