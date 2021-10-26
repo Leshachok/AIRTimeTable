@@ -24,9 +24,9 @@
                             <div class="timetable-card-info__subject">{{pair.subject}}</div>
                             <div class="timetable-card-info__teacher">{{pair.lecturers}}</div>
                         </div>
-                        <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/zoom.png' " class="timetable-card-info__image-link" id="zoom">
-                        <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/gmeet.png' " class="timetable-card-info__image-link" id="gmeet">
-                        <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/teams.png' " class="timetable-card-info__image-link" id="teams">
+                        <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/zoom.svg' " class="timetable-card-info__image-link" id="zoom">
+                        <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/gmeet.svg' " class="timetable-card-info__image-link" id="gmeet">
+                        <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/teams.svg' " class="timetable-card-info__image-link" id="teams">
                         <input type="image" (click)="showDialogEdit(pair) "  [src]="edit_image" *ngIf="group == editAllowGroup" class="timetable-card-info__image-link" id="edit">
                         <input type="image" (click)="onDeletePair(pair.id)" [src]="delete_image" *ngIf="group == editAllowGroup"class="timetable-card-info__image-link" id="delete">
                         <div class="timetable-card-footer-information">

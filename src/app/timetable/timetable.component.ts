@@ -37,9 +37,9 @@ export class TimetableComponent implements OnInit, OnChanges {
   delete_image:string ="assets/img/delete.png";
 
   mapDomenIcon: Map<string, string> = new Map([
-    ["meet.google.com", "assets/img/gmeet.png"],
-    ["zoom.us", "assets/img/zoom.png"],
-    ["teams.microsoft.com", "assets/img/teams.png"],
+    ["meet.google.com", "assets/img/gmeet.svg"],
+    ["zoom.us", "assets/img/zoom.svg"],
+    ["teams.microsoft.com", "assets/img/teams.svg"],
   ])
 
   constructor(private service: TimeTableService, private TgService: TelegramLoginService,
