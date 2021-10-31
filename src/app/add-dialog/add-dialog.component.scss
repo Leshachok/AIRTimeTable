@@ -4,10 +4,18 @@
     align-items: flex-start;
     justify-content: space-around;
     height: 100%;
+    //margin-bottom: 1rem;
+    //overflow: scroll;
   }
   .p-float-label{
     width: 100%;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
   .float-input{
-    width: 100%;
+    width: 100%; 
+  }
+  p-dialog .ui-dialog {
+    overflow: scroll;
+    max-height: 70%;
   }
