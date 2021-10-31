@@ -59,8 +59,7 @@ export class TimetableComponent implements OnInit, OnChanges {
         pair: pair
       },
       header: 'Редагування пари',
-      width: '25vw',
-      height: '35vw'
+      width: '25rem'
       
     });
 
@@ -84,8 +83,7 @@ export class TimetableComponent implements OnInit, OnChanges {
   showDialogCreate(){
     const ref = this.dialogService.open(AddDialogComponent, {
       header: 'Додання нової пари',
-      width: '25vw',
-      height: '35vw',
+      width: '25rem',
     });
     ref.onClose.subscribe(
       (pairs)=>{
