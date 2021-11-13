@@ -1,0 +1,259 @@
+$dark-grayish-blue: rgba(48,56,75,1);
+$light-grayish-blue: rgba(78,88,115,1);
+
+body {
+  font-family: Manrope;
+}
+
+.timetable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timetable-day__weekday {
+  margin-bottom: 1rem;
+  text-align: center;
+} 
+
+.timetable-days-wrapper {
+  width: 95%;
+  display: flex;
+  justify-content: center;
+}
+
+.timetable-day {
+  flex-direction: column;
+  flex: 1;
+  margin: 1rem 0.6rem 0rem 0.6rem;
+  max-width: 18%;
+  min-height: 60px;
+}
+
+.pair-list {
+  min-height: 120px;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+}
+
+.timetable-card {
+  padding: 0.8rem;
+  background-color: white;
+  margin: 0rem 0rem 0.8rem 0rem;
+  border-radius: 0.35rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  hyphens: auto;
+}
+
+.timetable-card:last-child {
+  margin-bottom: 0rem;
+}
+
+.timetable-card-footer-information {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  hyphens: none;
+}
+
+.timetable-day__weekday {
+  color: $dark-grayish-blue;
+}
+
+.timetable-card-info__room {
+  font-size: 1.25rem;
+  color: $dark-grayish-blue;
+}
+
+.timetable-card-info__subject {
+  margin: 0.5rem 0rem;
+  color: $light-grayish-blue;
+  line-height: 1.25;
+}
+.timetable-card-info__teacher{
+  margin: 0.5rem 0rem;
+  color: $light-grayish-blue;
+  line-height: 1.25;
+}
+
+
+.timetable-card__time {
+  color: $light-grayish-blue;
+  display: inline-flex;
+}
+
+.timetable-card-info__subject {
+  font-size: 0.925rem;
+}
+
+.timetable-card-type {
+  color: white;
+  border-radius: 0.25rem;
+  border-collapse: separate;
+  padding: 0.25rem 0.35rem;
+  font-size: 0.8rem;
+}
+
+.timetable-card-info__image-link {
+  width: 24px;
+  height: 24px;
+  transition: filter 0.3s ease-out;
+}
+
+
+#zoom:hover{
+  filter: drop-shadow(0px 4px 8px rgb(59, 163, 211));
+}
+#teams:hover{
+  filter: drop-shadow(0px 4px 8px rgba(70, 78, 184, 0.5));
+}
+#gmeet:hover{
+  filter: drop-shadow(0px 4px 8px rgba(62, 241, 62, 0.5));
+}
+
+
+#lab{
+  background: #2254D3;
+}
+#lecture{
+  background:#53A33C;
+}
+#practice{
+  background: #D32323;
+}
+
+.timetable-day:last-child {
+  margin-right: 0rem;
+}
+
+.timetable-day:first-child {
+  margin-left: 0rem;
+}
+
+@media (max-width: 1200px) {
+  .timetable-days-wrapper {
+    width: 98%;
+  }
+}
+
+@media (max-width: 960px) {
+  .timetable-card-footer-information {
+    flex-direction: column;
+    align-items: initial;
+  }
+  .timetable-card {
+    text-align: center;
+  }
+  .timetable-card__time {
+    margin-top: 0.6rem;
+    justify-content: center;
+  }
+}
+
+
+@media (max-width: 850px) {
+  .timetable-days-wrapper {
+    flex-wrap: wrap;
+  }
+  .timetable-card-footer-information {
+    align-items: center;
+  }
+  .timetable-day {
+    flex: 1 1 0px;
+    min-width: 30%;
+    max-width: 30%;
+  }
+  .timetable-day:first-child {
+    margin-left: 0.6rem;
+  }
+  .timetable-day:last-child {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 608px) {
+  .timetable-day {
+    min-width: 46%;
+    max-width: 46%;
+  }
+}
+
+@media (max-width: 506px) {
+  .timetable-days-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .timetable-day {
+    min-width: auto;
+    max-width: 80%;
+    width: 100%;
+  }
+}
+
+.button_image{
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 16px;
+  border-radius:8px;
+}
+
+// Toxic waste:
+
+  
+#add_card {
+  background: #EAEAEA;
+  border: 1px dashed #30384B;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+#add_card:active {
+  background: #d8d7d7;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.25);
+  border: 0px;
+}
+a {
+  color: none;
+  text-decoration: none;
+}
+#edit{
+  left:180px ;
+  border: 2px solid #FFCB13;
+ }
+ #edit:hover{
+   box-shadow: 0px 4px 8px #FFCB13;
+ }
+ #delete{
+   left:210px ;
+  border: 2px solid #F95A00;
+ }
+ #delete:hover{
+   box-shadow: 0px 4px 8px #F95A00;
+ }
+
+ .example-custom-placeholder {
+    background: #ccc;
+    border: dotted 3px #999;
+    margin: 0rem 0rem 0.8rem 0rem;
+    min-height: 120px;
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.cdk-drop-list-dragging .cdk-drag {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Animate an item that has been dropped. */
+.cdk-drag-animating {
+    transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.timetable-card:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }

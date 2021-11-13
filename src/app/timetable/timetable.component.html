@@ -7,7 +7,7 @@
         <title>Timetable Component</title>
     </head>
     <body>
-        <div *ngIf="pairs.length; else unset" class="timetable">
+        <div *ngIf="!onServerError; else unset" class="timetable">
             <div class="timetable-days-wrapper">
                 <div class="timetable-day" *ngFor="let day of pairs" >
                <!-- <div  class="day_title">-->
@@ -27,8 +27,6 @@
                         <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/zoom.svg' " class="timetable-card-info__image-link" id="zoom">
                         <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/gmeet.svg' " class="timetable-card-info__image-link" id="gmeet">
                         <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/teams.svg' " class="timetable-card-info__image-link" id="teams">
-                        <input type="image" (click)="showDialogEdit(pair) "  [src]="edit_image" *ngIf="group == editAllowGroup" class="timetable-card-info__image-link" id="edit">
-                        <input type="image" (click)="onDeletePair(pair.id)" [src]="delete_image" *ngIf="group == editAllowGroup"class="timetable-card-info__image-link" id="delete">
                         <div class="timetable-card-footer-information">
                             <div class="timetable-card-type" id={{pair.type}}>
                                 <div class="timetable-card-type__name" *ngIf="pair.type === 'lab'">Лабораторна</div>
@@ -38,13 +36,11 @@
                             <div class="timetable-card__time">{{pair.time}}</div>
                         </div>     
                     </div>
-                    <button (click)="showDialogCreate()" *ngIf="group == editAllowGroup" class="add-timetable-card" id="add_card">+ Додати пару</button>
-                </div>
+                   </div>
             </div>
         </div>
         
-        <p-confirmDialog [visible]="onDeleted" header="Підтвердження" icon="pi pi-exclamation-triangle" class="confirmation-dialog"></p-confirmDialog>
-        <p-toast class="confirmation-success" position="top-right"></p-toast>
+
 
         <ng-template #unset>
                 <h1>Ой.. щось із сервером</h1>
