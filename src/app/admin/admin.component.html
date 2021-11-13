@@ -9,6 +9,7 @@
            <div class="timetable-day__weekday" *ngIf="day.weekday === 'thursday'">Четвер</div> 
            <div class="timetable-day__weekday" *ngIf="day.weekday === 'friday'">П'ятниця</div>  
         <!--</div>-->
+        <p-toast></p-toast>
             <div class="pair-list" cdkDropList [cdkDropListData]="day.pairs" (cdkDropListDropped)="drop($event)">
                <div class="timetable-card" *ngFor="let pair of day.pairs" cdkDrag>
                     <div class="example-custom-placeholder" *cdkDragPlaceholder></div>

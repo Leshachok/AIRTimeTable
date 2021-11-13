@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { Day, Pair } from '../request/request';
 import { TimeTableService } from 'src/services/timetableservice';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-admin',
@@ -22,16 +23,23 @@ export class AdminComponent implements OnInit {
     ["teams.microsoft.com", "assets/img/teams.svg"],
   ])
 
-  constructor(private service: TimeTableService) {
+  constructor(private service: TimeTableService,  private messageService: MessageService) { }
   
-  }
   ngOnInit(): void {
     this.getPairs()
   }
 
   drop(event: CdkDragDrop<Pair[]>) {
+    this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Ви посунули пару'});
+    
+
+  
+
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      event.container.data.forEach((element, index) => {
+        if(index >  event.previousIndex) console.log("need to change time on "+ element.subject)
+      });
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -39,6 +47,13 @@ export class AdminComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       )
+      // в тот день, когда украли пару, ничего не меняем
+      // если есть свободное место, то пары не двигаем, если нет, то к последующим прибавляем время
+      event.container.data.forEach((element, index) => {
+        if(index >  event.currentIndex) {
+          console.log("need to change time on current container "+ element.subject)
+        }
+      });
     }
   }
 
