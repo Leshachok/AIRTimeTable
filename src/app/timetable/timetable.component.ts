@@ -28,7 +28,7 @@ export class TimetableComponent implements OnInit, OnChanges {
   @Input() editAllowGroup: string = ''
   onDeleted = false
   add_pair_dialog_visible = false
-  serverError = false
+  onServerError = false
 
   room:string = '';
   subject:string = '';
@@ -165,7 +165,7 @@ export class TimetableComponent implements OnInit, OnChanges {
       },
       (error) => {
         console.error('There was an error!', error)
-        this.serverError = true
+        this.onServerError = true
         this.pairs = []
       }
     

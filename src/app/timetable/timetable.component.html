@@ -7,7 +7,7 @@
         <title>Timetable Component</title>
     </head>
     <body>
-        <div *ngIf="!serverError; else unset" class="timetable">
+        <div *ngIf="!onServerError; else unset" class="timetable">
             <div class="timetable-days-wrapper">
                 <div class="timetable-day" *ngFor="let day of pairs" >
                <!-- <div  class="day_title">-->
