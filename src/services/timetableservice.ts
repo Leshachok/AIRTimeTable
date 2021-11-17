@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable} from "@angular/core";
 import { CookieService } from "ngx-cookie-service";
 import { Observable } from "rxjs";
-import { EditGroupResponse, Pair, PairResponse, Response } from "src/app/request/request";
+import { EditGroupResponse, Pair, PairResponse, Response } from "src/request/request";
 import { TelegramLoginService } from "./telegramloginservice";
 
 @Injectable({
