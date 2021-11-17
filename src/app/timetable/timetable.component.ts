@@ -5,7 +5,7 @@ import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
-import { Day,  Pair } from '../request/request';
+import { Day,  Pair } from '../../request/request';
 
 @Component({
   selector: 'app-timetable',
@@ -28,11 +28,16 @@ export class TimetableComponent implements OnInit, OnChanges {
   @Input() editAllowGroup: string = ''
   onDeleted = false
   add_pair_dialog_visible = false
+<<<<<<< HEAD
   onServerError = false
+=======
+  serverError = false
+>>>>>>> 2d07c42580bfb2301c617a84758cc1d144dc065a
 
   room:string = '';
   subject:string = '';
   time:string ='';
+  currentTime = 0;
 
   edit_image:string ="assets/img/edit.png";
   delete_image:string ="assets/img/delete.png";
@@ -51,6 +56,7 @@ export class TimetableComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.getPairs()
     this.days.map((value)=> new Date(value))
+    this.currentTime = Date.now()/1000
   }
 
 

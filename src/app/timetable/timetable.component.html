@@ -27,6 +27,9 @@
                         <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/zoom.svg' " class="timetable-card-info__image-link" id="zoom">
                         <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/gmeet.svg' " class="timetable-card-info__image-link" id="gmeet">
                         <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/teams.svg' " class="timetable-card-info__image-link" id="teams">
+                        <div *ngIf=" (pair.timestamp < currentTime) && (currentTime - pair.timestamp < 5700)">live</div>
+                        <input type="image" (click)="showDialogEdit(pair) "  [src]="edit_image" *ngIf="group == editAllowGroup" class="timetable-card-info__image-link" id="edit">
+                        <input type="image" (click)="onDeletePair(pair.id)" [src]="delete_image" *ngIf="group == editAllowGroup"class="timetable-card-info__image-link" id="delete">
                         <div class="timetable-card-footer-information">
                             <div class="timetable-card-type" id={{pair.type}}>
                                 <div class="timetable-card-type__name" *ngIf="pair.type === 'lab'">Лабораторна</div>
