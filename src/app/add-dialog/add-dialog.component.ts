@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TimeTableService } from 'src/services/timetableservice';
-import { NewPair } from '../request/request';
+import { NewPair } from '../../request/request';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
 

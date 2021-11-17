@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Pair } from '../request/request';
+import { Pair } from '../../request/request';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -10,7 +10,7 @@ import { Pair } from '../request/request';
 
 export class EditDialogComponent implements OnInit {
 
-  public pair: Pair = new Pair('', '', '', [], 0, '', '')
+  public pair: Pair = new Pair('', '', '', [], 0, '', '', 0)
   public room: string = ''
   public typeUa: string = 'Лекція'
   public type: string = ''
