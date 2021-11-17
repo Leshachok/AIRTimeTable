@@ -28,11 +28,7 @@ export class TimetableComponent implements OnInit, OnChanges {
   @Input() editAllowGroup: string = ''
   onDeleted = false
   add_pair_dialog_visible = false
-<<<<<<< HEAD
   onServerError = false
-=======
-  serverError = false
->>>>>>> 2d07c42580bfb2301c617a84758cc1d144dc065a
 
   room:string = '';
   subject:string = '';
