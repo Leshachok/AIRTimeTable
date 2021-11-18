@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -175,5 +176,4 @@ export class TimetableComponent implements OnInit, OnChanges {
   openLink(url: string){
     window.open(url)
   }
-  
 }

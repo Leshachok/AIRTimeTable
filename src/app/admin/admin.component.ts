@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import { Day, Pair } from '../request/request';
+//import { Day, Pair } from '../request/request';
 import { TimeTableService } from 'src/services/timetableservice';
 import { MessageService } from 'primeng/api';
+import { Day, Pair } from 'src/request/request';
 
 @Component({
   selector: 'app-admin',
