@@ -20,18 +20,31 @@
 
                     <div class="timetable-card" *ngFor="let pair of day.pairs">
                         <div class="timetable-card-info">
-                            <div class="timetable-card-info__room">{{pair.room}}</div>
+                            <div class="timetable-card-header">
+                                <div class="timetable-card-info__room" *ngIf="!pair.link.length">{{pair.room}}</div>
+                                <div class="timetable-card-link" *ngIf="pair.link.length">
+                                    <button (click)="openLink(pair.link)"  *ngIf="pair.link.length && pair.link_icon === 'assets/img/zoom.svg' " class="timetable-card-info__image-link" id="zoom" >
+                                        <img [src]="pair.link_icon" height="16px" width="24px">
+                                        <span *ngIf="this.screenWidth >= 1330 || this.screenWidth >= 770 && this.screenWidth <= 850 || this.screenWidth >= 290 &&  this.screenWidth <= 608"  >Приєднатися</span>
+                                    </button>
+                                    <button (click)="openLink(pair.link)"  *ngIf="pair.link.length && pair.link_icon === 'assets/img/gmeet.svg' " class="timetable-card-info__image-link" id="gmeet">
+                                        <img [src]="pair.link_icon" height="16px" width="24px">
+                                        <span *ngIf="this.screenWidth >= 1330 || this.screenWidth >= 770 && this.screenWidth <= 850 || this.screenWidth >= 290 &&  this.screenWidth <= 608"  >Приєднатися</span>
+                                    </button>
+                                    <button (click)="openLink(pair.link)"  *ngIf="pair.link.length && pair.link_icon === 'assets/img/teams.svg' " class="timetable-card-info__image-link" id="teams">
+                                    <img [src]="pair.link_icon" height="16px" width="24px">
+                                        <span *ngIf="this.screenWidth >= 1330 || this.screenWidth >= 770 && this.screenWidth <= 850 || this.screenWidth >= 290 &&  this.screenWidth <= 608"  >Приєднатися</span>
+                                    </button>
+                                </div>
+                                <div class="timetable-card-live" *ngIf=" (pair.timestamp < currentTime) && (currentTime - pair.timestamp < 5700)"  ><img [src]="live_image">Live</div>
+                            </div>
                             <div class="timetable-card-info__subject">{{pair.subject}}</div>
                             <div class="timetable-card-info__teacher">{{pair.lecturers}}</div>
                         </div>
 
 
-                        <div class="timetable-card-link" *ngIf="pair.link.length">
-                            <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/zoom.svg' " class="timetable-card-info__image-link" id="zoom">
-                            <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/gmeet.svg' " class="timetable-card-info__image-link" id="gmeet">
-                            <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/teams.svg' " class="timetable-card-info__image-link" id="teams">
-                        </div>
-                        <div *ngIf=" (pair.timestamp < currentTime) && (currentTime - pair.timestamp < 5700)">live</div>
+                        
+                        
                         <div class="timetable-card-type-wrapper">
 
                             <div class="timetable-card-type" id={{pair.type}}>

@@ -63,7 +63,6 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-top: 0.5rem;
   hyphens: none;
 }
 
@@ -113,9 +112,48 @@ body {
 }
 
 .timetable-card-info__image-link {
-  width: 24px;
-  height: 24px;
+  //width: 8.938rem;
+  height: 1.875rem;
   transition: filter 0.3s ease-out;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  justify-content: space-between;
+  background-color: white;
+  border: 1px solid;
+  border-radius:0.5rem ;
+}
+
+.timetable-card-header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  hyphens: none;
+}
+.timetable-card-live {
+  font-family: Manrope;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 19px;
+color: #F16969;
+display: flex;
+align-items: center;
+justify-content: space-between;
+width: 3.438rem;
+}
+#zoom{
+  color: #4A8CFF;
+  border-color: #4A8CFF;
+}
+#teams{
+  color: #5558AF;
+  border-color: #5558AF;
+}
+#gmeet{
+  color: #00AC47;
+  border-color: #00AC47;
 }
 
 

@@ -7,6 +7,7 @@ import { TimeTableService } from 'src/services/timetableservice';
 import { AddDialogComponent } from '../add-dialog/add-dialog.component';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { Day,  Pair } from '../../request/request';
+import { HostListener } from "@angular/core";
 
 @Component({
   selector: 'app-timetable',
@@ -38,6 +39,9 @@ export class TimetableComponent implements OnInit, OnChanges {
 
   edit_image:string ="assets/img/edit.png";
   delete_image:string ="assets/img/delete.png";
+  live_image:string = "assets/img/live.svg"
+  
+  screenWidth: number = 0;
 
   mapDomenIcon: Map<string, string> = new Map([
     ["meet.google.com", "assets/img/gmeet.svg"],
@@ -45,9 +49,15 @@ export class TimetableComponent implements OnInit, OnChanges {
     ["teams.microsoft.com", "assets/img/teams.svg"],
   ])
 
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+   this.screenWidth = window.innerWidth;
+}
+
   constructor(private service: TimeTableService, private TgService: TelegramLoginService,
        private confService: ConfirmationService, private messageService: MessageService, private dialogService: DialogService) { 
     this.tgID = TgService.getID()
+    this.onResize();
   }
 
   ngOnInit() {
