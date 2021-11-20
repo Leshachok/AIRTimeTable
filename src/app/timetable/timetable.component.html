@@ -56,10 +56,6 @@
                         
                         <div class="timetable-card-footer">
                             <div class="timetable-card__time">{{pair.time}}</div>
-                            <div class="buttons" *ngIf="group == editAllowGroup">
-                                <input type="image" (click)="showDialogEdit(pair) "  [src]="edit_image"  class="timetable-card-info__image-link" id="edit" >
-                                <input type="image" (click)="onDeletePair(pair.id)" [src]="delete_image" class="timetable-card-info__image-link" id="delete">
-                            </div>
                               
                         </div>   
                     </div>
@@ -67,7 +63,6 @@
                    </div>
 
             </div>
-            <button (click)="showDialogCreate()" *ngIf="group == editAllowGroup" class="add-timetable-card" id="add_card">+</button>
         </div>
         
 

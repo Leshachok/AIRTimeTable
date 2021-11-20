@@ -27,7 +27,7 @@ export class MainComponent implements OnInit {
 	thirdGroupItems: MenuItem[] = [];
 	fourthGroupItems: MenuItem[] = [];
 
-  constructor(private service: TelegramLoginService, private ttservice: TimeTableService,
+  constructor(public service: TelegramLoginService, private ttservice: TimeTableService,
      private messageService: MessageService,
      private router: Router
      ) { }
@@ -91,10 +91,10 @@ export class MainComponent implements OnInit {
       this.user = user;
       this.service.saveData(user);
       this.telegramID = user['id']
-      //это убрать когда всех зарегаем
-      //this.ttservice.addGroupEditor()
+
       this.ttservice.getEditGroupByTgID().subscribe(
         (response)=>{
+            this.service.isLoggedIn = true
             this.editGroup = response.data.group
             this.ttservice.setEditGroup(this.editGroup)
             this.messageService.add({severity:'success', summary: 'Отримано доступ', detail: 'Тепер ви маєте змогу редагувати розклад групи ' + this.editGroup});
@@ -106,6 +106,7 @@ export class MainComponent implements OnInit {
       )
     }
   
+    
     getGroups(course: number): string[] {
       return this.ttservice.getGroupsByCourse(course); 
     }
@@ -115,6 +116,5 @@ export class MainComponent implements OnInit {
       this.group = group
       this.items[0].label = group
     }
-
 
 }

@@ -6,7 +6,11 @@
 		</div>
 	</ng-template>
 	<ng-template class="telegram-login" pTemplate="end">
-		<button pButton type="button" label="Админка" (click)="handleClick()"></button>
+		<angular-telegram-login-widget *ngIf="!service.isLoggedIn; else unset" class="telegram-login__widget" id="telegram_login" (load)="onLoad()" (loadError)="onLoadError()" (login)="onLogin($event)"
+		[botName]="botName"></angular-telegram-login-widget>
+		<ng-template #unset>
+			<button pButton type="button" label="Админка" (click)="handleClick()"></button>
+		</ng-template>
 	</ng-template>
 	</p-menubar>
 </header>

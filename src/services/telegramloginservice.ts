@@ -11,9 +11,18 @@ export class TelegramLoginService {
     private tgID: number = 0
     private username: string = ""
     private first_name: string = ""
+    private _isLoggedIn = true;
+
+    public get isLoggedIn() {
+        return this._isLoggedIn;
+    }
+    public set isLoggedIn(value) {
+        this._isLoggedIn = value;
+    }
 
     constructor(private cookieService: CookieService) { }
 
+    
     getID():number{
         this.tgID = +this.cookieService.get(this.keyID)
         return this.tgID

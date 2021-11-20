@@ -23,9 +23,6 @@ export class TimetableComponent implements OnInit, OnChanges {
   //тут както пары хранятся
   pairs: Day[] = []
   days: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
-  displayEdit = false
-  displayDelete = false
-  displayAdd = false
   deleteId: number = 0
   @Input() editAllowGroup: string = ''
   onDeleted = false
@@ -36,12 +33,9 @@ export class TimetableComponent implements OnInit, OnChanges {
   subject:string = '';
   time:string ='';
   currentTime = 0;
-
-  edit_image:string ="assets/img/edit.png";
-  delete_image:string ="assets/img/delete.png";
-  live_image:string = "assets/img/live.svg"
   
   screenWidth: number = 0;
+  live_image:string = "assets/img/live.svg"
 
   mapDomenIcon: Map<string, string> = new Map([
     ["meet.google.com", "assets/img/gmeet.svg"],
@@ -67,57 +61,6 @@ export class TimetableComponent implements OnInit, OnChanges {
   }
 
 
-  showDialogEdit(pair: Pair){
-    const ref = this.dialogService.open(EditDialogComponent, {
-      data: {
-        pair: pair
-      },
-      header: 'Редагування пари',
-      width: '25rem'
-      
-    });
-
-    ref.onClose.subscribe(
-      (pair)=>{
-          if(pair){
-            this.service.editPair(this.editAllowGroup, pair).subscribe(
-              (response) =>{
-                  this.getPairs()
-                  this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Пара успішно змінена!'});
-              },
-              (error) => {
-
-              }
-            )
-          }
-      }
-    )
-  }
-
-  showDialogCreate(){
-    const ref = this.dialogService.open(AddDialogComponent, {
-      header: 'Додання нової пари',
-      width: '25rem',
-    });
-    ref.onClose.subscribe(
-      (pairs)=>{
-          if(pairs){
-            this.service.addPair(JSON.stringify(pairs)).subscribe(
-              (response) =>{
-                  this.messageService.add({severity:'success', summary: 'Додано', detail: 'Пара успішно додана!'});
-                  this.getPairs()
-            
-              },
-              (error) => {
-
-              }
-            )
-          }
-      }
-    )
-  }
-
-
   ngOnChanges(changes: SimpleChanges){
       if (changes.group){ 
         this.getPairs()
@@ -125,30 +68,7 @@ export class TimetableComponent implements OnInit, OnChanges {
       }     
   }
 
-  onDeletePair(id: number){
-    this.deleteId = id
-    this.onDeleted = true
-    this.confService.confirm({
-      message: 'Ви дійсно хочете видалити пару?',
-        accept: () => {
-            //Actual logic to perform a confirmation
-            this.service.deletePair(id).subscribe(
-              (response) => {
-                  this.messageService.add({severity:'success', summary: 'Видалено', detail: 'Пара успішно видалена'});
-                  this.getPairs()
-              },
-              (error) => {
-                  this.messageService.add({severity:'error', summary: 'Помилка', detail: 'Пара не видалена'});
-              });
-        },
-        reject: () => {
 
-        },
-        acceptLabel: "Так",
-        rejectLabel: "Ні"
-
-    });
-  }
 
   getPairs(){
     this.service.getPairs(this.group).subscribe(
