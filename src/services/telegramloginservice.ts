@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, OnInit } from "@angular/core";
 import { CookieService } from "ngx-cookie-service";
 
 @Injectable({
@@ -11,14 +11,6 @@ export class TelegramLoginService {
     private tgID: number = 0
     private username: string = ""
     private first_name: string = ""
-    private _isLoggedIn = false;
-
-    public get isLoggedIn() {
-        return this._isLoggedIn;
-    }
-    public set isLoggedIn(value) {
-        this._isLoggedIn = value;
-    }
 
     constructor(private cookieService: CookieService) { }
 

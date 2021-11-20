@@ -94,7 +94,6 @@ export class MainComponent implements OnInit {
 
       this.ttservice.getEditGroupByTgID().subscribe(
         (response)=>{
-            this.service.isLoggedIn = true
             this.editGroup = response.data.group
             this.ttservice.setEditGroup(this.editGroup)
             this.messageService.add({severity:'success', summary: 'Отримано доступ', detail: 'Тепер ви маєте змогу редагувати розклад групи ' + this.editGroup});
