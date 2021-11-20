@@ -22,18 +22,27 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AddDialogComponent } from './add-dialog/add-dialog.component'
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { ButtonModule } from 'primeng/button';
+import { AdminComponent } from './admin/admin.component';
+import { TreeModule } from 'primeng/tree';
+import  {DragDropModule} from '@angular/cdk/drag-drop';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TimetableComponent,
     EditDialogComponent,
-    AddDialogComponent
+    AddDialogComponent,
+    MainComponent,
+    AdminComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularTelegramLoginWidgetModule,
+    DragDropModule, 
     HttpClientModule,
     BrowserAnimationsModule,
     DialogModule,
@@ -45,7 +54,9 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     MenubarModule,
     DropdownModule,
     ScrollingModule,
-    InputSwitchModule
+    InputSwitchModule,
+    ButtonModule,
+    TreeModule
   ],
   providers: [
     TelegramLoginService,
