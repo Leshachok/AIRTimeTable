@@ -11,7 +11,7 @@ export class TelegramLoginService {
     private tgID: number = 0
     private username: string = ""
     private first_name: string = ""
-    private _isLoggedIn = true;
+    private _isLoggedIn = false;
 
     public get isLoggedIn() {
         return this._isLoggedIn;
