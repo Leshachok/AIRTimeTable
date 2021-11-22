@@ -11,7 +11,7 @@ import { TimeTableService } from 'src/services/timetableservice';
 })
 export class MainComponent implements OnInit {
   title = 'AIRTable'
-  botName = "ISHIRTestBot";
+  botName = "OdesaPolytechnicBot";
 
   isLoad: boolean = false;
   isLoadError: boolean = false;
@@ -34,6 +34,7 @@ export class MainComponent implements OnInit {
 
      ngOnInit() {
       this.group = this.ttservice.getLastSelectedGroup()
+      this.editGroup = this.ttservice.getEditGroup()
       this.ttservice.map.get(1)!!.map((group) => this.firstGroupItems.push({label: group, command: event => this.setGroup(group)}));
       this.ttservice.map.get(2)!!.map((group)  => this.secondGroupItems.push({label: group, command: event => this.setGroup(group)}))
       this.ttservice.map.get(3)!!.map((group)  => this.thirdGroupItems.push({label: group, command: event => this.setGroup(group)}))
