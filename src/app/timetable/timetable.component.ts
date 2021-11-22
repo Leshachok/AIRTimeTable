@@ -3,7 +3,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
-import { Day } from '../../request/request';
+import { Day, Pair } from '../../request/request';
 import { HostListener } from "@angular/core";
 import { DatePipe } from '@angular/common'
 
@@ -19,8 +19,8 @@ export class TimetableComponent implements OnInit, OnChanges {
   @Input() tgID: number = 0
 
   //тут както пары хранятся
-  pairs: Day[] = []
-  days: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
+  days: Day[] = []
+  days_enum: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
   deleteId: number = 0
   @Input() editAllowGroup: string = ''
   onDeleted = false
@@ -54,9 +54,20 @@ export class TimetableComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.getPairs()
-    this.days.map((value)=> new Date(value))
+    //initializing array of pairs
+    this.days_enum.forEach((weekday, index)=>{
+      this.days.push(new Day(weekday, []))
+      this.days[index].weekday = weekday
+    })
+    
+    //time in seconds
     this.currentTime = Date.now()/1000
+
+    //console.log(new Date(this.currentTime*1000).getDay() - 1)
+
+    this.getPairs()
+    // this.days_enum.map((value)=> new Date(value))
+
   }
 
 
@@ -72,10 +83,9 @@ export class TimetableComponent implements OnInit, OnChanges {
   getPairs(){
     this.service.getPairs(this.group).subscribe(
       (response) => {
-
         // тут в pairs записываются пары
-        this.pairs = response.data
-        this.pairs.forEach( (day) => {
+        this.days = response.data
+        this.days.forEach( (day) => {
           day.pairs.forEach( (pair) => {
             pair.timestamp -= 7200
             let date = new Date(pair.timestamp * 1000)
@@ -99,7 +109,7 @@ export class TimetableComponent implements OnInit, OnChanges {
       (error) => {
         console.error('There was an error!', error)
         this.onServerError = true
-        this.pairs = []
+        this.days = []
       }
     
     )

@@ -9,6 +9,11 @@ export class PairResponse {
 export class Day{
     public weekday: string = ""
     public pairs: Pair[] = []
+
+    constructor(weekday: string, pairs: Pair[]){
+        this.weekday = weekday
+        this.pairs = pairs
+    }
 }
 
 export class Pair{
@@ -45,4 +50,19 @@ export class Response{
     public code: number = 0
     public message: string = ""
     public data = []
+}
+
+export class NewPair{
+    
+    constructor(
+        public lecturers: string[],
+        public divisions: string[], 
+        public subject: string, 
+        public room:string,
+        public weeks: number[],
+        public day: number,
+        public lesson_num: number,
+        public type: string,
+        public link: string
+        ) { }
 }
