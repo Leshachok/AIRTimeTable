@@ -78,7 +78,7 @@ export class TimetableComponent implements OnInit, OnChanges {
         this.pairs = response.data
         this.pairs.forEach( (day) => {
           day.pairs.forEach( (pair) => {
-
+            pair.timestamp -= 7200
             if(pair.link.length){
               pair.link_icon = "assets/img/custom.jpg";
               [...this.mapDomenIcon.keys()].forEach((key) => {
