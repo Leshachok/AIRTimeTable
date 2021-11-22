@@ -39,7 +39,7 @@ export class AdminComponent implements OnInit {
        private dialogService: DialogService, 
        private confService: ConfirmationService) { }
   
-  ngOnInit(): void {
+  ngOnInit(){
     this.group = this.service.getEditGroup()
     this.getPairs()
   }
