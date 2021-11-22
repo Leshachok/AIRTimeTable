@@ -1,13 +1,11 @@
-import { formatDate } from '@angular/common';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
-import { AddDialogComponent } from '../add-dialog/add-dialog.component';
-import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
-import { Day,  Pair } from '../../request/request';
+import { Day } from '../../request/request';
 import { HostListener } from "@angular/core";
+import { DatePipe } from '@angular/common'
 
 @Component({
   selector: 'app-timetable',
@@ -49,7 +47,8 @@ export class TimetableComponent implements OnInit, OnChanges {
 }
 
   constructor(private service: TimeTableService, private TgService: TelegramLoginService,
-       private confService: ConfirmationService, private messageService: MessageService, private dialogService: DialogService) { 
+       private confService: ConfirmationService, private messageService: MessageService, private dialogService: DialogService,
+       public datepipe: DatePipe) { 
     this.tgID = TgService.getID()
     this.onResize();
   }
@@ -79,6 +78,11 @@ export class TimetableComponent implements OnInit, OnChanges {
         this.pairs.forEach( (day) => {
           day.pairs.forEach( (pair) => {
             pair.timestamp -= 7200
+            let date = new Date(pair.timestamp * 1000)
+            let begin_time = this.datepipe.transform(date, 'HH:mm')
+            let end_date = new Date(pair.timestamp * 1000 + 5700000)
+            let end_time = this.datepipe.transform(end_date, 'HH:mm')
+            pair.time = begin_time + " - " + end_time
             if(pair.link.length){
               pair.link_icon = "assets/img/custom.jpg";
               [...this.mapDomenIcon.keys()].forEach((key) => {
@@ -87,8 +91,6 @@ export class TimetableComponent implements OnInit, OnChanges {
                 }
               })
             }
-
-            
 
           })
         })

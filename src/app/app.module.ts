@@ -27,6 +27,7 @@ import { AdminComponent } from './admin/admin.component';
 import { TreeModule } from 'primeng/tree';
 import  {DragDropModule} from '@angular/cdk/drag-drop';
 import { MainComponent } from './main/main.component';
+import { DatePipe } from '@angular/common'
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { MainComponent } from './main/main.component';
     TimeTableService,
     ConfirmationService,
     MessageService,
-    DialogService
+    DialogService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })

@@ -10,7 +10,6 @@ import { TimeTableService } from 'src/services/timetableservice';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  title = 'AIRTable'
   botName = "OdesaPolytechnicBot";
 
   isLoad: boolean = false;

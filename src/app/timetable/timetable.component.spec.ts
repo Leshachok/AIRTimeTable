@@ -23,10 +23,5 @@ fdescribe('TimetableComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display group', ()=>{
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.group')?.textContent).toEqual('Выбраная группа ' + component.group);
-  })
 
 });
