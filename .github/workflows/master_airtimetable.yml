@@ -25,7 +25,7 @@ jobs:
         run: |
           npm install
           npm run build --if-present
-          ng test
+          npm test
         working-directory: .
 
       - name: Upload artifact for deployment job
