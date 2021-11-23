@@ -6,7 +6,7 @@
 		</div>
 	</ng-template>
 	<ng-template class="telegram-login" pTemplate="end">
-		<angular-telegram-login-widget *ngIf="!editGroup; else unset" class="telegram-login__widget" id="telegram_login" (load)="onLoad()" (loadError)="onLoadError()" (login)="onLogin($event)"
+		<angular-telegram-login-widget *ngIf="!editDivision; else unset" class="telegram-login__widget" id="telegram_login" (load)="onLoad()" (loadError)="onLoadError()" (login)="onLogin($event)"
 		[botName]="botName"></angular-telegram-login-widget>
 		<ng-template #unset>
 			<button pButton type="button" label="Админка" (click)="handleClick()"></button>
@@ -14,4 +14,4 @@
 	</ng-template>
 	</p-menubar>
 </header>
-<app-timetable class="timetable" [editAllowGroup]="editGroup" [tgID]="telegramID" [group]="group"></app-timetable>
+<app-timetable class="timetable" [editAllowGroup]="editDivision" [tgID]="telegramID" [divisionId]="divisionId"></app-timetable>

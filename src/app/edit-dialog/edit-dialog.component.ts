@@ -10,7 +10,7 @@ import { Pair } from '../../request/request';
 
 export class EditDialogComponent implements OnInit {
 
-  public pair: Pair = new Pair('', '', '', [], 0, '', '', 0)
+  //public pair: Pair = new Pair('', '', '', [], 0, '', '', 0)
   public room: string = ''
   public typeUa: string = 'Лекція'
   public type: string = ''
@@ -26,30 +26,30 @@ export class EditDialogComponent implements OnInit {
   constructor(private config: DynamicDialogConfig, private ref: DynamicDialogRef) { }
 
   ngOnInit(): void {
-    this.pair = this.config.data.pair
-    this.room = this.pair.room? this.pair.room: '100'
-    this.type = this.pair.type? this.pair.type: ''
-    this.subject = this.pair.subject? this.pair.subject: 'Назва предмету'
-    this.types = [...this.typesMap.keys()]
-    this.link = this.pair.link
-    if(this.type.length){
-      this.types.forEach((key) => {
-        if(this.type == this.typesMap.get(key)!!){
-          this.typeUa = key
-        }
-      })
-    }
+    // this.pair = this.config.data.pair
+    // this.room = this.pair.room? this.pair.room: '100'
+    // this.type = this.pair.type? this.pair.type: ''
+    // this.subject = this.pair.subject? this.pair.subject: 'Назва предмету'
+    // this.types = [...this.typesMap.keys()]
+    // this.link = this.pair.link
+    // if(this.type.length){
+    //   this.types.forEach((key) => {
+    //     if(this.type == this.typesMap.get(key)!!){
+    //       this.typeUa = key
+    //     }
+    //   })
+    // }
   }
 
-  close(){
-    this.type = this.typesMap.get(this.typeUa)!!
-    this.pair.room = this.room
-    this.pair.subject = this.subject
-    this.pair.type = this.type
-    this.pair.link = this.link
+  // close(){
+  //   this.type = this.typesMap.get(this.typeUa)!!
+  //   this.pair.room = this.room
+  //   this.pair.subject = this.subject
+  //   this.pair.type = this.type
+  //   this.pair.link = this.link
     
-    this.ref.close(this.pair)
-  }
+  //   this.ref.close(this.pair)
+  // }
 
 }
 

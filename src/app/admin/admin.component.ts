@@ -74,23 +74,23 @@ export class AdminComponent implements OnInit {
       (response) => {
 
         // тут в pairs записываются пары
-        this.pairs = response.data
-        this.pairs.forEach( (day) => {
-          day.pairs.forEach( (pair) => {
+        // this.pairs = response.data
+        // this.pairs.forEach( (day) => {
+        //   day.pairs.forEach( (pair) => {
 
-            if(pair.link.length){
-              pair.link_icon = "assets/img/custom.jpg";
-              [...this.mapDomenIcon.keys()].forEach((key) => {
-                if(pair.link.includes(key)){
-                  pair.link_icon = this.mapDomenIcon.get(key)!!
-                }
-              })
-            }
+        //     if(pair.link.length){
+        //       pair.link_icon = "assets/img/custom.jpg";
+        //       [...this.mapDomenIcon.keys()].forEach((key) => {
+        //         if(pair.link.includes(key)){
+        //           pair.link_icon = this.mapDomenIcon.get(key)!!
+        //         }
+        //       })
+        //     }
 
             
 
-          })
-        })
+        //   })
+        // })
 
       },
       (error) => {
@@ -118,15 +118,15 @@ export class AdminComponent implements OnInit {
     ref.onClose.subscribe(
       (pair)=>{
           if(pair){
-            this.service.editPair(this.group, pair).subscribe(
-              (response) =>{
-                  this.getPairs()
-                  this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Пара успішно змінена!'});
-              },
-              (error) => {
+            // this.service.editPair(this.group, pair).subscribe(
+            //   (response) =>{
+            //       this.getPairs()
+            //       this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Пара успішно змінена!'});
+            //   },
+            //   (error) => {
 
-              }
-            )
+            //   }
+            // )
           }
       }
     )
