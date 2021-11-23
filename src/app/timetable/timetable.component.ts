@@ -15,7 +15,7 @@ import { DatePipe } from '@angular/common'
 export class TimetableComponent implements OnInit, OnChanges {
 
   //тут номер группы хранится
-  @Input() group: string = "УК211"
+  @Input() divisionId: string = "619c4239aac3eafc5139d2c6"
   @Input() tgID: number = 0
 
   //тут както пары хранятся
@@ -23,8 +23,6 @@ export class TimetableComponent implements OnInit, OnChanges {
   days_enum: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
   deleteId: number = 0
   @Input() editAllowGroup: string = ''
-  onDeleted = false
-  add_pair_dialog_visible = false
   onServerError = false
 
   room:string = '';
@@ -54,6 +52,7 @@ export class TimetableComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this.divisionId = this.service.getLastSelectedGroupId()
     //initializing array of pairs
     this.days_enum.forEach((weekday, index)=>{
       this.days.push(new Day(weekday, []))
@@ -72,44 +71,50 @@ export class TimetableComponent implements OnInit, OnChanges {
 
 
   ngOnChanges(changes: SimpleChanges){
-      if (changes.group){ 
+      if (changes.divisionId){ 
         this.getPairs()
-        this.service.setLastSelectedGroup(changes.group.currentValue)
+        this.service.setLastSelectedGroupId(changes.divisionId.currentValue)
       }     
   }
 
 
 
   getPairs(){
-    this.service.getPairs(this.group).subscribe(
+    this.service.getPairs(this.divisionId).subscribe(
       (response) => {
         // тут в pairs записываются пары
-        this.days = response.data
-        this.days.forEach( (day) => {
-          day.pairs.forEach( (pair) => {
-            pair.timestamp -= 7200
-            let date = new Date(pair.timestamp * 1000)
-            let begin_time = this.datepipe.transform(date, 'HH:mm')
-            let end_date = new Date(pair.timestamp * 1000 + 5700000)
-            let end_time = this.datepipe.transform(end_date, 'HH:mm')
-            pair.time = begin_time + " - " + end_time
-            if(pair.link.length){
-              pair.link_icon = "assets/img/custom.jpg";
-              [...this.mapDomenIcon.keys()].forEach((key) => {
-                if(pair.link.includes(key)){
-                  pair.link_icon = this.mapDomenIcon.get(key)!!
-                }
-              })
-            }
+        let pairs = response
+        pairs = pairs.sort((a, b) => a.day - b.day)
+        pairs.forEach((pair) => {
+          this.days[pair.day-1].pairs.push(pair)
 
-          })
+          // if(pair.link.length){
+          //   pair.link_icon = "assets/img/custom.jpg";
+          //   [...this.mapDomenIcon.keys()].forEach((key) => {
+          //     if(pair.link.includes(key)){
+          //       pair.link_icon = this.mapDomenIcon.get(key)!!
+          //     }
+          //   })
+          // }
         })
+
+        // this.days.forEach( (day) => {
+        //   day.pairs.forEach( (pair) => {
+        //     pair.timestamp -= 7200
+        //     let date = new Date(pair.timestamp * 1000)
+        //     let begin_time = this.datepipe.transform(date, 'HH:mm')
+        //     let end_date = new Date(pair.timestamp * 1000 + 5700000)
+        //     let end_time = this.datepipe.transform(end_date, 'HH:mm')
+        //     pair.time = begin_time + " - " + end_time
+            
+
+        //   })
+        // })
 
       },
       (error) => {
         console.error('There was an error!', error)
         this.onServerError = true
-        this.days = []
       }
     
     )

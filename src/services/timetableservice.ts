@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable} from "@angular/core";
 import { CookieService } from "ngx-cookie-service";
 import { Observable } from "rxjs";
-import { EditGroupResponse, Pair, PairResponse, Response } from "src/request/request";
+import { Division, EditGroupResponse, Pair, Response } from "src/request/request";
 import { TelegramLoginService } from "./telegramloginservice";
 
 @Injectable({
@@ -10,15 +10,11 @@ import { TelegramLoginService } from "./telegramloginservice";
 })
 export class TimeTableService {
 
-    public map: Map<number, string[]> = new Map([
-        [1, ["УК211", "УП211", "УЕ211"]],
-        [2, ["УЕ201", "УК201", "УП201", "УП202"]],
-        [3, ["УІ191", "УК191", "УЕ191"]],
-        [4, ["УІ184", "УК181", "УЕ181"]],
-    ])
     public editGroup = ''
     private lastSelectedGroup = ''
+    private lastSelectedGroupId = ''
     private keyGroup = 'lastSelect'
+    private keyId = 'lastSelectId'
 
     constructor(private httpClient: HttpClient, private service: TelegramLoginService, private cookieService: CookieService) { }
 
@@ -29,6 +25,15 @@ export class TimeTableService {
 
     setLastSelectedGroup(group: string){
         this.cookieService.set(this.keyGroup, group)
+    }
+
+    getLastSelectedGroupId(): string{
+        this.lastSelectedGroupId = this.cookieService.get(this.keyId)
+        return this.lastSelectedGroupId? this.lastSelectedGroupId: '619c4239aac3eafc5139d2c6'
+    }
+
+    setLastSelectedGroupId(id: string){
+        this.cookieService.set(this.keyId, id)
     }
 
     getEditGroup():string{
@@ -46,16 +51,16 @@ export class TimeTableService {
         this.editGroup = group
     }
 
-    getGroupsByCourse(course: number): string[]{
-        let groups = this.map.get(course) 
-        return groups ? groups : []
+
+    getDivisions(){
+        const url: string = `https://routine.pnit.od.ua/divisions`;
+        return this.httpClient.get<Division[]>(url)
     }
 
-    getPairs(group: string): Observable<PairResponse>{
-        const params = new HttpParams()
-            .set('division', group)
-        const url: string = `https://routine.pnit.od.ua/routine/getLessons`;
-        return this.httpClient.post<PairResponse>(url, params)
+    getPairs(divisionId: string): Observable<Pair[]>{
+        const url: string = `https://routine.pnit.od.ua/lessons/${divisionId}/current`;
+        console.log(url)
+        return this.httpClient.get<Pair[]>(url)
     }
 
     addGroupEditor(division: string = 'set group here'){
@@ -75,18 +80,18 @@ export class TimeTableService {
 
     }
 
-    editPair(division: string, pair: Pair): Observable<any>{
-        const params = new HttpParams()
-            .set('division', division)
-            .set('editorID', this.service.getID())
-            .set('room', pair.room)
-            .set('type', pair.type)
-            .set('pairID', pair.id)
-            .set('subject', pair.subject)
-            .set('link', pair.link)
-        const url: string = `https://routine.pnit.od.ua/routine/editPair`;
-        return this.httpClient.post(url, params)
-    }
+    // editPair(division: string, pair: Pair): Observable<any>{
+    //     const params = new HttpParams()
+    //         .set('division', division)
+    //         .set('editorID', this.service.getID())
+    //         .set('room', pair.room)
+    //         .set('type', pair.type)
+    //         .set('pairID', pair.id)
+    //         .set('subject', pair.subject)
+    //         .set('link', pair.link)
+    //     const url: string = `https://routine.pnit.od.ua/routine/editPair`;
+    //     return this.httpClient.post(url, params)
+    // }
 
     deletePair(id: number): Observable<Response>{
         const params = new HttpParams()

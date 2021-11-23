@@ -1,9 +1,8 @@
 
-export class PairResponse {
-    public code: number = 0
-    public message: string = ""
-    public data: Day[] = []
-    
+export class Division {
+    public name: string = ""
+    public course: number = 0
+    public id: string = ""
 }
 
 export class Day{
@@ -18,22 +17,39 @@ export class Day{
 
 export class Pair{
 
-    public subject: string = ""
+    public lecturers: Lecturer[] = []
+    public divisions: Division[] = []
+    public subject: Subject = new Subject
+    public repeat: string = ""
     public room: string = ""
-    public time: string = ""
-    public lecturers: string[] = []
-    public id: number = 0
     public type: string = ""
-    public link: string = ""
-    public link_icon = ""
-    public timestamp = 0
+    public number: number = 0
+    public day: number = 0
+    public start: string = ""
+    public end: string = ""
 
-    public repeat: string | null = null
+}
 
-    constructor(subject: string, room: string, time: string, lecturers: string[], id: number, type: string, link: string, timestamp: number){
-        this.subject = subject, this.room = room, this.time = time, this.id = id, this.type = type, this.lecturers = lecturers, this.link = link, this.timestamp = timestamp
-    }
+export class Lecturer {
+    public firstname: string = ""
+    public lastname: string = ""
+    public patronymic: string = ""
+    public mail: string = ""
+    public lecturerData: LecturerData = new LecturerData 
+}   
 
+export class LecturerData {
+    public position: string = ""
+    public _id: string = ""
+}
+
+export class Subject {
+    public name: string = ""
+    public id: string = ""
+}
+
+export class Group{
+    public group: string = ''
 }
 
 export class EditGroupResponse{
@@ -41,11 +57,6 @@ export class EditGroupResponse{
     public message: string = ""
     public data: Group = new Group()
 }
-
-export class Group{
-    public group: string = ''
-}
-
 export class Response{
     public code: number = 0
     public message: string = ""

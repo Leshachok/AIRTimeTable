@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
+import { Division } from 'src/request/request';
 import { TelegramLoginService } from 'src/services/telegramloginservice';
 import { TimeTableService } from 'src/services/timetableservice';
 
@@ -16,15 +17,13 @@ export class MainComponent implements OnInit {
   isLoadError: boolean = false;
 
   user: any = undefined;
-  group: string = "";
+  division: string = "";
+  divisionId: string = ""
   telegramID: number = 0
-  editGroup: string = ""
+  editDivision: string = ""
 
 	items: MenuItem[] = [];
-	firstGroupItems: MenuItem[] = [];
-	secondGroupItems: MenuItem[] = [];
-	thirdGroupItems: MenuItem[] = [];
-	fourthGroupItems: MenuItem[] = [];
+  courses = [1, 2, 3, 4]
 
   constructor(public service: TelegramLoginService, private ttservice: TimeTableService,
      private messageService: MessageService,
@@ -32,35 +31,23 @@ export class MainComponent implements OnInit {
      ) { }
 
      ngOnInit() {
-      this.group = this.ttservice.getLastSelectedGroup()
-      this.editGroup = this.ttservice.getEditGroup()
-      this.ttservice.map.get(1)!!.map((group) => this.firstGroupItems.push({label: group, command: event => this.setGroup(group)}));
-      this.ttservice.map.get(2)!!.map((group)  => this.secondGroupItems.push({label: group, command: event => this.setGroup(group)}))
-      this.ttservice.map.get(3)!!.map((group)  => this.thirdGroupItems.push({label: group, command: event => this.setGroup(group)}))
-      this.ttservice.map.get(4)!!.map((group)  => this.fourthGroupItems.push({label: group, command: event => this.setGroup(group)}))
-      this.items = [
-        {
-          label: this.group,
-          items: [
-              {
-                label: "1 курс",
-                items: this.firstGroupItems
-              },
-              {
-                label: '2 курс',
-                items: this.secondGroupItems
-              }, 
-              {
-              label: "3 курс",
-                items: this.thirdGroupItems
-              }, 
-              {
-              label: "4 курс",
-                items: this.fourthGroupItems
-              }
-          ]
-        }, 
-      ]
+
+      this.division = this.ttservice.getLastSelectedGroup()
+      this.items = [{label: this.division, items: []}]
+      this.ttservice.getDivisions().subscribe((response)=>{
+          this.courses.forEach((num)=>{
+            let filter = response.filter(division => division.course == num)
+            let menuitems: MenuItem[] = [];
+            filter.forEach((division)=> menuitems.push({label: division.name, command: event => this.setDivision(division)}))
+            this.items[0].items!!.push({label: num + ' курс', items: menuitems})
+          })
+        
+      },
+      (error)=>{
+        console.log(error)
+      })
+
+      this.editDivision = this.ttservice.getEditGroup()
     }
   
     handleClick(){
@@ -72,9 +59,9 @@ export class MainComponent implements OnInit {
       if(this.service.getID() != 0) {
         this.ttservice.getEditGroupByTgID().subscribe(
           (response)=>{
-              this.editGroup = response.data.group
-              this.ttservice.setEditGroup(this.editGroup)
-              this.messageService.add({severity:'success', summary: 'Є доступ', detail: 'Ви маєте змогу редагувати розклад групи ' + this.editGroup});
+              this.editDivision = response.data.group
+              this.ttservice.setEditGroup(this.editDivision)
+              this.messageService.add({severity:'success', summary: 'Є доступ', detail: 'Ви маєте змогу редагувати розклад групи ' + this.editDivision});
           },
           (error)=>{
               console.log('Нельзя')
@@ -94,26 +81,23 @@ export class MainComponent implements OnInit {
 
       this.ttservice.getEditGroupByTgID().subscribe(
         (response)=>{
-            this.editGroup = response.data.group
-            this.ttservice.setEditGroup(this.editGroup)
-            this.messageService.add({severity:'success', summary: 'Отримано доступ', detail: 'Тепер ви маєте змогу редагувати розклад групи ' + this.editGroup});
+            this.editDivision = response.data.group
+            this.ttservice.setEditGroup(this.editDivision)
+            this.messageService.add({severity:'success', summary: 'Отримано доступ', detail: 'Тепер ви маєте змогу редагувати розклад групи ' + this.editDivision});
         },
         (error)=>{
             console.log('Нельзя')
-            this.messageService.add({severity:'warn', summary: 'Відмова в доступі', detail: 'У вас нема доступу редагування груп' + this.editGroup});
+            this.messageService.add({severity:'warn', summary: 'Відмова в доступі', detail: 'У вас нема доступу редагування груп' + this.editDivision});
         }
       )
     }
   
-    
-    getGroups(course: number): string[] {
-      return this.ttservice.getGroupsByCourse(course); 
-    }
   
-  
-    setGroup(group: string) {
-      this.group = group
-      this.items[0].label = group
+    setDivision(division: Division) {
+      this.division = division.name
+      this.divisionId = division.id
+      this.items[0].label = this.division
+      this.ttservice.setLastSelectedGroup(division.name)
     }
 
 }
