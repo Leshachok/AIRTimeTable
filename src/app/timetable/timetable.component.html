@@ -18,8 +18,8 @@
                     <div class="timetable-card" *ngFor="let pair of day.pairs">
                         <div class="timetable-card-info">
                             <div class="timetable-card-header">
-                                <!-- <div class="timetable-card-info__room" *ngIf="!pair.link.length">{{pair.room}}</div>
-                                <div class="timetable-card-link" *ngIf="pair.link.length">
+                                <div class="timetable-card-info__room" >{{pair.room}}</div>
+                                <!-- <div class="timetable-card-link" *ngIf="pair.link.length">
                                     <button (click)="openLink(pair.link)"  *ngIf="pair.link.length && pair.link_icon === 'assets/img/zoom.svg' " class="timetable-card-info__image-link" id="zoom" >
                                         <img [src]="pair.link_icon" height="16px" width="24px">
                                         <span *ngIf="this.screenWidth >= 1330 || this.screenWidth >= 770 && this.screenWidth <= 850 || this.screenWidth >= 290 &&  this.screenWidth <= 608"  >Приєднатися</span>
@@ -32,11 +32,11 @@
                                     <img [src]="pair.link_icon" height="16px" width="24px">
                                         <span *ngIf="this.screenWidth >= 1330 || this.screenWidth >= 770 && this.screenWidth <= 850 || this.screenWidth >= 290 &&  this.screenWidth <= 608"  >Приєднатися</span>
                                     </button>
-                                </div>
-                                <div class="timetable-card-live" *ngIf=" (pair.timestamp < currentTime) && (currentTime - pair.timestamp < 5700)"  ><img [src]="live_image">Live</div> -->
+                                </div> -->
+                                <!-- <div class="timetable-card-live" *ngIf=" (pair.timestamp < currentTime) && (currentTime - pair.timestamp < 5700)"  ><img [src]="live_image">Live</div> -->
                             </div>
-                            <div class="timetable-card-info__subject">{{pair.subject}}</div>
-                            <div class="timetable-card-info__teacher">{{pair.lecturers}}</div>
+                            <div class="timetable-card-info__subject">{{pair.subject.name}}</div>
+                            <div *ngIf="pair.lecturers[0]" class="timetable-card-info__teacher">{{pair.lecturers[0].firstname + ' ' + pair.lecturers[0].lastname}}</div>
                         </div>
 
 
@@ -51,10 +51,10 @@
                             </div>
                         </div>
                         
-                        <!-- <div class="timetable-card-footer">
-                            <div class="timetable-card__time">{{pair.time}}</div>
-                              
-                        </div>    -->
+                        <div class="timetable-card-footer">
+                            <div class="timetable-card__time">{{pair.start + ' - ' + pair.end}}</div>
+                            
+                        </div>   
                     </div>
 
                    </div>

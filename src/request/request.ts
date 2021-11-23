@@ -35,7 +35,7 @@ export class Lecturer {
     public lastname: string = ""
     public patronymic: string = ""
     public mail: string = ""
-    public lecturerData: LecturerData = new LecturerData 
+    public lecturerData: LecturerData = new LecturerData()
 }   
 
 export class LecturerData {

@@ -58,6 +58,7 @@ export class TimetableComponent implements OnInit, OnChanges {
       this.days.push(new Day(weekday, []))
       this.days[index].weekday = weekday
     })
+
     
     //time in seconds
     this.currentTime = Date.now()/1000
@@ -85,6 +86,9 @@ export class TimetableComponent implements OnInit, OnChanges {
         // тут в pairs записываются пары
         let pairs = response
         pairs = pairs.sort((a, b) => a.day - b.day)
+        this.days.forEach((day)=>{
+          day.pairs = []
+        })
         pairs.forEach((pair) => {
           this.days[pair.day-1].pairs.push(pair)
 

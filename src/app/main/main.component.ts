@@ -33,6 +33,7 @@ export class MainComponent implements OnInit {
      ngOnInit() {
 
       this.division = this.ttservice.getLastSelectedGroup()
+      this.divisionId = this.ttservice.getLastSelectedGroupId()
       this.items = [{label: this.division, items: []}]
       this.ttservice.getDivisions().subscribe((response)=>{
           this.courses.forEach((num)=>{
