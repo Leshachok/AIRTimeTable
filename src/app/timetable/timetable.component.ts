@@ -41,8 +41,8 @@ export class TimetableComponent implements OnInit, OnChanges {
 
   @HostListener('window:resize', ['$event'])
   onResize() {
-   this.screenWidth = window.innerWidth;
-}
+    this.screenWidth = window.innerWidth;
+  }
 
   constructor(private service: TimeTableService, private TgService: TelegramLoginService,
        private confService: ConfirmationService, private messageService: MessageService, private dialogService: DialogService,
@@ -81,7 +81,6 @@ export class TimetableComponent implements OnInit, OnChanges {
 
 
   getPairs(){
-    this.onServerError = false
     this.service.getPairs(this.divisionId).subscribe(
       (response) => {
         // тут в pairs записываются пары
