@@ -81,6 +81,7 @@ export class TimetableComponent implements OnInit, OnChanges {
 
 
   getPairs(){
+    onServerError = false
     this.service.getPairs(this.divisionId).subscribe(
       (response) => {
         // тут в pairs записываются пары
