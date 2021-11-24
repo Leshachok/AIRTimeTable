@@ -53,12 +53,12 @@ export class TimeTableService {
 
 
     getDivisions(){
-        const url: string = `https://routine.pnit.od.ua/divisions`;
+        const url: string = `https://api.timetable.univera.app/divisions`;
         return this.httpClient.get<Division[]>(url)
     }
 
     getPairs(divisionId: string): Observable<Pair[]>{
-        const url: string = `https://routine.pnit.od.ua/lessons/${divisionId}/current`;
+        const url: string = `https://api.timetable.univera.app/lessons/${divisionId}/current`;
         console.log(url)
         return this.httpClient.get<Pair[]>(url)
     }
