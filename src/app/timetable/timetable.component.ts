@@ -15,7 +15,7 @@ import { DatePipe } from '@angular/common'
 export class TimetableComponent implements OnInit, OnChanges {
 
   //тут номер группы хранится
-  @Input() divisionId: string = "619c4239aac3eafc5139d2c6"
+  @Input() divisionId: string = "61a388bc09b14de7d30ac552"
   @Input() tgID: number = 0
 
   //тут както пары хранятся
@@ -81,6 +81,7 @@ export class TimetableComponent implements OnInit, OnChanges {
 
 
   getPairs(){
+    console.log(this.divisionId)
     this.service.getPairs(this.divisionId).subscribe(
       (response) => {
         // тут в pairs записываются пары

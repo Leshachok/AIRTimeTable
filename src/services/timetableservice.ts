@@ -29,7 +29,7 @@ export class TimeTableService {
 
     getLastSelectedGroupId(): string{
         this.lastSelectedGroupId = this.cookieService.get(this.keyId)
-        return this.lastSelectedGroupId? this.lastSelectedGroupId: '619c4239aac3eafc5139d2c6'
+        return this.lastSelectedGroupId? this.lastSelectedGroupId: '61a388bc09b14de7d30ac552'
     }
 
     setLastSelectedGroupId(id: string){

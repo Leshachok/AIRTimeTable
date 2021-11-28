@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit {
 
 
   pairs: Day[] = []
-  group = 'УІ191'
+  group = 'УК211'
   days: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
 
   deleteId: number = 0
