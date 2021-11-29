@@ -25,11 +25,11 @@ export class MainComponent implements OnInit {
   editDivision: string = ""
 
   weeks = ["current", "next"]
-  selectedWeek = "Поточна"
+  selectedWeek = "Поточний тиждень"
   selectedWeekNumber = 0
   mapWeekUkEn: Map<string, string> = new Map([
-    ["Поточна", "current"],
-    ["Наступна", "next"],
+    ["Поточний тиждень", "current"],
+    ["Наступний тиждень", "next"],
   ])
 
 
