@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { WidgetConfiguration } from 'angular-telegram-login-widget/lib/types';
 import { MenuItem, MessageService } from 'primeng/api';
 import { Division } from 'src/request/request';
 import { TelegramLoginService } from 'src/services/telegramloginservice';
@@ -24,13 +25,26 @@ export class MainComponent implements OnInit {
 
 	items: MenuItem[] = [];
   courses = [1, 2, 3, 4]
-
+  config: WidgetConfiguration = {
+        buttonStyle: 'large',
+        showUserPhoto: true,
+        cornerRadius: 50,
+        accessToWriteMessages: true
+  };
+  
   constructor(public service: TelegramLoginService, private ttservice: TimeTableService,
      private messageService: MessageService,
      private router: Router
      ) { }
 
      ngOnInit() {
+
+    
+      if(window.innerWidth < 600){
+        this.config.buttonStyle = "small"
+      }
+
+      console.log(this.config.buttonStyle)
 
       this.division = this.ttservice.getLastSelectedGroup()
       this.divisionId = this.ttservice.getLastSelectedGroupId()
@@ -102,3 +116,7 @@ export class MainComponent implements OnInit {
     }
 
 }
+
+export class myWidgetConfiguration implements WidgetConfiguration{
+
+} 
