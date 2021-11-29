@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable} from "@angular/core";
 import { CookieService } from "ngx-cookie-service";
 import { Observable } from "rxjs";
-import { Division, EditGroupResponse, Pair, Response } from "src/request/request";
+import { Division, EditGroupResponse, Pair, WeekTimetableResponse } from "src/request/request";
 import { TelegramLoginService } from "./telegramloginservice";
 
 @Injectable({
@@ -57,10 +57,9 @@ export class TimeTableService {
         return this.httpClient.get<Division[]>(url)
     }
 
-    getPairs(divisionId: string): Observable<Pair[]>{
-        const url: string = `https://api.timetable.univera.app/lessons/${divisionId}/current`;
-        console.log(url)
-        return this.httpClient.get<Pair[]>(url)
+    getPairs(divisionId: string, week: string): Observable<WeekTimetableResponse>{
+        const url: string = `https://api.timetable.univera.app/lessons/${divisionId}/${week}`;
+        return this.httpClient.get<WeekTimetableResponse>(url)
     }
 
     addGroupEditor(division: string = 'set group here'){

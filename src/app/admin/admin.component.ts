@@ -70,7 +70,7 @@ export class AdminComponent implements OnInit {
   }
 
   getPairs(){
-    this.service.getPairs(this.group).subscribe(
+    this.service.getPairs(this.group, "current").subscribe(
       (response) => {
 
         // тут в pairs записываются пары
