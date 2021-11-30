@@ -37,6 +37,7 @@ export class MainComponent implements OnInit {
   days: Day[] = []
   days_enum: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
   courses = [1, 2, 3, 4]
+  isLoggedIn = false
 
   items: MenuItem[] = [];
   weekItems: MenuItem[] = [];
@@ -118,6 +119,7 @@ export class MainComponent implements OnInit {
       this.user = user;
       this.service.saveData(user);
       this.telegramID = user['id']
+      this.isLoggedIn = true
 
       this.ttservice.getEditGroupByTgID().subscribe(
         (response)=>{

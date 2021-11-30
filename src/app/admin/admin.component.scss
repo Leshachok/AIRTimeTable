@@ -13,7 +13,7 @@ body {
 
 .timetable-day__weekday {
   margin-bottom: 1rem;
-  text-align: center;
+  font-size: 1.125rem;
 } 
 
 .timetable-days-wrapper {
@@ -27,14 +27,6 @@ body {
   flex: 1;
   margin: 1rem 0.6rem 0rem 0.6rem;
   max-width: 18%;
-  min-height: 60px;
-}
-
-.pair-list {
-  min-height: 120px;
-  border-radius: 4px;
-  overflow: hidden;
-  display: block;
 }
 
 .timetable-card {
@@ -44,20 +36,31 @@ body {
   border-radius: 0.35rem;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  cursor: move;
   hyphens: auto;
+  max-width: 23.85rem;
 }
-
 .timetable-card:last-child {
   margin-bottom: 0rem;
 }
 
-.timetable-card-footer-information {
+.timetable-card-type-wrapper {
+  display: flex;
+  margin: 1rem 0rem;
+  hyphens: none;
+}
+.timetable-card-footer {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   margin-top: 1rem;
+  hyphens: none;
+}
+.timetable-card-link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   hyphens: none;
 }
 
@@ -66,43 +69,86 @@ body {
 }
 
 .timetable-card-info__room {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
+  font-weight: bold;
   color: $dark-grayish-blue;
+
 }
 
 .timetable-card-info__subject {
   margin: 0.5rem 0rem;
   color: $light-grayish-blue;
   line-height: 1.25;
+  font-size: 1rem;
+  
 }
 .timetable-card-info__teacher{
   margin: 0.5rem 0rem;
-  color: $light-grayish-blue;
+  color: #808BA8;
   line-height: 1.25;
+  font-size: 1rem;
 }
 
 
 .timetable-card__time {
   color: $light-grayish-blue;
   display: inline-flex;
+  font-weight: bold;
+  font-size: 1.375rem;
 }
 
-.timetable-card-info__subject {
-  font-size: 0.925rem;
-}
 
 .timetable-card-type {
   color: white;
   border-radius: 0.25rem;
   border-collapse: separate;
   padding: 0.25rem 0.35rem;
-  font-size: 0.8rem;
+  font-size: 1.063rem;
+
 }
 
 .timetable-card-info__image-link {
-  width: 24px;
-  height: 24px;
+  height: 1.875rem;
   transition: filter 0.3s ease-out;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  justify-content: space-between;
+  background-color: white;
+  border: 1px solid;
+  border-radius:0.5rem ;
+}
+
+.timetable-card-header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  hyphens: none;
+}
+.timetable-card-live {
+  font-family: Manrope;
+font-style: normal;
+font-weight: normal;
+font-size:0.875rem;
+line-height: 19px;
+color: #F16969;
+display: flex;
+align-items: center;
+justify-content: space-between;
+width: 3.438rem;
+}
+#zoom{
+  color: #4A8CFF;
+  border-color: #4A8CFF;
+}
+#teams{
+  color: #5558AF;
+  border-color: #5558AF;
+}
+#gmeet{
+  color: #00AC47;
+  border-color: #00AC47;
 }
 
 
@@ -142,16 +188,12 @@ body {
 }
 
 @media (max-width: 960px) {
-  .timetable-card-footer-information {
-    flex-direction: column;
-    align-items: initial;
-  }
-  .timetable-card {
-    text-align: center;
-  }
   .timetable-card__time {
     margin-top: 0.6rem;
     justify-content: center;
+  }
+  .timetable-card-link{
+    flex-direction: column;
   }
 }
 
@@ -160,7 +202,7 @@ body {
   .timetable-days-wrapper {
     flex-wrap: wrap;
   }
-  .timetable-card-footer-information {
+  .timetable-card-footer-type-wrapper  {
     align-items: center;
   }
   .timetable-day {
@@ -202,17 +244,33 @@ body {
   top: 16px;
   border-radius:8px;
 }
+.live{
+  color: #fff;
+  background: #8f0303;
+  padding: 1px 8px;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 11px rgb(0 0 0 / 50%);
+  font-weight: 700;
+}
 
 // Toxic waste:
 
   
 #add_card {
-  background: #EAEAEA;
-  border: 1px dashed #30384B;
-  font-size: 17px;
+  background: white;
+  border: 1px ;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  position : fixed;
+   bottom   : 1rem;
+   right    : 1rem;
+  height: 4rem;
+  width: 4rem;
+  font-size: 2rem;
+  border-radius: 50%;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+  opacity: 0.9;
 }
 #add_card:active {
   background: #d8d7d7;
@@ -226,6 +284,7 @@ a {
 #edit{
   left:180px ;
   border: 2px solid #FFCB13;
+  border-radius: 0.35rem;
  }
  #edit:hover{
    box-shadow: 0px 4px 8px #FFCB13;
@@ -233,16 +292,18 @@ a {
  #delete{
    left:210px ;
   border: 2px solid #F95A00;
+  border-radius: 0.35rem;
  }
  #delete:hover{
    box-shadow: 0px 4px 8px #F95A00;
  }
 
+
  .example-custom-placeholder {
     background: #ccc;
     border: dotted 3px #999;
     margin: 0rem 0rem 0.8rem 0rem;
-    min-height: 120px;
+    min-height: 150px;
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
@@ -257,4 +318,11 @@ a {
 
 .timetable-card:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .pair-list {
+    min-height: 150px;
+    border-radius: 4px;
+    overflow: hidden;
+    display: block;
   }

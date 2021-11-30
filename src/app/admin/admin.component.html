@@ -1,7 +1,7 @@
 
 <div class="timetable" cdkDropListGroup>
     <div class="timetable-days-wrapper">
-        <div class="timetable-day" *ngFor="let day of pairs" >
+        <div class="timetable-day" *ngFor="let day of days" >
        <!-- <div  class="day_title">-->
            <div class="timetable-day__weekday" *ngIf="day.weekday === 'monday'">Понеділок</div>
            <div class="timetable-day__weekday" *ngIf="day.weekday === 'tuesday'">Вівторок</div> 
@@ -15,22 +15,27 @@
                     <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
                     <div class="timetable-card-info">
                         <div class="timetable-card-info__room">{{pair.room}}</div>
-                        <div class="timetable-card-info__subject">{{pair.subject}}</div>
-                        <div class="timetable-card-info__teacher">{{pair.lecturers}}</div>
+                        <div class="timetable-card-info__subject">{{pair.subject.name}}</div>
+                        <div *ngIf="pair.lecturers.length" class="timetable-card-info__teacher">{{pair.lecturers[0].firstname + ' ' + pair.lecturers[0].lastname}}</div>
                     </div>
                     <!-- <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/zoom.svg' " class="timetable-card-info__image-link" id="zoom">
                     <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/gmeet.svg' " class="timetable-card-info__image-link" id="gmeet">
                     <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/teams.svg' " class="timetable-card-info__image-link" id="teams">
                     <input type="image" (click)="showDialogEdit(pair) "  [src]="edit_image" class="timetable-card-info__image-link" id="edit">
-                    <input type="image" (click)="onDeletePair(pair.id)" [src]="delete_image" class="timetable-card-info__image-link" id="delete">
-                    <div class="timetable-card-footer-information">
+                    <input type="image" (click)="onDeletePair(pair.id)" [src]="delete_image" class="timetable-card-info__image-link" id="delete"> -->
+                    <div class="timetable-card-type-wrapper">
+
                         <div class="timetable-card-type" id={{pair.type}}>
                             <div class="timetable-card-type__name" *ngIf="pair.type === 'lab'">Лабораторна</div>
                             <div class="timetable-card-type__name" *ngIf="pair.type === 'lecture'">Лекція</div>
                             <div class="timetable-card-type__name" *ngIf="pair.type === 'practice'">Практика</div>
                         </div>
-                        <div class="timetable-card__time">{{pair.time}}</div> -->
-                    <!-- </div>      -->
+                    </div>
+                    
+                    <div class="timetable-card-footer">
+                        <div class="timetable-card__time">{{pair.start + ' - ' + pair.end}}</div>
+                        
+                    </div>    
                 </div> 
             </div>
             

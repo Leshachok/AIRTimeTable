@@ -16,9 +16,9 @@ import { DialogService } from 'primeng/dynamicdialog';
 export class AdminComponent implements OnInit {
 
 
-  pairs: Day[] = []
-  group = 'УК211'
-  days: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
+  days: Day[] = []
+  divisionId = '61a388bc09b14de7d30ac552'
+  days_enum: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
 
   deleteId: number = 0
   onDeleted = false
@@ -40,7 +40,11 @@ export class AdminComponent implements OnInit {
        private confService: ConfirmationService) { }
   
   ngOnInit(){
-    this.group = this.service.getEditGroup()
+    // this.divisionId = this.service.getEditGroup()
+    this.days_enum.forEach((weekday, index)=>{
+      this.days.push(new Day(weekday, []))
+      this.days[index].weekday = weekday
+    })
     this.getPairs()
   }
 
@@ -70,8 +74,25 @@ export class AdminComponent implements OnInit {
   }
 
   getPairs(){
-    this.service.getPairs(this.group, "current").subscribe(
+    this.service.getPairs(this.divisionId, "current").subscribe(
       (response) => {
+        let pairs = response.lessons
+          pairs = pairs.sort((a, b) => a.day - b.day)
+          
+          pairs.forEach((pair) => {
+            if(pair.start.length == 4) pair.start = '0' + pair.start
+            if(pair.end.length == 4) pair.end = '0' + pair.end
+            this.days[pair.day-1].pairs.push(pair)
+  
+            // if(pair.link.length){
+            //   pair.link_icon = "assets/img/custom.jpg";
+            //   [...this.mapDomenIcon.keys()].forEach((key) => {
+            //     if(pair.link.includes(key)){
+            //       pair.link_icon = this.mapDomenIcon.get(key)!!
+            //     }
+            //   })
+            // }
+          })
 
         // тут в pairs записываются пары
         // this.pairs = response.data
@@ -95,7 +116,7 @@ export class AdminComponent implements OnInit {
       },
       (error) => {
         console.error('There was an error!', error)
-        this.pairs = []
+        this.days = []
       }
     
     )
