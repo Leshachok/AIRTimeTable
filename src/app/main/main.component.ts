@@ -192,7 +192,7 @@ export class MainComponent implements OnInit {
           this.onServerError = true
         },
         () => {
-          let message = this.selectedWeekNumber % 0 ? 'Непарний' : "Парний"
+          let message = this.selectedWeekNumber % 2 ? 'Непарний' : "Парний"
           this.messageService.add({severity:'success', summary: `${this.selectedWeekNumber}, ${message}`, detail: 'Ви обрали тиждень'});
         }
       
