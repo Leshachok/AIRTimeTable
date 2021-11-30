@@ -29,7 +29,7 @@ jobs:
         
       - name: npm test
         run: |
-          npm run test --watch=false
+          npm run test-ci
         working-directory: .
 
       - name: Upload artifact for deployment job
