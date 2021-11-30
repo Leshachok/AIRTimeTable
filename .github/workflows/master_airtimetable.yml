@@ -29,7 +29,7 @@ jobs:
         
       - name: npm test
         run: |
-          npm run test --if-present
+          npm run test --if-present --watch=false
         working-directory: .
 
       - name: Upload artifact for deployment job
