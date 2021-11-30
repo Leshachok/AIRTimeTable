@@ -299,7 +299,7 @@ a {
  }
 
 
- .example-custom-placeholder {
+.example-custom-placeholder {
     background: #ccc;
     border: dotted 3px #999;
     margin: 0rem 0rem 0.8rem 0rem;
@@ -318,11 +318,11 @@ a {
 
 .timetable-card:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
+}
 
-  .pair-list {
-    min-height: 150px;
-    border-radius: 4px;
-    overflow: hidden;
-    display: block;
-  }
+.pair-list {
+  min-height: 150px;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+}
