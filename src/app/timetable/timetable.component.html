@@ -33,7 +33,7 @@
                                         <span *ngIf="this.screenWidth >= 1330 || this.screenWidth >= 770 && this.screenWidth <= 850 || this.screenWidth >= 290 &&  this.screenWidth <= 608"  >Приєднатися</span>
                                     </button>
                                 </div> -->
-                                <!-- <div class="timetable-card-live" *ngIf=" (pair.timestamp < currentTime) && (currentTime - pair.timestamp < 5700)"  ><img [src]="live_image">Live</div> -->
+                                <div class="timetable-card-live" *ngIf="pair.day == currentDay && pair.start < currentTime && pair.end > currentTime"  ><img [src]="live_image">Live</div>
                             </div>
                             <div class="timetable-card-info__subject">{{pair.subject.name}}</div>
                             <div *ngIf="pair.lecturers[0]" class="timetable-card-info__teacher">{{pair.lecturers[0].firstname + ' ' + pair.lecturers[0].lastname}}</div>

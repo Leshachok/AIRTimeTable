@@ -161,6 +161,8 @@ export class MainComponent implements OnInit {
             day.pairs = []
           })
           pairs.forEach((pair) => {
+            if(pair.start.length == 4) pair.start = '0' + pair.start
+            if(pair.end.length == 4) pair.end = '0' + pair.end
             this.days[pair.day-1].pairs.push(pair)
   
             // if(pair.link.length){

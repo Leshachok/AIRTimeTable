@@ -21,7 +21,9 @@ export class TimetableComponent {
   room:string = '';
   subject:string = '';
   time:string ='';
-  currentTime = 0;
+  currentDay = 0;
+  currentTime = "";
+
   
   screenWidth: number = 0;
   live_image:string = "assets/img/live.svg"
@@ -39,7 +41,9 @@ export class TimetableComponent {
 
   constructor() { 
     this.onResize();
-    this.currentTime = Date.now()/1000
+    let date = new Date()
+    this.currentDay = date.getDay()
+    this.currentTime = date.toISOString().substr(11, 5)
   }
 
 
