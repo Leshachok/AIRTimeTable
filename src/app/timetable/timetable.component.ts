@@ -1,18 +1,13 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { ConfirmationService, MessageService } from 'primeng/api';
-import { DialogService } from 'primeng/dynamicdialog';
-import { TelegramLoginService } from 'src/services/telegramloginservice';
-import { TimeTableService } from 'src/services/timetableservice';
 import { Day, Pair } from '../../request/request';
 import { HostListener } from "@angular/core";
-import { DatePipe } from '@angular/common'
 
 @Component({
   selector: 'app-timetable',
   templateUrl: './timetable.component.html',
   styleUrls: ['./timetable.component.scss'],
 })
-export class TimetableComponent implements OnInit {
+export class TimetableComponent {
 
   //тут номер группы хранится
   @Input() tgID: number = 0
@@ -44,9 +39,6 @@ export class TimetableComponent implements OnInit {
 
   constructor() { 
     this.onResize();
-  }
-
-  ngOnInit() {
     this.currentTime = Date.now()/1000
   }
 
