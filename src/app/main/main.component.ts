@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, DoCheck, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { WidgetConfiguration } from 'angular-telegram-login-widget/lib/types';
 import { MenuItem, MessageService } from 'primeng/api';

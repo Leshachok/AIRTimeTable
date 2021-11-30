@@ -25,7 +25,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { ButtonModule } from 'primeng/button';
 import { AdminComponent } from './admin/admin.component';
 import { TreeModule } from 'primeng/tree';
-import  {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MainComponent } from './main/main.component';
 import { DatePipe } from '@angular/common'
 

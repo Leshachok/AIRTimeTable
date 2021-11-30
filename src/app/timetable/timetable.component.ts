@@ -42,23 +42,12 @@ export class TimetableComponent implements OnInit {
     this.screenWidth = window.innerWidth;
   }
 
-  constructor(private service: TimeTableService, private TgService: TelegramLoginService,
-       private confService: ConfirmationService, private messageService: MessageService, private dialogService: DialogService,
-       public datepipe: DatePipe) { 
-    this.tgID = TgService.getID()
+  constructor() { 
     this.onResize();
   }
 
   ngOnInit() {
-    //initializing array of pairs
-
-    
-    //time in seconds
     this.currentTime = Date.now()/1000
-
-    //console.log(new Date(this.currentTime*1000).getDay() - 1)
-    // this.days_enum.map((value)=> new Date(value))
-
   }
 
 
