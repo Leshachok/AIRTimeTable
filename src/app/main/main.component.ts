@@ -203,7 +203,12 @@ export class MainComponent implements OnInit {
       )
     }
 
-  
+    isLive(day:string,start:number,end:number,currentDay:string,currentTime:number):boolean{
+      if(day == currentDay && start < currentTime && end > currentTime){
+        return true
+      }
+      return false
+    }
 }
 
 

@@ -43,9 +43,32 @@ export class TimetableComponent {
     this.onResize();
     let date = new Date()
     this.currentDay = date.getDay()
-    this.currentTime = date.toISOString().substr(11, 5)
+    //this.currentTime = date.toISOString().substr(11, 5)
+    if(date.getHours() < 10 ){
+      if(date.getMinutes() < 10 ){
+        this.currentTime = "0"+date.getHours() +":0"+date.getMinutes();
+      }
+      else{
+        this.currentTime = "0"+date.getHours() +":"+date.getMinutes();
+      }
+    }
+    else{
+      if(date.getMinutes() < 10 ){
+        this.currentTime = date.getHours() +":0"+date.getMinutes();
+      }
+      else{
+        this.currentTime = date.getHours() +":"+date.getMinutes();
+      }
+    }
   }
 
+  isLive(day:number,start:string,end:string,currentDay:number,currentTime:string):boolean{
+    console.log(currentTime)
+    if(day == currentDay && start < currentTime && end > currentTime){
+      return true
+    }
+    return false
+  }
 
   openLink(url: string){
     window.open(url)
