@@ -1,5 +1,5 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, CdkDragStart, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 //import { Day, Pair } from '../request/request';
 import { TimeTableService } from 'src/services/timetableservice';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -20,6 +20,8 @@ export class AdminComponent implements OnInit {
   pairNumbers = [1, 2, 3, 4]
   divisionId = '61a388bc09b14de7d30ac552'
   days_enum: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
+
+  isDragStarted = false
 
   deleteId: number = 0
   onDeleted = false
@@ -49,13 +51,24 @@ export class AdminComponent implements OnInit {
     this.getPairs()
   }
 
+  dragStart(pair: (Pair | null)){
+    this.isDragStarted = true
+    console.log(pair)
+  }
+
+  dragEnd(){
+    this.isDragStarted = false
+  }
+
   drop(event: CdkDragDrop<(Pair | null)[]>) {
+  
     this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Ви посунули пару'});
     
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       event.container.data.forEach((element, index) => {
-        if(index >  event.previousIndex) console.log("need to change time on "+ element!.subject)
+        if(element == null) return
+        if(index >  event.previousIndex) console.log("need to change time on "+ element!.subject.name)
       });
     } else {
       transferArrayItem(

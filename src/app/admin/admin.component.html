@@ -14,15 +14,20 @@
                 <div *ngFor="let pair of day.pairs">
                     
                     <div *ngIf="pair == null; else pairCard">
-                        <div class="example-custom-placeholder" cdkDrag></div>
+                        <div class="example-custom-placeholder" [cdkDragDisabled]="true" cdkDrag>
+                            <div *ngIf="isDragStarted">Можна перетягнути сюди</div>
+                        </div>
                     </div>
                     <ng-template #pairCard>
-                        <div class="timetable-card" cdkDrag>
+                        <div class="timetable-card" cdkDrag (cdkDragStarted)="dragStart(pair)" (cdkDragEnded)="dragEnd()">
                             <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
                             <div class="timetable-card-info">
                                 <div class="timetable-card-info__room">{{pair!.room}}</div>
                                 <div class="timetable-card-info__subject">{{pair!.subject.name}}</div>
-                                <div *ngIf="pair!.lecturers.length" class="timetable-card-info__teacher">{{pair!.lecturers[0].firstname + ' ' + pair!.lecturers[0].lastname}}</div>
+                                <div *ngIf="pair!.lecturers.length; else emptystring" class="timetable-card-info__teacher">{{pair!.lecturers[0].firstname + ' ' + pair!.lecturers[0].lastname}}</div>
+                                <ng-template #emptystring>
+                                    <div class="timetable-card-info__teacher-placeholder"></div>
+                                </ng-template>
                             </div>
         
                             <!-- <input type="image" (click)="openLink(pair.link)" [src]="pair.link_icon" *ngIf="pair.link.length && pair.link_icon === 'assets/img/zoom.svg' " class="timetable-card-info__image-link" id="zoom">

@@ -39,6 +39,7 @@ body {
   hyphens: auto;
   max-width: 23.85rem;
 }
+
 .timetable-card:last-child {
   margin-bottom: 0rem;
 }
@@ -87,6 +88,9 @@ body {
   color: #808BA8;
   line-height: 1.25;
   font-size: 1rem;
+}
+.timetable-card-info__teacher-placeholder{
+  min-height: 20px;
 }
 
 
@@ -303,7 +307,7 @@ a {
     background: #ccc;
     border: dotted 3px #999;
     margin: 0rem 0rem 0.8rem 0rem;
-    min-height: 150px;
+    min-height: 170px;
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 

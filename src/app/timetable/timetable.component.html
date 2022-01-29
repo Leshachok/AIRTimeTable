@@ -38,7 +38,8 @@
                                 <div class="timetable-card-live" *ngIf="isLive(pair!.day,pair!.start,pair!.end,currentDay,currentTime)"  ><img [src]="live_image">Live</div>
                             </div>
                             <div class="timetable-card-info__subject">{{pair!.subject.name}}</div>
-                            <div *ngIf="pair!.lecturers[0]" class="timetable-card-info__teacher">{{pair!.lecturers[0].firstname + ' ' + pair!.lecturers[0].lastname}}</div>
+                            <div *ngIf="pair!.lecturers[0]; else emptystring" class="timetable-card-info__teacher">{{pair!.lecturers[0].firstname + ' ' + pair!.lecturers[0].lastname}}</div>
+                            <ng-template #emptystring> </ng-template>
                         </div>
 
 
