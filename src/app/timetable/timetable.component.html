@@ -15,12 +15,12 @@
                    <div class="timetable-day__weekday">{{day.weekday}}</div> 
                 <!--</div>-->
 
-                    <div [ngStyle]="{'border': isLive(pair.day,pair.start,pair.end,currentDay,currentTime) ? '1px solid #F16969' : '0px',
-                'box-shadow' : isLive(pair.day,pair.start,pair.end,currentDay,currentTime) ? '0px 4px 8px rgba(241, 105, 105, 0.25)': '0px 4px 8px rgba(0, 0, 0, 0.25)'
+                    <div [ngStyle]="{'border': isLive(pair!.day,pair!.start,pair!.end,currentDay,currentTime) ? '1px solid #F16969' : '0px',
+                'box-shadow' : isLive(pair!.day,pair!.start,pair!.end,currentDay,currentTime) ? '0px 4px 8px rgba(241, 105, 105, 0.25)': '0px 4px 8px rgba(0, 0, 0, 0.25)'
                 }" class="timetable-card" *ngFor="let pair of day.pairs">
                         <div class="timetable-card-info">
                             <div class="timetable-card-header">
-                                <div class="timetable-card-info__room" >{{pair.room}}</div>
+                                <div class="timetable-card-info__room" >{{pair!.room}}</div>
                                 <!-- <div class="timetable-card-link" *ngIf="pair.link.length">
                                     <button (click)="openLink(pair.link)"  *ngIf="pair.link.length && pair.link_icon === 'assets/img/zoom.svg' " class="timetable-card-info__image-link" id="zoom" >
                                         <img [src]="pair.link_icon" height="16px" width="24px">
@@ -35,10 +35,11 @@
                                         <span *ngIf="this.screenWidth >= 1330 || this.screenWidth >= 770 && this.screenWidth <= 850 || this.screenWidth >= 290 &&  this.screenWidth <= 608"  >Приєднатися</span>
                                     </button>
                                 </div> -->
-                                <div class="timetable-card-live" *ngIf="isLive(pair.day,pair.start,pair.end,currentDay,currentTime)"  ><img [src]="live_image">Live</div>
+                                <div class="timetable-card-live" *ngIf="isLive(pair!.day,pair!.start,pair!.end,currentDay,currentTime)"  ><img [src]="live_image">Live</div>
                             </div>
-                            <div class="timetable-card-info__subject">{{pair.subject.name}}</div>
-                            <div *ngIf="pair.lecturers[0]" class="timetable-card-info__teacher">{{pair.lecturers[0].firstname + ' ' + pair.lecturers[0].lastname}}</div>
+                            <div class="timetable-card-info__subject">{{pair!.subject.name}}</div>
+                            <div *ngIf="pair!.lecturers[0]; else emptystring" class="timetable-card-info__teacher">{{pair!.lecturers[0].firstname + ' ' + pair!.lecturers[0].lastname}}</div>
+                            <ng-template #emptystring> </ng-template>
                         </div>
 
 
@@ -46,15 +47,15 @@
                         
                         <div class="timetable-card-type-wrapper">
 
-                            <div class="timetable-card-type" id={{pair.type}}>
-                                <div class="timetable-card-type__name" *ngIf="pair.type === 'lab'">Лабораторна</div>
-                                <div class="timetable-card-type__name" *ngIf="pair.type === 'lecture'">Лекція</div>
-                                <div class="timetable-card-type__name" *ngIf="pair.type === 'practice'">Практика</div>
+                            <div class="timetable-card-type" id={{pair!.type}}>
+                                <div class="timetable-card-type__name" *ngIf="pair!.type === 'lab'">Лабораторна</div>
+                                <div class="timetable-card-type__name" *ngIf="pair!.type === 'lecture'">Лекція</div>
+                                <div class="timetable-card-type__name" *ngIf="pair!.type === 'practice'">Практика</div>
                             </div>
                         </div>
                         
                         <div class="timetable-card-footer">
-                            <div class="timetable-card__time">{{pair.start + ' - ' + pair.end}}</div>
+                            <div class="timetable-card__time">{{pair!.start + ' - ' + pair!.end}}</div>
                             
                         </div>   
                     </div>

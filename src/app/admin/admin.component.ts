@@ -1,5 +1,5 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, CdkDragStart, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 //import { Day, Pair } from '../request/request';
 import { TimeTableService } from 'src/services/timetableservice';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -17,8 +17,11 @@ export class AdminComponent implements OnInit {
 
 
   days: Day[] = []
+  pairNumbers = [1, 2, 3, 4]
   divisionId = '61a388bc09b14de7d30ac552'
   days_enum: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
+
+  isDragStarted = false
 
   deleteId: number = 0
   onDeleted = false
@@ -48,13 +51,24 @@ export class AdminComponent implements OnInit {
     this.getPairs()
   }
 
-  drop(event: CdkDragDrop<Pair[]>) {
+  dragStart(pair: (Pair | null)){
+    this.isDragStarted = true
+    console.log(pair)
+  }
+
+  dragEnd(){
+    this.isDragStarted = false
+  }
+
+  drop(event: CdkDragDrop<(Pair | null)[]>) {
+  
     this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Ви посунули пару'});
     
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       event.container.data.forEach((element, index) => {
-        if(index >  event.previousIndex) console.log("need to change time on "+ element.subject)
+        if(element == null) return
+        if(index >  event.previousIndex) console.log("need to change time on "+ element!.subject.name)
       });
     } else {
       transferArrayItem(
@@ -67,7 +81,7 @@ export class AdminComponent implements OnInit {
       // если есть свободное место, то пары не двигаем, если нет, то к последующим прибавляем время
       event.container.data.forEach((element, index) => {
         if(index >  event.currentIndex) {
-          console.log("need to change time on current container "+ element.subject)
+          console.log("need to change time on current container "+ element!.subject)
         }
       });
     }
@@ -79,11 +93,12 @@ export class AdminComponent implements OnInit {
         let pairs = response.lessons
           pairs = pairs.sort((a, b) => a.day - b.day)
           
+
           pairs.forEach((pair) => {
             if(pair.start.length == 4) pair.start = '0' + pair.start
             if(pair.end.length == 4) pair.end = '0' + pair.end
             this.days[pair.day-1].pairs.push(pair)
-  
+            
             // if(pair.link.length){
             //   pair.link_icon = "assets/img/custom.jpg";
             //   [...this.mapDomenIcon.keys()].forEach((key) => {
@@ -93,6 +108,16 @@ export class AdminComponent implements OnInit {
             //   })
             // }
           })
+
+          this.days.forEach(day => {
+            this.pairNumbers.forEach(number => {
+              if(day.pairs.find(pair => pair?.number == number) == undefined){
+                day.pairs.splice(number-1, 0, null)
+              }
+            })
+          })
+
+          
 
         // тут в pairs записываются пары
         // this.pairs = response.data

@@ -7,7 +7,7 @@ export class Division {
 
 export class Day{
     public weekday: string = ""
-    public pairs: Pair[] = []
+    public pairs: (Pair | null)[] = []
 
     constructor(weekday: string, pairs: Pair[]){
         this.weekday = weekday
