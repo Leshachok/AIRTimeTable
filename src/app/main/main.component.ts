@@ -12,7 +12,7 @@ import { TimeTableService } from 'src/services/timetableservice';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  botName = "OdesaPolytechnicBot";
+  botName = "UniveraTimetableBot";
 
   isLoad: boolean = false;
   isLoadError: boolean = false;
