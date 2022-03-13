@@ -14,6 +14,7 @@ export class TelegramLoginService {
     private tgID: number = 0
     private username: string = ""
     private first_name: string = ""
+    private access_token: string = ""
 
     constructor(private cookieService: CookieService, private httpClient: HttpClient) { }
 
@@ -30,6 +31,10 @@ export class TelegramLoginService {
     getUsername(): string{
         this.username = this.cookieService.get(this.keyName)
         return this.username
+    }
+
+    saveAccessToken(token: string){
+        this.access_token = token
     }
 
     saveData(userData: any){

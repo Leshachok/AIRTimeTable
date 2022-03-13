@@ -125,9 +125,10 @@ export class MainComponent implements OnInit {
       this.telegramLoginService.saveData(user);
       this.telegramLoginService.login(user).subscribe(
         (response) => {
+          this.telegramLoginService.saveAccessToken(response.accessToken)
+          this.messageService.add({ severity:'success', summary: `Успіх`, detail: 'Ми створили вам аккаунт'});
           console.log(response.account)
           console.log(response.account?.divisionId)
-          this.messageService.add({severity:'success', summary: `Ура`, detail: 'Залогинились'});
         },
         (error) => {
           console.log(error)
