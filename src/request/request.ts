@@ -62,3 +62,15 @@ export class WeekTimetableResponse{
     public week: number = 0
     public lessons: Pair[] = []
 }
+
+export class Account{
+    public accessGroups: string[] = []
+    public divisionId: string = ""
+    public id: string = ""
+}
+
+export class LoginResponse{
+    public accessToken: string = ""
+    public refreshToken: string = ""
+    public account: Account | undefined
+}

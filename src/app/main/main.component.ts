@@ -123,20 +123,14 @@ export class MainComponent implements OnInit {
     onLogin(user: any) {
       this.user = user;
       this.telegramLoginService.saveData(user);
-      this.telegramLoginService.login(user)
-      console.log(user)
-      this.telegramID = user['id']
-      this.isLoggedIn = true
-
-      this.timetableService.getEditGroupByTgID().subscribe(
-        (response)=>{
-            this.editDivision = response.data.group
-            this.timetableService.setEditGroup(this.editDivision)
-            this.messageService.add({severity:'success', summary: 'Отримано доступ', detail: 'Тепер ви маєте змогу редагувати розклад групи ' + this.editDivision});
+      this.telegramLoginService.login(user).subscribe(
+        (response) => {
+          console.log(response.account)
+          console.log(response.account?.divisionId)
+          this.messageService.add({severity:'success', summary: `Ура`, detail: 'Залогинились'});
         },
-        (error)=>{
-            console.log('Нельзя')
-            this.messageService.add({severity:'warn', summary: 'Відмова в доступі', detail: 'У вас нема доступу редагування груп' + this.editDivision});
+        (error) => {
+          console.log(error)
         }
       )
     }

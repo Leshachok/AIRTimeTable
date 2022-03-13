@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
 import { CookieService } from "ngx-cookie-service";
 import { Observable } from "rxjs";
+import { LoginResponse } from "src/request/request";
 
 @Injectable({
     providedIn: 'root'
@@ -39,10 +40,12 @@ export class TelegramLoginService {
         this.cookieService.set(this.keyID, this.tgID.toString());
     }
 
-    login(data: any): Observable<any>{
+    login(data: any): Observable<LoginResponse>{
+        const body = {
+            "tgLogin": data
+        }
         const url: string = `https://api.timetable.univera.app/login`;
-        return this.httpClient.post<any>(url, data)
+        return this.httpClient.post<LoginResponse>(url, body)
     }
-
     
 }
