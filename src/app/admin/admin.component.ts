@@ -39,7 +39,10 @@ export class AdminComponent implements OnInit {
        private timetableService: TimeTableService,
        private messageService: MessageService,
        private dialogService: DialogService, 
-       private confService: ConfirmationService) { this.divisionId = this.timetableService.getEditGroup() }
+       private confService: ConfirmationService) { 
+    this.divisionId = this.timetableService.getEditGroup()
+    console.log(this.divisionId)
+  }
   
   ngOnInit(){
     this.days_enum.forEach((weekday, index)=>{

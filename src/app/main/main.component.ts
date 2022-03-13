@@ -117,6 +117,7 @@ export class MainComponent implements OnInit {
           this.telegramLoginService.saveAccessToken(response.accessToken)
           this.timetableService.setEditGroup(response.account!.division)
           this.messageService.add({ severity:'success', summary: `Успіх`, detail: 'Залогинився'});
+          this.isLoggedIn = true
           console.log(response.account)
           console.log(response.account?.division)
         },
