@@ -16,7 +16,6 @@ export class Day{
 }
 
 export class Pair{
-
     public lecturers: Lecturer[] = []
     public divisions: Division[] = []
     public subject: Subject = new Subject
@@ -27,7 +26,9 @@ export class Pair{
     public day: number = 0
     public start: string = ""
     public end: string = ""
-
+    public link: string = ""
+    public icon: string = ""
+    public id: "" = ""
 }
 
 export class Lecturer {

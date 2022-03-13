@@ -1,6 +1,5 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import {CdkDragDrop, CdkDragStart, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-//import { Day, Pair } from '../request/request';
 import { TimeTableService } from 'src/services/timetableservice';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Day, Pair } from 'src/request/request';
@@ -43,7 +42,7 @@ export class AdminComponent implements OnInit {
        private confService: ConfirmationService) { }
   
   ngOnInit(){
-    // this.divisionId = this.service.getEditGroup()
+    //this.divisionId = this.service.getEditGroup()
     this.days_enum.forEach((weekday, index)=>{
       this.days.push(new Day(weekday, []))
       this.days[index].weekday = weekday
@@ -99,14 +98,14 @@ export class AdminComponent implements OnInit {
             if(pair.end.length == 4) pair.end = '0' + pair.end
             this.days[pair.day-1].pairs.push(pair)
             
-            // if(pair.link.length){
-            //   pair.link_icon = "assets/img/custom.jpg";
-            //   [...this.mapDomenIcon.keys()].forEach((key) => {
-            //     if(pair.link.includes(key)){
-            //       pair.link_icon = this.mapDomenIcon.get(key)!!
-            //     }
-            //   })
-            // }
+            if(pair.link){
+              pair.icon = "assets/img/custom.jpg";
+              [...this.mapDomenIcon.keys()].forEach((key) => {
+                if(pair.link.includes(key)){
+                  pair.icon = this.mapDomenIcon.get(key)!!
+                }
+              })
+            }
           })
 
           this.days.forEach(day => {
@@ -116,27 +115,6 @@ export class AdminComponent implements OnInit {
               }
             })
           })
-
-          
-
-        // тут в pairs записываются пары
-        // this.pairs = response.data
-        // this.pairs.forEach( (day) => {
-        //   day.pairs.forEach( (pair) => {
-
-        //     if(pair.link.length){
-        //       pair.link_icon = "assets/img/custom.jpg";
-        //       [...this.mapDomenIcon.keys()].forEach((key) => {
-        //         if(pair.link.includes(key)){
-        //           pair.link_icon = this.mapDomenIcon.get(key)!!
-        //         }
-        //       })
-        //     }
-
-            
-
-        //   })
-        // })
 
       },
       (error) => {
@@ -164,15 +142,16 @@ export class AdminComponent implements OnInit {
     ref.onClose.subscribe(
       (pair)=>{
           if(pair){
-            // this.service.editPair(this.group, pair).subscribe(
-            //   (response) =>{
-            //       this.getPairs()
-            //       this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Пара успішно змінена!'});
-            //   },
-            //   (error) => {
-
-            //   }
-            // )
+            this.service.editPair(pair).subscribe(
+              (response) =>{
+                this.days.forEach((day) => day.pairs = [])
+                this.getPairs()
+                this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Пара успішно змінена!'});
+              },
+              (error) => {
+                this.messageService.add({severity:'error', summary: 'Не змінено', detail: pair.id});
+              }
+            )
           }
       }
     )
@@ -209,21 +188,21 @@ export class AdminComponent implements OnInit {
       }     
   }
 
-  onDeletePair(id: number){
-    this.deleteId = id
+  onDeletePair(id: string){
+    //this.deleteId = pair.id
     this.onDeleted = true
     this.confService.confirm({
       message: 'Ви дійсно хочете видалити пару?',
         accept: () => {
             //Actual logic to perform a confirmation
-            this.service.deletePair(id).subscribe(
-              (response) => {
-                  this.messageService.add({severity:'success', summary: 'Видалено', detail: 'Пара успішно видалена'});
-                  this.getPairs()
-              },
-              (error) => {
-                  this.messageService.add({severity:'error', summary: 'Помилка', detail: 'Пара не видалена'});
-              });
+            // this.service.deletePair(id).subscribe(
+            //   (response) => {
+            //       this.messageService.add({severity:'success', summary: 'Видалено', detail: 'Пара успішно видалена'});
+            //       this.getPairs()
+            //   },
+            //   (error) => {
+            //       this.messageService.add({severity:'error', summary: 'Помилка', detail: 'Пара не видалена'});
+            //   });
         },
         reject: () => {
 

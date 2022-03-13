@@ -3,10 +3,10 @@
         <input class="float-input" id="float-input_room" type="text" [(ngModel)]="room" pInputText> 
         <label for="float-input_room">Аудиторія</label>
     </span>
-    <span class="p-float-label">
+    <!-- <span class="p-float-label">
         <input class="float-input" id="float-input_subject" type="text" [(ngModel)]="subject" pInputText> 
         <label for="float-input_subject">Дисципліна</label>
-    </span>
+    </span> -->
     <span class="p-float-label">
         <p-dropdown [options]="types" [(ngModel)]="typeUa"></p-dropdown>
         <label for="float-input_time">Тип</label>
@@ -16,6 +16,6 @@
         <label for="float-input_subject">Посилання на онлайн пару (якщо є)</label>
     </span>
 </div>
-<!-- <p-button label="Зберегти зміни" icon="pi pi-check" iconPos="left" (click) = "close()"></p-button> -->
+<p-button label="Зберегти зміни" icon="pi pi-check" iconPos="left" (click) = "close()"></p-button>
 <ng-template pTemplate="footer">
 </ng-template>

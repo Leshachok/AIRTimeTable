@@ -42,6 +42,12 @@ export class MainComponent implements OnInit {
   items: MenuItem[] = [];
   weekItems: MenuItem[] = [];
 
+  mapDomenIcon: Map<string, string> = new Map([
+    ["meet.google.com", "assets/img/gmeet.svg"],
+    ["zoom.us", "assets/img/zoom.svg"],
+    ["teams.microsoft.com", "assets/img/teams.svg"],
+  ])
+
   config: WidgetConfiguration = {
         buttonStyle: 'large',
         showUserPhoto: true,
@@ -49,7 +55,7 @@ export class MainComponent implements OnInit {
         accessToWriteMessages: true
   };
   
-  constructor(public service: TelegramLoginService, private ttservice: TimeTableService,
+  constructor(public telegramLoginService: TelegramLoginService, private timetableService: TimeTableService,
      private messageService: MessageService,
      private router: Router, private cdr: ChangeDetectorRef
      ) { }
@@ -64,13 +70,13 @@ export class MainComponent implements OnInit {
         this.config.showUserPhoto = false
       }
 
-      this.divisionName = this.ttservice.getLastSelectedGroup()
-      this.divisionId = this.ttservice.getLastSelectedGroupId()
+      this.divisionName = this.timetableService.getLastSelectedGroup()
+      this.divisionId = this.timetableService.getLastSelectedGroupId()
 
       this.weeks.forEach((week)=> {this.weekItems.push({label: week, command: event => this.setWeek(week)})})
       this.items = [{label: this.divisionName, items: []}, {label: this.selectedWeek, items: this.weekItems}]
       
-      this.ttservice.getDivisions().subscribe((response)=>{
+      this.timetableService.getDivisions().subscribe((response)=>{
           this.courses.forEach((num)=>{
             let filter = response.filter(division => division.course == num)
             let menuitems: MenuItem[] = [];
@@ -97,11 +103,11 @@ export class MainComponent implements OnInit {
   
     onLoad() {
       this.isLoad = true;
-      if(this.service.getID() != 0) {
-        this.ttservice.getEditGroupByTgID().subscribe(
+      if(this.telegramLoginService.getID() != 0) {
+        this.timetableService.getEditGroupByTgID().subscribe(
           (response)=>{
               this.editDivision = response.data.group
-              this.ttservice.setEditGroup(this.editDivision)
+              this.timetableService.setEditGroup(this.editDivision)
               this.messageService.add({severity:'success', summary: 'Є доступ', detail: 'Ви маєте змогу редагувати розклад групи ' + this.editDivision});
           },
           (error)=>{
@@ -117,14 +123,14 @@ export class MainComponent implements OnInit {
   
     onLogin(user: any) {
       this.user = user;
-      this.service.saveData(user);
+      this.telegramLoginService.saveData(user);
       this.telegramID = user['id']
       this.isLoggedIn = true
 
-      this.ttservice.getEditGroupByTgID().subscribe(
+      this.timetableService.getEditGroupByTgID().subscribe(
         (response)=>{
             this.editDivision = response.data.group
-            this.ttservice.setEditGroup(this.editDivision)
+            this.timetableService.setEditGroup(this.editDivision)
             this.messageService.add({severity:'success', summary: 'Отримано доступ', detail: 'Тепер ви маєте змогу редагувати розклад групи ' + this.editDivision});
         },
         (error)=>{
@@ -139,8 +145,8 @@ export class MainComponent implements OnInit {
       this.divisionName = division.name
       this.divisionId = division.id
       this.items[0].label = this.divisionName
-      this.ttservice.setLastSelectedGroup(division.name)
-      this.ttservice.setLastSelectedGroupId(division.id)
+      this.timetableService.setLastSelectedGroup(division.name)
+      this.timetableService.setLastSelectedGroupId(division.id)
       this.getPairs()
     }
 
@@ -152,7 +158,7 @@ export class MainComponent implements OnInit {
 
     getPairs(){
       let week = this.mapWeekUkEn.get(this.selectedWeek)!!
-      this.ttservice.getPairs(this.divisionId, week).subscribe(
+      this.timetableService.getPairs(this.divisionId, week).subscribe(
         (response) => {
           // тут в pairs записываются пары
           this.selectedWeekNumber = response.week
@@ -166,15 +172,15 @@ export class MainComponent implements OnInit {
             if(pair.start.length == 4) pair.start = '0' + pair.start
             if(pair.end.length == 4) pair.end = '0' + pair.end
             this.days[pair.day-1].pairs.push(pair)
-  
-            // if(pair.link.length){
-            //   pair.link_icon = "assets/img/custom.jpg";
-            //   [...this.mapDomenIcon.keys()].forEach((key) => {
-            //     if(pair.link.includes(key)){
-            //       pair.link_icon = this.mapDomenIcon.get(key)!!
-            //     }
-            //   })
-            // }
+            
+            if(pair.link){
+              pair.icon = "assets/img/custom.jpg";
+              [...this.mapDomenIcon.keys()].forEach((key) => {
+                if(pair.link.includes(key)){
+                  pair.icon = this.mapDomenIcon.get(key)!!
+                }
+              })
+            }
           })
   
           // this.days.forEach( (day) => {

@@ -43,7 +43,7 @@ export class TimeTableService {
     getEditGroupByTgID(): Observable<EditGroupResponse>{
         const params = new HttpParams()
             .set('editorID', this.service.getID())
-        const url: string = `https://routine.pnit.od.ua/routine/getEditGroup`;
+        const url: string = `https://api.timetable.univera.app/routine/getEditGroup`;
         return this.httpClient.post<EditGroupResponse>(url, params)
     }
 
@@ -68,7 +68,7 @@ export class TimeTableService {
             .set('editorID', this.service.getID())
             .set('username', this.service.getUsername())
             .set('name', this.service.getFirstName())
-        const url: string = `https://routine.pnit.od.ua/routine/insertEG`;
+        const url: string = `https://api.timetable.univera.app/routine/insertEG`;
         this.httpClient.post(url, params).subscribe(
             (response) => {            
 
@@ -79,25 +79,24 @@ export class TimeTableService {
 
     }
 
-    // editPair(division: string, pair: Pair): Observable<any>{
-    //     const params = new HttpParams()
-    //         .set('division', division)
-    //         .set('editorID', this.service.getID())
-    //         .set('room', pair.room)
-    //         .set('type', pair.type)
-    //         .set('pairID', pair.id)
-    //         .set('subject', pair.subject)
-    //         .set('link', pair.link)
-    //     const url: string = `https://routine.pnit.od.ua/routine/editPair`;
-    //     return this.httpClient.post(url, params)
-    // }
+    editPair(pair: Pair): Observable<any>{
+        const body = {
+            "data": {
+                "link": pair.link,
+                "room": pair.room,
+                "type": pair.type
+            }
+        }
+        const url: string = `https://api.timetable.univera.app/lesson/${pair.id}`;
+        return this.httpClient.post(url, body)
+    }
 
     deletePair(id: number): Observable<Response>{
         const params = new HttpParams()
             .set('pairID', id)
             .set('editorID', this.service.getID())
             .set('group', this.editGroup)
-        const url: string = `https://routine.pnit.od.ua/routine/deletePair`;
+        const url: string = `https://api.timetable.univera.app/routine/deletePair`;
         return this.httpClient.post<Response>(url, params)
 
     }
@@ -105,7 +104,7 @@ export class TimeTableService {
     addPair(json: string){
         const params = new HttpParams()
             .set('json', json)
-        const url: string = `https://routine.pnit.od.ua/routine/insertLessons`;
+        const url: string = `https://api.timetable.univera.app/routine/insertLessons`;
         return this.httpClient.post<any>(url, params)
     }
     

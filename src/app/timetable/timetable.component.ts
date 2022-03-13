@@ -28,11 +28,6 @@ export class TimetableComponent {
   screenWidth: number = 0;
   live_image:string = "assets/img/live.svg"
 
-  mapDomenIcon: Map<string, string> = new Map([
-    ["meet.google.com", "assets/img/gmeet.svg"],
-    ["zoom.us", "assets/img/zoom.svg"],
-    ["teams.microsoft.com", "assets/img/teams.svg"],
-  ])
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -62,8 +57,7 @@ export class TimetableComponent {
     }
   }
 
-  isLive(day:number,start:string,end:string,currentDay:number,currentTime:string):boolean{
-    console.log(currentTime)
+  isLive(day:number,start:string,end:string,currentDay:number,currentTime:string): boolean{
     if(day == currentDay && start < currentTime && end > currentTime){
       return true
     }
