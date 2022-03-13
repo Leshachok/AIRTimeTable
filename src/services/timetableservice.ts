@@ -51,7 +51,6 @@ export class TimeTableService {
         this.editGroup = group
     }
 
-
     getDivisions(){
         const url: string = `https://api.timetable.univera.app/divisions`;
         return this.httpClient.get<Division[]>(url)

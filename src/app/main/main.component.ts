@@ -59,7 +59,6 @@ export class MainComponent implements OnInit {
      private messageService: MessageService,
      private router: Router, private cdr: ChangeDetectorRef
      ) { }
-  
 
      ngOnInit() {
       
@@ -124,6 +123,8 @@ export class MainComponent implements OnInit {
     onLogin(user: any) {
       this.user = user;
       this.telegramLoginService.saveData(user);
+      this.telegramLoginService.login(user)
+      console.log(user)
       this.telegramID = user['id']
       this.isLoggedIn = true
 

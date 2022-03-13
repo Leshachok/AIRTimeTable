@@ -1,5 +1,7 @@
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
 import { CookieService } from "ngx-cookie-service";
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +14,7 @@ export class TelegramLoginService {
     private username: string = ""
     private first_name: string = ""
 
-    constructor(private cookieService: CookieService) { }
+    constructor(private cookieService: CookieService, private httpClient: HttpClient) { }
 
     
     getID():number{
@@ -35,6 +37,11 @@ export class TelegramLoginService {
         this.first_name = userData['first_name'] ? userData['first_name'] : userData['second_name']
         this.cookieService.set(this.keyName, this.username);
         this.cookieService.set(this.keyID, this.tgID.toString());
+    }
+
+    login(data: any): Observable<any>{
+        const url: string = `https://api.timetable.univera.app/login`;
+        return this.httpClient.post<any>(url, data)
     }
 
     
