@@ -18,14 +18,16 @@
                             <div *ngIf="isDragStarted">Можна перетягнути сюди</div>
                         </div>
                     </div>
-                    <ng-template #pairCard>
-                        <div class="timetable-card" cdkDrag (cdkDragStarted)="dragStart(pair)" (cdkDragEnded)="dragEnd()">
+                    <ng-template #pairCard >
+                        <div [ngStyle]="{'margin-bottom':'0.8rem'}" class="timetable-card" cdkDrag (cdkDragStarted)="dragStart(pair)" (cdkDragEnded)="dragEnd()">
                             <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
                             <div class="timetable-card-info">
                                 <div class="timetable-card-header">
                                     <div class="timetable-card-info__room" >{{pair!.room}}</div>
-                                    <input type="image" (click)="showDialogEdit(pair!!)"  [src]="edit_image" class="timetable-card-info__image-link" id="edit">
-                                    <input type="image" (click)="onDeletePair(pair!!.id)" [src]="delete_image" class="timetable-card-info__image-link" id="delete">
+                                    <div class="timetable-card-buttons">
+                                        <input type="image" (click)="showDialogEdit(pair!!)"  [src]="edit_image" class="timetable-card-info__image-link" id="edit">
+                                        <input type="image" (click)="onDeletePair(pair!!.id)" [src]="delete_image" class="timetable-card-info__image-link" id="delete">
+                                    </div>
                                 </div>
                                 <div class="timetable-card-info__subject">{{pair!.subject.name}}</div>
                                 <div *ngIf="pair!.lecturers.length; else emptystring" class="timetable-card-info__teacher">{{pair!.lecturers[0].firstname + ' ' + pair!.lecturers[0].lastname}}</div>
