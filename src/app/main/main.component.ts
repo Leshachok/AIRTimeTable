@@ -102,18 +102,7 @@ export class MainComponent implements OnInit {
   
     onLoad() {
       this.isLoad = true;
-      if(this.telegramLoginService.getID() != 0) {
-        this.timetableService.getEditGroupByTgID().subscribe(
-          (response)=>{
-              this.editDivision = response.data.group
-              this.timetableService.setEditGroup(this.editDivision)
-              this.messageService.add({severity:'success', summary: 'Є доступ', detail: 'Ви маєте змогу редагувати розклад групи ' + this.editDivision});
-          },
-          (error)=>{
-
-          }
-        )
-      }
+      
     }
   
     onLoadError() {
@@ -126,9 +115,10 @@ export class MainComponent implements OnInit {
       this.telegramLoginService.login(user).subscribe(
         (response) => {
           this.telegramLoginService.saveAccessToken(response.accessToken)
-          this.messageService.add({ severity:'success', summary: `Успіх`, detail: 'Ми створили вам аккаунт'});
+          this.timetableService.setEditGroup(response.account!.division)
+          this.messageService.add({ severity:'success', summary: `Успіх`, detail: 'Залогинився'});
           console.log(response.account)
-          console.log(response.account?.divisionId)
+          console.log(response.account?.division)
         },
         (error) => {
           console.log(error)

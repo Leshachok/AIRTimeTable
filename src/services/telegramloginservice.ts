@@ -15,8 +15,11 @@ export class TelegramLoginService {
     private username: string = ""
     private first_name: string = ""
     private access_token: string = ""
+    private ACCESS_TOKEN_KEY: string = "ACCESS_TOKEN"
 
-    constructor(private cookieService: CookieService, private httpClient: HttpClient) { }
+    constructor(private cookieService: CookieService, private httpClient: HttpClient) { 
+        this.access_token = cookieService.get(this.ACCESS_TOKEN_KEY)
+    }
 
     
     getID():number{
@@ -35,6 +38,11 @@ export class TelegramLoginService {
 
     saveAccessToken(token: string){
         this.access_token = token
+        this.cookieService.set(this.ACCESS_TOKEN_KEY, this.access_token)
+    }
+
+    getAccessToken(): string {
+        return this.access_token
     }
 
     saveData(userData: any){
@@ -50,7 +58,7 @@ export class TelegramLoginService {
             "tgLogin": data
         }
         const url: string = `https://api.timetable.univera.app/login`;
-        return this.httpClient.post<LoginResponse>(url, body)
+        return this.httpClient.post<LoginResponse>(url, body,)
     }
     
 }

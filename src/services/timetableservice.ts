@@ -10,13 +10,16 @@ import { TelegramLoginService } from "./telegramloginservice";
 })
 export class TimeTableService {
 
-    public editGroup = ''
+    public EDIT_KEY = "EDIT_DIVISION_ID"
+    public editDivisionId = ''
     private lastSelectedGroup = ''
     private lastSelectedGroupId = ''
     private keyGroup = 'lastSelect'
     private keyId = 'lastSelectId'
 
-    constructor(private httpClient: HttpClient, private service: TelegramLoginService, private cookieService: CookieService) { }
+    constructor(private httpClient: HttpClient, private service: TelegramLoginService, private cookieService: CookieService) {
+        this.editDivisionId = cookieService.get(this.EDIT_KEY)
+     }
 
     getLastSelectedGroup(): string{
         this.lastSelectedGroup = this.cookieService.get(this.keyGroup)
@@ -37,7 +40,7 @@ export class TimeTableService {
     }
 
     getEditGroup():string{
-        return this.editGroup
+        return this.editDivisionId
     }
 
     getEditGroupByTgID(): Observable<EditGroupResponse>{
@@ -47,8 +50,9 @@ export class TimeTableService {
         return this.httpClient.post<EditGroupResponse>(url, params)
     }
 
-    setEditGroup(group: string){
-        this.editGroup = group
+    setEditGroup(division: string){
+        this.editDivisionId = division
+        this.cookieService.set(this.EDIT_KEY, division)
     }
 
     getDivisions(){
@@ -86,15 +90,18 @@ export class TimeTableService {
                 "type": pair.type
             }
         }
+        
+        const headers = {
+            "authorization": "Bearer " + this.service.getAccessToken()
+        }
         const url: string = `https://api.timetable.univera.app/lesson/${pair.id}`;
-        return this.httpClient.post(url, body)
+        return this.httpClient.post(url, body, {headers: headers})
     }
 
     deletePair(id: number): Observable<Response>{
         const params = new HttpParams()
             .set('pairID', id)
             .set('editorID', this.service.getID())
-            .set('group', this.editGroup)
         const url: string = `https://api.timetable.univera.app/routine/deletePair`;
         return this.httpClient.post<Response>(url, params)
 

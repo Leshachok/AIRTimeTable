@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit {
 
   days: Day[] = []
   pairNumbers = [1, 2, 3, 4]
-  divisionId = '61a388bc09b14de7d30ac552'
+  divisionId = ''
   days_enum: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
 
   isDragStarted = false
@@ -36,13 +36,12 @@ export class AdminComponent implements OnInit {
   ])
 
   constructor(
-       private service: TimeTableService,
+       private timetableService: TimeTableService,
        private messageService: MessageService,
        private dialogService: DialogService, 
-       private confService: ConfirmationService) { }
+       private confService: ConfirmationService) { this.divisionId = this.timetableService.getEditGroup() }
   
   ngOnInit(){
-    //this.divisionId = this.service.getEditGroup()
     this.days_enum.forEach((weekday, index)=>{
       this.days.push(new Day(weekday, []))
       this.days[index].weekday = weekday
@@ -87,7 +86,7 @@ export class AdminComponent implements OnInit {
   }
 
   getPairs(){
-    this.service.getPairs(this.divisionId, "current").subscribe(
+    this.timetableService.getPairs(this.divisionId, "current").subscribe(
       (response) => {
         let pairs = response.lessons
           pairs = pairs.sort((a, b) => a.day - b.day)
@@ -142,7 +141,7 @@ export class AdminComponent implements OnInit {
     ref.onClose.subscribe(
       (pair)=>{
           if(pair){
-            this.service.editPair(pair).subscribe(
+            this.timetableService.editPair(pair).subscribe(
               (response) =>{
                 this.days.forEach((day) => day.pairs = [])
                 this.getPairs()
@@ -165,7 +164,7 @@ export class AdminComponent implements OnInit {
     ref.onClose.subscribe(
       (pairs)=>{
           if(pairs){
-            this.service.addPair(JSON.stringify(pairs)).subscribe(
+            this.timetableService.addPair(JSON.stringify(pairs)).subscribe(
               (response) =>{
                   this.messageService.add({severity:'success', summary: 'Додано', detail: 'Пара успішно додана!'});
                   this.getPairs()
@@ -184,7 +183,7 @@ export class AdminComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges){
       if (changes.group){ 
         this.getPairs()
-        this.service.setLastSelectedGroup(changes.group.currentValue)
+        this.timetableService.setLastSelectedGroup(changes.group.currentValue)
       }     
   }
 
