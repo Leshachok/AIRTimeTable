@@ -82,7 +82,7 @@ body {
 .timetable-card-buttons{
   display: flex;
   flex-direction: row;
-  width: 4rem;
+  width: 6rem;
   justify-content: space-between;
 }
 
@@ -338,4 +338,13 @@ a {
   border-radius: 4px;
   overflow: hidden;
   display: block;
+}
+
+.example-handle {
+  top: 10px;
+  right: 10px;
+  color: #ccc;
+  cursor: move;
+  width: 24px;
+  height: 24px;
 }

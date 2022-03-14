@@ -6,13 +6,13 @@
 		</div>
 	</ng-template>
 	<ng-template class="telegram-login" pTemplate="end">
-		<angular-telegram-login-widget [config]="config"  *ngIf="!isLoggedIn; else unset" class="telegram-login__widget" id="telegram_login" (load)="onLoad()" (loadError)="onLoadError()" (login)="onLogin($event)"
+		<angular-telegram-login-widget [config]="config"  *ngIf="editDivision.length == 0; else unset" class="telegram-login__widget" id="telegram_login" (load)="onLoad()" (loadError)="onLoadError()" (login)="onLogin($event)"
 		[botName]="botName"></angular-telegram-login-widget>
 		<ng-template #unset>
-			<button pButton type="button" label="Админка" (click)="handleClick()"></button>
+			<button pButton type="button" label="Редагування розкладу" (click)="handleClick()"></button>
 		</ng-template>
 	</ng-template>
 	</p-menubar>
 </header>
 <app-timetable class="timetable" [days]="days" [editAllowGroup]="editDivision" [tgID]="telegramID" [onServerError]="onServerError"></app-timetable>
-<p-toast [style]="{ 'width' : '270px' }" position="top-right"></p-toast>
+<p-toast [style]="{ 'width' : '270px' }" position="bottom-right"></p-toast>
