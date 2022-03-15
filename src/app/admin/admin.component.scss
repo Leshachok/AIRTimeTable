@@ -195,9 +195,45 @@ width: 3.438rem;
   margin-left: 0rem;
 }
 
+@media (min-width: 2133px) {
+  .timetable-card-info__subject{
+    min-height: 40px;
+  }
+}
+@media (max-width: 2133px) {
+  .timetable-card-info__subject{
+    min-height: 40px;
+  }
+}
+@media (max-width:1373px) {
+  .timetable-card-info__subject{
+    min-height: 60px;
+  }
+  .example-custom-placeholder{
+    min-height: 231.58px
+  }
+}
+
 @media (max-width: 1200px) {
   .timetable-days-wrapper {
     width: 98%;
+  }
+}
+
+@media (max-width:1090px) {
+  .timetable-card-info__subject{
+    min-height: 80px;
+  }
+  .example-custom-placeholder{
+    min-height: 251.58px
+  }
+}
+@media (max-width: 1050px) {
+  .timetable-card-info__teacher{
+    min-height: 40px;
+  }
+  .example-custom-placeholder{
+    min-height: 271.58px
   }
 }
 
@@ -209,10 +245,12 @@ width: 3.438rem;
   .timetable-card-link{
     flex-direction: column;
   }
+  .example-custom-placeholder{
+    min-height: 281.58px
+  }
 }
 
-
-@media (max-width: 850px) {
+@media (max-width: 882px) {
   .timetable-days-wrapper {
     flex-wrap: wrap;
   }
@@ -230,12 +268,59 @@ width: 3.438rem;
   .timetable-day:last-child {
     margin-bottom: 1.5rem;
   }
+  .timetable-card-info__teacher{
+    min-height: 20px;
+  }
+  .timetable-card-info__subject{
+    min-height: 40px;
+  }
+  .example-custom-placeholder{
+    min-height: 221.58px
+  }
+}
+@media (max-width:795px) {
+  .timetable-card-info__subject{
+    min-height: 60px;
+  }
+  .example-custom-placeholder{
+    min-height: 241.58px
+  }
+}
+@media (max-width:640px) {
+  .timetable-card-info__subject{
+    min-height: 80px;
+  }
+  .example-custom-placeholder{
+    min-height: 261.58px
+  }
+}
+@media (max-width:630px) {
+  .timetable-card-info__teacher{
+    min-height: 40px;
+  }
+  .example-custom-placeholder{
+    min-height: 281.58px
+  }
 }
 
 @media (max-width: 608px) {
   .timetable-day {
     min-width: 46%;
     max-width: 46%;
+  }
+  .timetable-card-info__subject{
+    min-height:40px;
+  }
+  .example-custom-placeholder{
+    min-height: 241.58px
+  }
+}
+@media (max-width:520px) {
+  .timetable-card-info__subject{
+    min-height: 60px;
+  }
+  .example-custom-placeholder{
+    min-height: 261.58px
   }
 }
 
@@ -248,6 +333,12 @@ width: 3.438rem;
     min-width: auto;
     max-width: 80%;
     width: 100%;
+  }
+  .timetable-card-info__subject{
+    min-height: 20px;
+  }
+  .example-custom-placeholder{
+    min-height: 221.58px
   }
 }
 
@@ -316,8 +407,9 @@ a {
     background: #ccc;
     border: dotted 3px #999;
     margin: 0rem 0rem 0.8rem 0rem;
-    min-height: 190px;
+    height: 211.58px;
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    max-width: 23.85rem;
 }
 
 .cdk-drop-list-dragging .cdk-drag {

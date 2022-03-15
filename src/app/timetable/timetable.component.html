@@ -20,7 +20,7 @@
                 }" class="timetable-card" *ngFor="let pair of day.pairs">
                         <div class="timetable-card-info">
                             <div class="timetable-card-header">
-                                <div class="timetable-card-info__room" >{{pair!.room}}</div>
+                                <div class="timetable-card-info__room" *ngIf="!pair!!.link" >{{pair!.room}}</div>
                                 <div class="timetable-card-link" *ngIf="pair!!.link">
                                     <button (click)="openLink(pair!!.link)"  *ngIf="pair!!.icon === 'assets/img/zoom.svg' " class="timetable-card-info__image-link" id="zoom" >
                                         <img [src]="pair!!.icon" height="16px" width="24px">
@@ -41,8 +41,6 @@
                             <div *ngIf="pair!.lecturers[0]; else emptystring" class="timetable-card-info__teacher">{{pair!.lecturers[0].firstname + ' ' + pair!.lecturers[0].lastname}}</div>
                             <ng-template #emptystring> </ng-template>
                         </div>
-
-
                         
                         
                         <div class="timetable-card-type-wrapper">

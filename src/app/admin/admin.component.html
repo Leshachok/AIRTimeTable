@@ -3,11 +3,8 @@
     <div class="timetable-days-wrapper">
         <div class="timetable-day" *ngFor="let day of days" >
        <!-- <div  class="day_title">-->
-           <div class="timetable-day__weekday" *ngIf="day.weekday === 'monday'">Понеділок</div>
-           <div class="timetable-day__weekday" *ngIf="day.weekday === 'tuesday'">Вівторок</div> 
-           <div class="timetable-day__weekday" *ngIf="day.weekday === 'wednesday'">Середа</div> 
-           <div class="timetable-day__weekday" *ngIf="day.weekday === 'thursday'">Четвер</div> 
-           <div class="timetable-day__weekday" *ngIf="day.weekday === 'friday'">П'ятниця</div>  
+                   
+        <div class="timetable-day__weekday">{{day.weekday}}</div> 
         <!--</div>-->
         <p-toast></p-toast>
             <div class="pair-list" cdkDropList [cdkDropListData]="day.pairs" (cdkDropListDropped)="drop($event)">

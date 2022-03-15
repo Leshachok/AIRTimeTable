@@ -120,7 +120,7 @@ body {
 }
 
 .timetable-card-info__image-link {
-  height: 1.875rem;
+  height: 1.725rem;
   transition: filter 0.3s ease-out;
   display: flex;
   align-items: center;
@@ -192,12 +192,18 @@ width: 3.438rem;
 .timetable-day:first-child {
   margin-left: 0rem;
 }
+
+@media (min-width: 2133px) {
+  .timetable-card-info__subject{
+    min-height: 40px;
+  }
+}
 @media (max-width: 2133px) {
   .timetable-card-info__subject{
     min-height: 40px;
   }
 }
-@media (max-width:1365px) {
+@media (max-width:1373px) {
   .timetable-card-info__subject{
     min-height: 60px;
   }
@@ -214,6 +220,11 @@ width: 3.438rem;
     min-height: 80px;
   }
 }
+@media (max-width: 1050px) {
+  .timetable-card-info__teacher{
+    min-height: 40px;
+  }
+}
 
 @media (max-width: 960px) {
   .timetable-card__time {
@@ -223,12 +234,8 @@ width: 3.438rem;
   .timetable-card-link{
     flex-direction: column;
   }
-  .timetable-card-info__teacher{
-    min-height: 40px;
-  }
+  
 }
-
-
 
 @media (max-width: 850px) {
   .timetable-days-wrapper {
@@ -261,6 +268,16 @@ width: 3.438rem;
   }
 }
 
+@media (max-width:640px) {
+  .timetable-card-info__subject{
+    min-height: 80px;
+  }
+}
+@media (max-width:630px) {
+  .timetable-card-info__teacher{
+    min-height: 40px;
+  }
+}
 @media (max-width: 608px) {
   .timetable-day {
     min-width: 46%;
