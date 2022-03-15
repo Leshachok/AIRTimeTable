@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit {
 
   days: Day[] = []
   pairNumbers = [1, 2, 3, 4]
-  divisionId = '61a38bb109b14de7d30acd3b'
+  divisionId = ''
   days_enum: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
 
   isDragStarted = false
@@ -35,13 +35,20 @@ export class AdminComponent implements OnInit {
     ["teams.microsoft.com", "assets/img/teams.svg"],
   ])
 
+  mapPairNumberTime: Map<number, string> = new Map([
+    [1, "08:00 - 09:35"],
+    [2, "09:50 - 11:25"],
+    [3, "11:40 - 13:15"],
+    [4, "13:30 - 15:05"],
+    [5, "15:20 - 16:55"],
+  ])
+
   constructor(
        private timetableService: TimeTableService,
        private messageService: MessageService,
        private dialogService: DialogService, 
        private confService: ConfirmationService) { 
-    //this.divisionId = this.timetableService.getEditGroup()
-    console.log(this.divisionId)
+    this.divisionId = this.timetableService.getEditGroup()
   }
   
   ngOnInit(){
@@ -54,38 +61,145 @@ export class AdminComponent implements OnInit {
 
   dragStart(pair: (Pair | null)){
     this.isDragStarted = true
-    console.log(pair)
   }
 
   dragEnd(){
     this.isDragStarted = false
   }
 
+  // это надо разбить на подфункции
   drop(event: CdkDragDrop<(Pair | null)[]>) {
   
-    this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Ви посунули пару'});
-    
+    // если двигаю пару в пределах дня 
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      event.container.data.forEach((element, index) => {
-        if(element == null) return
-        if(index >  event.previousIndex) console.log("need to change time on "+ element!.subject.name)
-      });
+      var previousIndex = event.previousIndex;
+      var currentIndex = event.currentIndex;
+
+      var movingPair = event.previousContainer.data[previousIndex]
+      var movedPair = event.container.data[currentIndex]
+
+      var previousDay = movingPair?.day
+
+      moveItemInArray(event.container.data, previousIndex, currentIndex);
+
+
+      var pairs = event.container.data
+      var i
+
+      // пару поставили в пустое место
+      if(movedPair == null){
+        // обновим номер пары
+        var previousDayPairs = this.days[previousDay! -1].pairs
+        previousDayPairs[currentIndex]!.number = currentIndex + 1
+        
+        // обновим пустые ячейки
+        this.fullPlaceholders(previousDay! -1)
+        return
+      }
+
+      //пару подняли выше
+      if(currentIndex < previousIndex){
+        // новая позиция пары, меняем ее номер
+        pairs[currentIndex]!.number = (currentIndex + 1)
+
+        // подняли пару выше, надо поменять время у всех, начиная с current index до previous index
+        for(i = currentIndex + 1; i <= previousIndex; i++){
+          var pair = pairs[i]
+          if(pair == null) continue
+          pair.number = pair.number + 1
+        }
+
+      } else if (currentIndex > previousIndex){
+        // опустили пару ниже, надо поменять время у всех, начиная с previous index до current index
+        for(i = previousIndex; i < currentIndex; i++){
+          var pair = pairs[i]
+          if(pair == null) continue
+          pair.number = pair.number - 1
+        }
+
+        // новая позиция пары, меняем ее номер
+        pairs[currentIndex]!.number = (currentIndex + 1)
+      }
+      
+    // пару передвинули в другой день
     } else {
+
+      // проверим, не превышен ли лимит пар в день
+      var pairsCount = event.container.data.filter((pair) => pair != null).length
+      if(pairsCount > 4){
+        this.messageService.add({severity: 'warn', summary: 'Забагато пар в день', detail: 'Пошкодуйте студентів'});
+        return
+      }
+     
+
+      var previousIndex = event.previousIndex;
+      var currentIndex = event.currentIndex;
+
+      var movingPair = event.previousContainer.data[previousIndex]
+      var movedPair = event.container.data[currentIndex]
+
+  
+      var previousDay = movingPair?.day
+
+
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex,
       )
-      // в тот день, когда украли пару, ничего не меняем
-      // если есть свободное место, то пары не двигаем, если нет, то к последующим прибавляем время
-      event.container.data.forEach((element, index) => {
-        if(index >  event.currentIndex) {
-          console.log("need to change time on current container "+ element!.subject)
+      
+      var currentDay = +(event.container.id.split("-").pop()!) +1
+
+      // пару поставили в пустое место
+      if(movedPair == null){
+        
+        // обновим позицию пары
+        var currentDayPairs = this.days[currentDay! - 1].pairs
+        currentDayPairs[currentIndex]!.number = currentIndex + 1
+        currentDayPairs[currentIndex]!.day = currentDay
+
+        // обновим пустые ячейки в том месте, куда перетащили пару
+        this.fullPlaceholders(currentDay! -1)
+        
+        // обновим пустые ячейки в том месте, откуда украли пару
+        this.fullPlaceholders(previousDay! -1)
+        return
+
+        
+        // пару поставили на место другой пары
+      } else {
+
+        // обновили пустые ячейки в том месте, откуда украли пару
+        this.fullPlaceholders(previousDay! -1)
+
+        // обновляем номер пары
+        var currentDayPairs = this.days[currentDay! - 1].pairs
+        currentDayPairs[currentIndex]!.number = currentIndex + 1
+        currentDayPairs[currentIndex]!.day = currentDay
+
+        // двигаем все нижние пары
+        var i
+        for(i = currentIndex + 1; i < 6; i++){
+          if(currentDayPairs[i] != null){
+            var pair = currentDayPairs[i]
+            pair!.number = i + 1
+          }
         }
-      });
+      }
+      
     }
+    this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Ви посунули пару'});
+  }
+
+  fullPlaceholders(dayIndex: number){
+    var pairs = this.days[dayIndex].pairs.filter((pair) => pair != null)
+    this.pairNumbers.forEach(number => {
+      if(pairs.find(pair => pair?.number == number) == undefined){
+        pairs.splice(number-1, 0, null)
+      }
+    })
+    this.days[dayIndex].pairs = pairs
   }
 
   getPairs(){
