@@ -34,6 +34,10 @@
                                     <img [src]="pair!!.icon" height="16px" width="24px">
                                         <span *ngIf="this.screenWidth >= 1330 || this.screenWidth >= 770 && this.screenWidth <= 850 || this.screenWidth >= 290 &&  this.screenWidth <= 608"  >Приєднатися</span>
                                     </button>
+                                    <button (click)="openLink(pair!!.link)"  *ngIf="pair!!.link && pair!!.icon === 'assets/img/custom.jpg' " class="timetable-card-info__image-link" id="teams">
+                                        <img [src]="pair!!.icon" height="16px" width="24px">
+                                            <span *ngIf="this.screenWidth >= 1330 || this.screenWidth >= 770 && this.screenWidth <= 850 || this.screenWidth >= 290 &&  this.screenWidth <= 608"  >Приєднатися</span>
+                                    </button>
                                 </div>
                                 <div class="timetable-card-live" *ngIf="isLive(pair!.day,pair!.start,pair!.end,currentDay,currentTime)"  ><img [src]="live_image">Live</div>
                             </div>
