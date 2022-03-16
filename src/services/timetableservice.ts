@@ -93,8 +93,10 @@ export class TimeTableService {
         const headers = {
             "authorization": "Bearer " + this.service.getAccessToken()
         }
+        console.log(headers)
+        console.log(body)
         const url: string = `https://api.timetable.univera.app/lesson/${id}}`;
-        return this.httpClient.post(url, body, {headers: headers})
+        return this.httpClient.post(url, body, { headers: headers })
     }
 
     editPair(pair: Pair): Observable<any>{
