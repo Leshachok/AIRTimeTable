@@ -110,8 +110,8 @@ export class AdminComponent implements OnInit {
         for(i = currentIndex + 1; i <= previousIndex; i++){
           var pair = pairs[i]
           if(pair == null) continue
-          pair.number = pair.number + 1
           this.editPairTime(pair!.id, pair!.day, pair.number + 1)
+          pair.number = pair.number + 1
         }
 
       } else if (currentIndex > previousIndex){
@@ -119,8 +119,8 @@ export class AdminComponent implements OnInit {
         for(i = previousIndex; i < currentIndex; i++){
           var pair = pairs[i]
           if(pair == null) continue
-          pair.number = pair.number - 1
           this.editPairTime(pair!.id, pair!.day, pair.number - 1)
+          pair.number = pair.number - 1
         }
 
         // новая позиция пары, меняем ее номер
