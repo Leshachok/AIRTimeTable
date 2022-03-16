@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit {
 
   days: Day[] = []
   pairNumbers = [1, 2, 3, 4]
-  divisionId = '61a38bb109b14de7d30acd3b'
+  divisionId = ''
   days_enum: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
 
   isDragStarted = false
@@ -48,7 +48,7 @@ export class AdminComponent implements OnInit {
        private messageService: MessageService,
        private dialogService: DialogService, 
        private confService: ConfirmationService) { 
-    //  this.divisionId = this.timetableService.getEditGroup()
+    this.divisionId = this.timetableService.getEditGroup()
   }
   
   ngOnInit(){
