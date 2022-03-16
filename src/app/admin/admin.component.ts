@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit {
 
   days: Day[] = []
   pairNumbers = [1, 2, 3, 4]
-  divisionId = ''
+  divisionId = '61a38bb109b14de7d30acd3b'
   days_enum: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
 
   isDragStarted = false
@@ -48,7 +48,7 @@ export class AdminComponent implements OnInit {
        private messageService: MessageService,
        private dialogService: DialogService, 
        private confService: ConfirmationService) { 
-    this.divisionId = this.timetableService.getEditGroup()
+    //this.divisionId = this.timetableService.getEditGroup()
   }
   
   ngOnInit(){
@@ -69,16 +69,18 @@ export class AdminComponent implements OnInit {
 
   // это надо разбить на подфункции
   drop(event: CdkDragDrop<(Pair | null)[]>) {
+
+    console.log("ташим")
   
     // если двигаю пару в пределах дня 
     if (event.previousContainer === event.container) {
       var previousIndex = event.previousIndex;
       var currentIndex = event.currentIndex;
 
-      var movingPair = event.previousContainer.data[previousIndex]
+      var draggedPair = event.previousContainer.data[previousIndex]
       var movedPair = event.container.data[currentIndex]
 
-      var previousDay = movingPair?.day
+      var previousDay = draggedPair?.day
 
       moveItemInArray(event.container.data, previousIndex, currentIndex);
 
@@ -92,19 +94,19 @@ export class AdminComponent implements OnInit {
         var previousDayPairs = this.days[previousDay! -1].pairs
         previousDayPairs[currentIndex]!.number = currentIndex + 1
 
-        this.editPairTime(movingPair!.id, movingPair!.day, currentIndex + 1)
+        this.editPairTime(draggedPair!.id, draggedPair!.day, currentIndex + 1)
         
         // обновим пустые ячейки
         this.fullPlaceholders(previousDay! -1)
         return
       }
-
+    
       //пару подняли выше
       if(currentIndex < previousIndex){
         // новая позиция пары, меняем ее номер
         pairs[currentIndex]!.number = (currentIndex + 1)
-
-        this.editPairTime(movingPair!.id, movingPair!.day, currentIndex + 1)
+        
+        this.editPairTime(draggedPair!.id, draggedPair!.day, currentIndex + 1)
 
         // подняли пару выше, надо поменять время у всех, начиная с current index до previous index
         for(i = currentIndex + 1; i <= previousIndex; i++){
@@ -126,7 +128,7 @@ export class AdminComponent implements OnInit {
         // новая позиция пары, меняем ее номер
         pairs[currentIndex]!.number = (currentIndex + 1)
 
-        this.editPairTime(movingPair!.id, movingPair!.day, currentIndex + 1)
+        this.editPairTime(draggedPair!.id, draggedPair!.day, currentIndex + 1)
       }
       
     // пару передвинули в другой день
@@ -143,11 +145,11 @@ export class AdminComponent implements OnInit {
       var previousIndex = event.previousIndex;
       var currentIndex = event.currentIndex;
 
-      var movingPair = event.previousContainer.data[previousIndex]
+      var draggedPair = event.previousContainer.data[previousIndex]
       var movedPair = event.container.data[currentIndex]
 
   
-      var previousDay = movingPair?.day
+      var previousDay = draggedPair?.day
 
 
       transferArrayItem(
@@ -167,7 +169,7 @@ export class AdminComponent implements OnInit {
         currentDayPairs[currentIndex]!.number = currentIndex + 1
         currentDayPairs[currentIndex]!.day = currentDay
 
-        this.editPairTime(movingPair!.id, currentDay, currentIndex + 1)
+        this.editPairTime(draggedPair!.id, currentDay, currentIndex + 1)
 
         // обновим пустые ячейки в том месте, куда перетащили пару
         this.fullPlaceholders(currentDay! -1)
@@ -188,7 +190,7 @@ export class AdminComponent implements OnInit {
         currentDayPairs[currentIndex]!.number = currentIndex + 1
         currentDayPairs[currentIndex]!.day = currentDay
 
-        this.editPairTime(movingPair!.id, currentDay, currentIndex + 1)
+        this.editPairTime(draggedPair!.id, currentDay, currentIndex + 1)
 
         // двигаем все нижние пары
         var i
@@ -196,7 +198,7 @@ export class AdminComponent implements OnInit {
           if(currentDayPairs[i] != null){
             var pair = currentDayPairs[i]
             pair!.number = i + 1
-            this.editPairTime(movingPair!.id, pair!.day, i + 1)
+            this.editPairTime(draggedPair!.id, pair!.day, i + 1)
           }
         }
       }
@@ -246,6 +248,10 @@ export class AdminComponent implements OnInit {
                 }
               })
             }
+          })
+
+          this.days.forEach((day) => {
+            day.pairs.sort((a, b) => a!.number - b!.number)
           })
 
           this.days.forEach(day => {
