@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit {
 
   days: Day[] = []
   pairNumbers = [1, 2, 3, 4]
-  divisionId = ''
+  divisionId = '61a38bb109b14de7d30acd3b'
   days_enum: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
 
   isDragStarted = false
@@ -48,7 +48,7 @@ export class AdminComponent implements OnInit {
        private messageService: MessageService,
        private dialogService: DialogService, 
        private confService: ConfirmationService) { 
-    this.divisionId = this.timetableService.getEditGroup()
+    //  this.divisionId = this.timetableService.getEditGroup()
   }
   
   ngOnInit(){
@@ -91,6 +91,8 @@ export class AdminComponent implements OnInit {
         // обновим номер пары
         var previousDayPairs = this.days[previousDay! -1].pairs
         previousDayPairs[currentIndex]!.number = currentIndex + 1
+
+        this.editPairTime(movingPair!.id, movingPair!.day, currentIndex + 1)
         
         // обновим пустые ячейки
         this.fullPlaceholders(previousDay! -1)
@@ -102,11 +104,14 @@ export class AdminComponent implements OnInit {
         // новая позиция пары, меняем ее номер
         pairs[currentIndex]!.number = (currentIndex + 1)
 
+        this.editPairTime(movingPair!.id, movingPair!.day, currentIndex + 1)
+
         // подняли пару выше, надо поменять время у всех, начиная с current index до previous index
         for(i = currentIndex + 1; i <= previousIndex; i++){
           var pair = pairs[i]
           if(pair == null) continue
           pair.number = pair.number + 1
+          this.editPairTime(pair!.id, pair!.day, pair.number + 1)
         }
 
       } else if (currentIndex > previousIndex){
@@ -115,10 +120,13 @@ export class AdminComponent implements OnInit {
           var pair = pairs[i]
           if(pair == null) continue
           pair.number = pair.number - 1
+          this.editPairTime(pair!.id, pair!.day, pair.number - 1)
         }
 
         // новая позиция пары, меняем ее номер
         pairs[currentIndex]!.number = (currentIndex + 1)
+
+        this.editPairTime(movingPair!.id, movingPair!.day, currentIndex + 1)
       }
       
     // пару передвинули в другой день
@@ -159,6 +167,8 @@ export class AdminComponent implements OnInit {
         currentDayPairs[currentIndex]!.number = currentIndex + 1
         currentDayPairs[currentIndex]!.day = currentDay
 
+        this.editPairTime(movingPair!.id, currentDay, currentIndex + 1)
+
         // обновим пустые ячейки в том месте, куда перетащили пару
         this.fullPlaceholders(currentDay! -1)
         
@@ -178,12 +188,15 @@ export class AdminComponent implements OnInit {
         currentDayPairs[currentIndex]!.number = currentIndex + 1
         currentDayPairs[currentIndex]!.day = currentDay
 
+        this.editPairTime(movingPair!.id, currentDay, currentIndex + 1)
+
         // двигаем все нижние пары
         var i
         for(i = currentIndex + 1; i < 6; i++){
           if(currentDayPairs[i] != null){
             var pair = currentDayPairs[i]
             pair!.number = i + 1
+            this.editPairTime(movingPair!.id, pair!.day, i + 1)
           }
         }
       }
@@ -200,6 +213,17 @@ export class AdminComponent implements OnInit {
       }
     })
     this.days[dayIndex].pairs = pairs
+  }
+
+  editPairTime(id: string, day: number, num: number){
+    this.timetableService.editPairTime(id, day, num).subscribe(
+      (response) => {
+        console.log(response)
+      },
+      (error) => {
+        console.log(error)
+      }
+    )
   }
 
   getPairs(){

@@ -82,6 +82,21 @@ export class TimeTableService {
 
     }
 
+    editPairTime(id: string, day: number, num: number): Observable<any>{
+        const body = {
+            "data": {
+                "day": day,
+                "number": num,
+            }
+        }
+
+        const headers = {
+            "authorization": "Bearer " + this.service.getAccessToken()
+        }
+        const url: string = `https://api.timetable.univera.app/lesson/${id}}`;
+        return this.httpClient.post(url, body, {headers: headers})
+    }
+
     editPair(pair: Pair): Observable<any>{
         const body = {
             "data": {
