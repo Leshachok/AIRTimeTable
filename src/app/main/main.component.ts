@@ -172,19 +172,10 @@ export class MainComponent implements OnInit {
               })
             }
           })
-  
-          // this.days.forEach( (day) => {
-          //   day.pairs.forEach( (pair) => {
-          //     pair.timestamp -= 7200
-          //     let date = new Date(pair.timestamp * 1000)
-          //     let begin_time = this.datepipe.transform(date, 'HH:mm')
-          //     let end_date = new Date(pair.timestamp * 1000 + 5700000)
-          //     let end_time = this.datepipe.transform(end_date, 'HH:mm')
-          //     pair.time = begin_time + " - " + end_time
-              
-  
-          //   })
-          // })
+
+          this.days.forEach((day) => {
+            day.pairs.sort((a, b) => a!.number - b!.number)
+          })
   
         },
         (error) => {
