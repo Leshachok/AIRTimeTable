@@ -27,16 +27,17 @@ export class TimeTableService {
     }
 
     setLastSelectedGroup(group: string){
-        this.cookieService.set(this.keyGroup, group)
+        this.cookieService.set(this.keyGroup, group, 7)
     }
 
     getLastSelectedGroupId(): string{
         this.lastSelectedGroupId = this.cookieService.get(this.keyId)
+        console.log(this.lastSelectedGroupId)
         return this.lastSelectedGroupId? this.lastSelectedGroupId: '61a388bc09b14de7d30ac552'
     }
 
     setLastSelectedGroupId(id: string){
-        this.cookieService.set(this.keyId, id)
+        this.cookieService.set(this.keyId, id, 7)
     }
 
     getEditGroup():string{
@@ -52,7 +53,7 @@ export class TimeTableService {
 
     setEditGroup(division: string){
         this.editDivisionId = division
-        this.cookieService.set(this.EDIT_KEY, division)
+        this.cookieService.set(this.EDIT_KEY, division, 7)
     }
 
     getDivisions(){
