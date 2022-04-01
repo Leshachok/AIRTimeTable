@@ -32,7 +32,6 @@ export class TimeTableService {
 
     getLastSelectedGroupId(): string{
         this.lastSelectedGroupId = this.cookieService.get(this.keyId)
-        console.log(this.lastSelectedGroupId)
         return this.lastSelectedGroupId? this.lastSelectedGroupId: '61a388bc09b14de7d30ac552'
     }
 
