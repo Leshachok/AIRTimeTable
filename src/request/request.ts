@@ -65,7 +65,6 @@ export class WeekTimetableResponse{
 
 export class Account{
     public accessGroups: string[] = []
-    public division: string = ""
     public id: string = ""
 }
 
