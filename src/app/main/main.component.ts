@@ -109,16 +109,17 @@ export class MainComponent implements OnInit {
     this.telegramLoginService.login(user).subscribe(
       (response) => {
         this.telegramLoginService.saveAccessToken(response.accessToken)
-        var divisions = response.account?.accessGroups;
-        if(divisions?.length == 0){
-          this.messageService.add({ severity:'error', summary: `Помилка`, detail: 'Нема дозволу на редагування'});
+        var editDivisionId = response.account?.division;
+        if(editDivisionId == undefined || editDivisionId == ""){
+          this.messageService.add({ severity:'warning', summary: `Помилка`, detail: 'Немає прав на редагування!'});
           return
         }
-        this.timetableService.setEditGroup(divisions![0])
-        this.editDivision = divisions![0]
+        this.timetableService.setEditGroup(editDivisionId)
+        this.editDivision = editDivisionId
         this.messageService.add({ severity:'success', summary: `Успіх`, detail: 'Залогинився'});
         this.isLoggedIn = true
         console.log(response.account)
+        console.log(response.account?.division)
       },
       (error) => {
         console.log(error)
