@@ -5,6 +5,9 @@ import { Observable } from "rxjs";
 import { Division, EditGroupResponse, Pair, WeekTimetableResponse } from "src/request/request";
 import { TelegramLoginService } from "./telegramloginservice";
 
+const origin = 'https://timetable.univera.app'
+// const origin = 'https://timetable.diialovesyou.com'
+
 @Injectable({
     providedIn: 'root'
 })
@@ -46,7 +49,7 @@ export class TimeTableService {
     getEditGroupByTgID(): Observable<EditGroupResponse>{
         const params = new HttpParams()
             .set('editorID', this.service.getID())
-        const url: string = `https://api.timetable.univera.app/routine/getEditGroup`;
+        const url: string = origin + '/routine/getEditGroup';
         return this.httpClient.post<EditGroupResponse>(url, params)
     }
 
@@ -56,12 +59,12 @@ export class TimeTableService {
     }
 
     getDivisions(){
-        const url: string = `https://api.timetable.univera.app/divisions`;
+        const url: string = origin + '/divisions';
         return this.httpClient.get<Division[]>(url)
     }
 
     getPairs(divisionId: string, week: string): Observable<WeekTimetableResponse>{
-        const url: string = `https://api.timetable.univera.app/lessons/${divisionId}/${week}`;
+        const url: string = `${origin}/lessons/${divisionId}/${week}`;
         return this.httpClient.get<WeekTimetableResponse>(url)
     }
 
@@ -71,9 +74,9 @@ export class TimeTableService {
             .set('editorID', this.service.getID())
             .set('username', this.service.getUsername())
             .set('name', this.service.getFirstName())
-        const url: string = `https://api.timetable.univera.app/routine/insertEG`;
+        const url: string = origin + '/routine/insertEG';
         this.httpClient.post(url, params).subscribe(
-            (response) => {            
+            (response) => {
 
             },
             (error) => {
@@ -93,7 +96,7 @@ export class TimeTableService {
         const headers = {
             "authorization": "Bearer " + this.service.getAccessToken()
         }
-        const url: string = `https://api.timetable.univera.app/lesson/${id}`;
+        const url: string = `${origin}/app/lesson/${id}`;
         return this.httpClient.post(url, body, { headers: headers })
     }
 
@@ -105,11 +108,11 @@ export class TimeTableService {
                 "type": pair.type
             }
         }
-        
+
         const headers = {
             "authorization": "Bearer " + this.service.getAccessToken()
         }
-        const url: string = `https://api.timetable.univera.app/lesson/${pair.id}`;
+        const url: string = `${origin}/lesson/${pair.id}`;
         return this.httpClient.post(url, body, {headers: headers})
     }
 
@@ -117,7 +120,7 @@ export class TimeTableService {
         const params = new HttpParams()
             .set('pairID', id)
             .set('editorID', this.service.getID())
-        const url: string = `https://api.timetable.univera.app/routine/deletePair`;
+        const url: string = `${origin}/routine/deletePair`;
         return this.httpClient.post<Response>(url, params)
 
     }
@@ -125,9 +128,9 @@ export class TimeTableService {
     addPair(json: string){
         const params = new HttpParams()
             .set('json', json)
-        const url: string = `https://api.timetable.univera.app/routine/insertLessons`;
+        const url: string = `${origin}/routine/insertLessons`;
         return this.httpClient.post<any>(url, params)
     }
-    
+
 }
 
