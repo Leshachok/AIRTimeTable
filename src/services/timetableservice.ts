@@ -96,7 +96,7 @@ export class TimeTableService {
         const headers = {
             "authorization": "Bearer " + this.service.getAccessToken()
         }
-        const url: string = `${origin}/app/lesson/${id}`;
+        const url: string = `${origin}/lesson/${id}`;
         return this.httpClient.post(url, body, { headers: headers })
     }
 
