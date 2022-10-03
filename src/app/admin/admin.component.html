@@ -1,12 +1,11 @@
 
 <div class="timetable" cdkDropListGroup>
     <div class="timetable-days-wrapper">
-        <div class="timetable-day" *ngFor="let day of days" >
+        <div class="timetable-day" *ngFor="let day of _days" >
        <!-- <div  class="day_title">-->
                    
         <div class="timetable-day__weekday">{{day.weekday}}</div> 
         <!--</div>-->
-        <p-toast></p-toast>
             <div class="pair-list" cdkDropList [cdkDropListData]="day.pairs" (cdkDropListDropped)="drop($event)">
                 <div *ngFor="let pair of day.pairs">
                     

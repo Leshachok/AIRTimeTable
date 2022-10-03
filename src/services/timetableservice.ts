@@ -15,14 +15,31 @@ export class TimeTableService {
 
     public EDIT_KEY = "EDIT_DIVISION_ID"
     public editDivisionId = ''
+    public accessGroup = ''
     private lastSelectedGroup = ''
     private lastSelectedGroupId = ''
     private keyGroup = 'lastSelect'
     private keyId = 'lastSelectId'
+    
+    private keyAccessGroup = 'access_group'
 
     constructor(private httpClient: HttpClient, private service: TelegramLoginService, private cookieService: CookieService) {
         this.editDivisionId = cookieService.get(this.EDIT_KEY)
-     }
+        this.getSavedAccessGroup()
+    }
+
+    getAccessGroup(): string {
+        return this.accessGroup
+    }
+
+    getSavedAccessGroup(){
+        this.accessGroup = this.cookieService.get(this.keyAccessGroup) ?? ""
+    }
+
+    saveAccessGroup(accessGroup: string){
+        this.accessGroup = accessGroup
+        this.cookieService.set(this.keyAccessGroup, accessGroup)
+    }
 
     getLastSelectedGroup(): string{
         this.lastSelectedGroup = this.cookieService.get(this.keyGroup)
@@ -30,7 +47,7 @@ export class TimeTableService {
     }
 
     setLastSelectedGroup(group: string){
-        this.cookieService.set(this.keyGroup, group, 7)
+        this.cookieService.set(this.keyGroup, group, 30)
     }
 
     getLastSelectedGroupId(): string{
@@ -42,7 +59,7 @@ export class TimeTableService {
         this.cookieService.set(this.keyId, id, 7)
     }
 
-    getEditGroup():string{
+    getEditGroup() : string{
         return this.editDivisionId
     }
 

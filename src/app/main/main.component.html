@@ -14,5 +14,6 @@
 	</ng-template>
 	</p-menubar>
 </header>
-<app-timetable class="timetable" [days]="days" [editAllowGroup]="editDivision" [tgID]="telegramID" [onServerError]="onServerError"></app-timetable>
+<app-admin [days]=days></app-admin>
+<!-- <app-timetable class="timetable" [days]="days" [editAllowGroup]="editDivision" [tgID]="telegramID" [onServerError]="onServerError"></app-timetable> -->
 <p-toast [style]="{ 'width' : '270px' }" position="bottom-right"></p-toast>

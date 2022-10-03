@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import {CdkDragDrop, CdkDragStart, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { TimeTableService } from 'src/services/timetableservice';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -12,13 +12,16 @@ import { DialogService } from 'primeng/dynamicdialog';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss']
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent {
 
+  _days: Day[] = []
 
-  days: Day[] = []
+  @Input() set days(value: Day[]){
+    this._days = value
+  }
+
   pairNumbers = [1, 2, 3, 4]
-  divisionId = ''
-  days_enum: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
+  days_enum: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"]
 
   isDragStarted = false
 
@@ -48,17 +51,9 @@ export class AdminComponent implements OnInit {
        private messageService: MessageService,
        private dialogService: DialogService, 
        private confService: ConfirmationService) { 
-    this.divisionId = this.timetableService.getEditGroup()
+    // this.divisionId = this.timetableService.getEditGroup()
   }
   
-  ngOnInit(){
-    this.days_enum.forEach((weekday, index)=>{
-      this.days.push(new Day(weekday, []))
-      this.days[index].weekday = weekday
-    })
-    this.getPairs()
-  }
-
   dragStart(pair: (Pair | null)){
     this.isDragStarted = true
   }
@@ -228,48 +223,49 @@ export class AdminComponent implements OnInit {
     )
   }
 
-  getPairs(){
-    this.timetableService.getPairs(this.divisionId, "current").subscribe(
-      (response) => {
-        let pairs = response.lessons
-          pairs = pairs.sort((a, b) => a.day - b.day)
+  // getPairs(){
+  //   this.timetableService.getPairs(this.divisionId, "current").subscribe(
+  //     (response) => {
+  //       console.log(response)
+  //       let pairs = response.lessons
+  //         pairs = pairs.sort((a, b) => a.day - b.day)
           
 
-          pairs.forEach((pair) => {
-            if(pair.start.length == 4) pair.start = '0' + pair.start
-            if(pair.end.length == 4) pair.end = '0' + pair.end
-            this.days[pair.day-1].pairs.push(pair)
+  //         pairs.forEach((pair) => {
+  //           if(pair.start.length == 4) pair.start = '0' + pair.start
+  //           if(pair.end.length == 4) pair.end = '0' + pair.end
+  //           this.days[pair.day-1].pairs.push(pair)
             
-            if(pair.link){
-              pair.icon = "assets/img/custom.jpg";
-              [...this.mapDomenIcon.keys()].forEach((key) => {
-                if(pair.link.includes(key)){
-                  pair.icon = this.mapDomenIcon.get(key)!!
-                }
-              })
-            }
-          })
+  //           if(pair.link){
+  //             pair.icon = "assets/img/custom.jpg";
+  //             [...this.mapDomenIcon.keys()].forEach((key) => {
+  //               if(pair.link.includes(key)){
+  //                 pair.icon = this.mapDomenIcon.get(key)!!
+  //               }
+  //             })
+  //           }
+  //         })
 
-          this.days.forEach((day) => {
-            day.pairs.sort((a, b) => a!.number - b!.number)
-          })
+  //         this.days.forEach((day) => {
+  //           day.pairs.sort((a, b) => a!.number - b!.number)
+  //         })
 
-          this.days.forEach(day => {
-            this.pairNumbers.forEach(number => {
-              if(day.pairs.find(pair => pair?.number == number) == undefined){
-                day.pairs.splice(number-1, 0, null)
-              }
-            })
-          })
+  //         this.days.forEach(day => {
+  //           this.pairNumbers.forEach(number => {
+  //             if(day.pairs.find(pair => pair?.number == number) == undefined){
+  //               day.pairs.splice(number-1, 0, null)
+  //             }
+  //           })
+  //         })
 
-      },
-      (error) => {
-        console.error('There was an error!', error)
-        this.days = []
-      }
+  //     },
+  //     (error) => {
+  //       console.error('There was an error!', error)
+  //       this.days = []
+  //     }
     
-    )
-  }
+  //   )
+  // }
 
   openLink(url: string){
     window.open(url)
@@ -291,7 +287,7 @@ export class AdminComponent implements OnInit {
             this.timetableService.editPair(pair).subscribe(
               (response) =>{
                 this.days.forEach((day) => day.pairs = [])
-                this.getPairs()
+                // this.getPairs()
                 this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Пара успішно змінена!'});
               },
               (error) => {
@@ -314,7 +310,7 @@ export class AdminComponent implements OnInit {
             this.timetableService.addPair(JSON.stringify(pairs)).subscribe(
               (response) =>{
                   this.messageService.add({severity:'success', summary: 'Додано', detail: 'Пара успішно додана!'});
-                  this.getPairs()
+                  // this.getPairs()
             
               },
               (error) => {
@@ -329,7 +325,7 @@ export class AdminComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges){
       if (changes.group){ 
-        this.getPairs()
+        // this.getPairs()
         this.timetableService.setLastSelectedGroup(changes.group.currentValue)
       }     
   }

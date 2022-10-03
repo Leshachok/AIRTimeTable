@@ -42,6 +42,8 @@ export class MainComponent implements OnInit {
   items: MenuItem[] = [];
   weekItems: MenuItem[] = [];
 
+  pairNumbers = [1, 2, 3, 4]
+
   mapDomenIcon: Map<string, string> = new Map([
     ["meet.google.com", "assets/img/gmeet.svg"],
     ["zoom.us", "assets/img/zoom.svg"],
@@ -70,8 +72,6 @@ export class MainComponent implements OnInit {
     this.getPreferences()
     this.fillUI()
     this.customizeTGWidget()
-    this.getDivisions()
-    this.getPairs()
   }
 
   getPreferences(){
@@ -109,22 +109,46 @@ export class MainComponent implements OnInit {
     this.telegramLoginService.login(user).subscribe(
       (response) => {
         this.telegramLoginService.saveAccessToken(response.accessToken)
-        var editDivisionId = response.account?.division;
-        if(editDivisionId == undefined || editDivisionId == ""){
+
+        let account = response.account
+        console.log(response.account)
+        console.log(response.account?.division)
+        if(account != undefined && account.accessGroups.includes("superadmin")){
+          this.loginSuperAdmin()
+          return;
+        }
+        else if(account != undefined && account.accessGroups.includes("admin")){
+          this.loginAdmin(account.division!!)
+          return;
+        }
+        else{
           this.messageService.add({ severity:'warning', summary: `Помилка`, detail: 'Немає прав на редагування!'});
           return
         }
-        this.timetableService.setEditGroup(editDivisionId)
-        this.editDivision = editDivisionId
-        this.messageService.add({ severity:'success', summary: `Успіх`, detail: 'Залогинився'});
-        this.isLoggedIn = true
-        console.log(response.account)
-        console.log(response.account?.division)
       },
       (error) => {
         console.log(error)
       }
     )
+  }
+
+  loginSuperAdmin(){
+    this.getDivisions()
+    this.timetableService.saveAccessGroup("superadmin")
+    this.messageService.add({ severity:'success', summary: `Ви залогінілись`, detail: 'Маєте права для редагування всіх груп!'});
+    this.isLoggedIn = true
+  }
+
+  loginAdmin(division: Division){
+    this.timetableService.setEditGroup(division.id)
+    this.timetableService.saveAccessGroup("admin")
+    this.messageService.add({ severity:'success', summary: `Ви залогінілись`, detail: `Маєте права для редагування групи ${division.name}!`});
+    this.isLoggedIn = true
+
+    
+    let menuitems: MenuItem[] = [];
+    menuitems.push({label: division.name, command: event => this.setDivision(division)});
+    this.items[0].items!!.push({label: division.course + ' курс', items: menuitems})
   }
 
 
@@ -186,6 +210,13 @@ export class MainComponent implements OnInit {
 
         this.days.forEach((day) => {
           day.pairs.sort((a, b) => a!.number - b!.number)
+        })
+        this.days.forEach(day => {
+          this.pairNumbers.forEach(number => {
+            if(day.pairs.find(pair => pair?.number == number) == undefined){
+              day.pairs.splice(number-1, 0, null)
+            }
+          })
         })
 
       },
