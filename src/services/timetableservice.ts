@@ -59,7 +59,7 @@ export class TimeTableService {
         this.cookieService.set(this.keyId, id, 7)
     }
 
-    getEditGroup() : string{
+    getEditDivisionId() : string{
         return this.editDivisionId
     }
 
@@ -70,9 +70,9 @@ export class TimeTableService {
         return this.httpClient.post<EditGroupResponse>(url, params)
     }
 
-    setEditGroup(division: string){
-        this.editDivisionId = division
-        this.cookieService.set(this.EDIT_KEY, division, 7)
+    setEditGroup(division: Division){
+        this.editDivisionId = division.id
+        this.cookieService.set(this.EDIT_KEY, division.id, 7)
     }
 
     getDivisions(){

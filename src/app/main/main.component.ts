@@ -19,6 +19,7 @@ export class MainComponent implements OnInit {
 
   user: any = undefined
   
+  accessGroup: string = ""
   divisionName: string = ""
   divisionId: string = ""
   telegramID: number = 0
@@ -77,6 +78,13 @@ export class MainComponent implements OnInit {
   getPreferences(){
     this.divisionName = this.timetableService.getLastSelectedGroup()
     this.divisionId = this.timetableService.getLastSelectedGroupId()
+    this.accessGroup = this.timetableService.getAccessGroup()
+    if(this.accessGroup == "superadmin"){
+      this.getDivisions()
+    }else if(this.accessGroup == "admin"){
+      let editDivisionId = this.timetableService.getEditDivisionId()
+      this.getPairs(editDivisionId)
+    }
   }
 
   fillUI(){
@@ -140,7 +148,7 @@ export class MainComponent implements OnInit {
   }
 
   loginAdmin(division: Division){
-    this.timetableService.setEditGroup(division.id)
+    this.timetableService.setEditGroup(division)
     this.timetableService.saveAccessGroup("admin")
     this.messageService.add({ severity:'success', summary: `Ви залогінілись`, detail: `Маєте права для редагування групи ${division.name}!`});
     this.isLoggedIn = true
@@ -181,9 +189,9 @@ export class MainComponent implements OnInit {
     })
   }
 
-  getPairs(){
+  getPairs(divisionId: string = this.divisionId){
     let week = this.mapWeekUkEn.get(this.selectedWeek)!!
-    this.timetableService.getPairs(this.divisionId, week).subscribe(
+    this.timetableService.getPairs(divisionId, week).subscribe(
       (response) => {
         // тут в pairs записываются пары
         this.selectedWeekNumber = response.week
@@ -237,6 +245,11 @@ export class MainComponent implements OnInit {
       return true
     }
     return false
+  }
+
+  handleLogoClick(){
+    window.open("https://univera.app")
+    console.log( "lol")
   }
 }
 

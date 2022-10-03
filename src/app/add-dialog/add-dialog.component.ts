@@ -47,7 +47,7 @@ export class AddDialogComponent implements OnInit {
 
 
   constructor(private service: TimeTableService,private ref: DynamicDialogRef, private messageService: MessageService) {
-    this.group = service.getEditGroup()
+    this.group = service.getEditDivisionId()
     this.days = [...this.daysMap.keys()]
     this.types = [...this.typesMap.keys()]
     this.weeks_type = [...this.weeksMap.keys()]
