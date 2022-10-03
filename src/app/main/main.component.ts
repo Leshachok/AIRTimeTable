@@ -18,7 +18,7 @@ export class MainComponent implements OnInit {
   isLoadError: boolean = false;
 
   user: any = undefined
-  
+
   divisionName: string = ""
   divisionId: string = ""
   telegramID: number = 0
@@ -35,7 +35,7 @@ export class MainComponent implements OnInit {
 
   onServerError = false
   days: Day[] = []
-  days_enum: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця"]
+  days_enum: Array<string> = ["Понеділок", "Вівторок", "Середа", "Четвер", "П'ятниця", "Субота"]
   courses = [1, 2, 3, 4]
   isLoggedIn = false
 
@@ -54,7 +54,7 @@ export class MainComponent implements OnInit {
     cornerRadius: 50,
     accessToWriteMessages: true
   };
-  
+
   constructor(public telegramLoginService: TelegramLoginService, private timetableService: TimeTableService,
     private messageService: MessageService,
     private router: Router, private cdr: ChangeDetectorRef
@@ -173,7 +173,7 @@ export class MainComponent implements OnInit {
           if(pair.start.length == 4) pair.start = '0' + pair.start
           if(pair.end.length == 4) pair.end = '0' + pair.end
           this.days[pair.day-1].pairs.push(pair)
-          
+
           if(pair.link){
             pair.icon = "assets/img/custom.jpg";
             [...this.mapDomenIcon.keys()].forEach((key) => {
@@ -197,7 +197,7 @@ export class MainComponent implements OnInit {
         let message = this.selectedWeekNumber % 2 ? 'Непарний' : "Парний"
         this.messageService.add({severity:'success', summary: `${this.selectedWeekNumber}, ${message}`, detail: 'Ви обрали тиждень'});
       }
-    
+
     )
   }
 
