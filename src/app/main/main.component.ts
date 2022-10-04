@@ -76,8 +76,7 @@ export class MainComponent implements OnInit {
   }
 
   getPreferences(){
-    this.divisionName = this.timetableService.getLastSelectedGroup()
-    this.divisionId = this.timetableService.getLastSelectedGroupId()
+    this.divisionName = this.timetableService.getEditDivisionName()
     this.accessGroup = this.timetableService.getAccessGroup()
     if(this.accessGroup == "superadmin"){
       this.getDivisions()

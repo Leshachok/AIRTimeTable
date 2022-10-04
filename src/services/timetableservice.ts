@@ -13,8 +13,10 @@ const origin = 'https://timetable.univera.app'
 })
 export class TimeTableService {
 
-    public EDIT_KEY = "EDIT_DIVISION_ID"
+    public EDIT_KEY_ID = "edit_division_id"
+    public EDIT_KEY_NAME = "edit_division_name"
     public editDivisionId = ''
+    public editDivisionName = ''
     public accessGroup = ''
     private lastSelectedGroup = ''
     private lastSelectedGroupId = ''
@@ -24,7 +26,8 @@ export class TimeTableService {
     private keyAccessGroup = 'access_group'
 
     constructor(private httpClient: HttpClient, private service: TelegramLoginService, private cookieService: CookieService) {
-        this.editDivisionId = cookieService.get(this.EDIT_KEY)
+        this.editDivisionId = cookieService.get(this.EDIT_KEY_ID)
+        this.editDivisionName = cookieService.get(this.EDIT_KEY_NAME)
         this.getSavedAccessGroup()
     }
 
@@ -63,6 +66,10 @@ export class TimeTableService {
         return this.editDivisionId
     }
 
+    getEditDivisionName() : string{
+        return this.editDivisionName
+    }
+
     getEditGroupByTgID(): Observable<EditGroupResponse>{
         const params = new HttpParams()
             .set('editorID', this.service.getID())
@@ -72,7 +79,9 @@ export class TimeTableService {
 
     setEditGroup(division: Division){
         this.editDivisionId = division.id
-        this.cookieService.set(this.EDIT_KEY, division.id, 7)
+        this.editDivisionName = division.name
+        this.cookieService.set(this.EDIT_KEY_ID, division.id, 30)
+        this.cookieService.set(this.EDIT_KEY_NAME, division.name, 30)
     }
 
     getDivisions(){
