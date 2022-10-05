@@ -65,8 +65,6 @@ export class AdminComponent {
   // это надо разбить на подфункции
   drop(event: CdkDragDrop<(Pair | null)[]>) {
 
-    console.log("ташим")
-  
     // если двигаю пару в пределах дня 
     if (event.previousContainer === event.container) {
       var previousIndex = event.previousIndex;
@@ -86,7 +84,7 @@ export class AdminComponent {
       // пару поставили в пустое место
       if(movedPair == null){
         // обновим номер пары
-        var previousDayPairs = this.days[previousDay! -1].pairs
+        var previousDayPairs = this._days[previousDay! - 1].pairs
         previousDayPairs[currentIndex]!.number = currentIndex + 1
 
         this.editPairTime(draggedPair!.id, draggedPair!.day, currentIndex + 1)
@@ -160,7 +158,7 @@ export class AdminComponent {
       if(movedPair == null){
         
         // обновим позицию пары
-        var currentDayPairs = this.days[currentDay! - 1].pairs
+        var currentDayPairs = this._days[currentDay! - 1].pairs
         currentDayPairs[currentIndex]!.number = currentIndex + 1
         currentDayPairs[currentIndex]!.day = currentDay
 
@@ -181,7 +179,7 @@ export class AdminComponent {
         this.fullPlaceholders(previousDay! -1)
 
         // обновляем номер пары
-        var currentDayPairs = this.days[currentDay! - 1].pairs
+        var currentDayPairs = this._days[currentDay! - 1].pairs
         currentDayPairs[currentIndex]!.number = currentIndex + 1
         currentDayPairs[currentIndex]!.day = currentDay
 
@@ -203,19 +201,19 @@ export class AdminComponent {
   }
 
   fullPlaceholders(dayIndex: number){
-    var pairs = this.days[dayIndex].pairs.filter((pair) => pair != null)
+    var pairs = this._days[dayIndex].pairs.filter((pair) => pair != null)
     this.pairNumbers.forEach(number => {
       if(pairs.find(pair => pair?.number == number) == undefined){
         pairs.splice(number-1, 0, null)
       }
     })
-    this.days[dayIndex].pairs = pairs
+    this._days[dayIndex].pairs = pairs
   }
 
   editPairTime(id: string, day: number, num: number){
     this.timetableService.editPairTime(id, day, num).subscribe(
       (response) => {
-        console.log(response)
+
       },
       (error) => {
         console.log(error)
@@ -286,7 +284,6 @@ export class AdminComponent {
           if(pair){
             this.timetableService.editPair(pair).subscribe(
               (response) =>{
-                this.days.forEach((day) => day.pairs = [])
                 // this.getPairs()
                 this.messageService.add({severity:'success', summary: 'Змінено', detail: 'Пара успішно змінена!'});
               },

@@ -118,8 +118,6 @@ export class MainComponent implements OnInit {
         this.telegramLoginService.saveAccessToken(response.accessToken)
 
         let account = response.account
-        console.log(response.account)
-        console.log(response.account?.division)
         if(account != undefined && account.accessGroups.includes("superadmin")){
           this.loginSuperAdmin()
           return;
